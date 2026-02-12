@@ -788,9 +788,10 @@ export const Actions = {
     requiresTarget: ActionTargetType.NONE,
     isVisible: (ctx) => ctx.layoutMode === 'workspaces',
     execute: async (ctx) => {
-      // If no workspace is selected, navigate to root
+      // If no workspace is selected, navigate to root (legacy design)
       if (!ctx.currentWorkspaceId) {
-        ctx.navigate('/');
+        // Use window.location for cross-design navigation (new design -> legacy design)
+        window.location.href = '/';
         return;
       }
 
@@ -799,18 +800,18 @@ export const Actions = {
         ctx.currentWorkspaceId
       );
       if (!workspace?.task_id) {
-        ctx.navigate('/');
+        window.location.href = '/';
         return;
       }
 
-      // Fetch task lazily to get project_id
+      // Fetch task to get project_id
       const task = await tasksApi.getById(workspace.task_id);
       if (task?.project_id) {
-        ctx.navigate(
-          `/local-projects/${task.project_id}/tasks/${workspace.task_id}/attempts/${ctx.currentWorkspaceId}`
-        );
+        // Navigate to the project tasks page (shows all stories)
+        // Use window.location for cross-design navigation (new design -> legacy design)
+        window.location.href = `/local-projects/${task.project_id}/tasks`;
       } else {
-        ctx.navigate('/');
+        window.location.href = '/';
       }
     },
   },
