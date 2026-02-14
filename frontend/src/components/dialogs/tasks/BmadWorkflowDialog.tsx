@@ -6,7 +6,7 @@
  * - Direct import of workflow stories into the project
  * - Option to delete all tasks in the "To Do" column
  */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -101,6 +101,17 @@ const BmadWorkflowDialogImpl = NiceModal.create<BmadWorkflowDialogProps>(
       skipped: number;
     } | null>(null);
 
+    /**
+     * Reset state when dialog opens
+     */
+    useEffect(() => {
+      if (modal.visible) {
+        setImportSuccess(null);
+        setImportProgress(null);
+        setError(null);
+        setShowDeleteConfirm(false);
+      }
+    }, [modal.visible]);
 
     /**
      * handleExecuteWorkflow - Imports workflow stories directly
@@ -129,6 +140,7 @@ const BmadWorkflowDialogImpl = NiceModal.create<BmadWorkflowDialogProps>(
           imported: result.imported,
           skipped: result.skipped,
         });
+        setIsImporting(false); // Stop importing state
 
         // Refresh the task list
         if (onRefresh) {
@@ -144,6 +156,9 @@ const BmadWorkflowDialogImpl = NiceModal.create<BmadWorkflowDialogProps>(
           };
           modal.resolve(workflowResult);
           modal.hide();
+          // Reset state for next time dialog opens
+          setImportSuccess(null);
+          setImportProgress(null);
         }, 2500); // Increased from 1500ms to allow reading skipped message
       } catch (err: unknown) {
         const errorMessage =
