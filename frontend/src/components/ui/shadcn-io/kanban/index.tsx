@@ -153,6 +153,8 @@ export type KanbanHeaderProps =
       color: Status['color'];
       className?: string;
       onAddTask?: () => void;
+      showBmadButton?: boolean;
+      onBmadClick?: () => void;
     };
 
 export const KanbanHeader = (props: KanbanHeaderProps) => {
@@ -181,21 +183,40 @@ export const KanbanHeader = (props: KanbanHeaderProps) => {
 
         <p className="m-0 text-sm">{props.name}</p>
       </span>
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant="ghost"
-              className="m-0 p-0 h-0 text-foreground/50 hover:text-foreground"
-              onClick={props.onAddTask}
-              aria-label={t('actions.addTask')}
-            >
-              <Plus className="h-4 w-4" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent side="top">{t('actions.addTask')}</TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+      <div className="flex items-center gap-1">
+        {props.showBmadButton && (
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="orange"
+                  className="m-0 p-0 h-5 w-5 rounded-sm"
+                  onClick={props.onBmadClick}
+                  aria-label="BMAD Workflow"
+                >
+                  <Plus className="h-3 w-3" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="top">BMAD Workflow</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        )}
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                className="m-0 p-0 h-0 text-foreground/50 hover:text-foreground"
+                onClick={props.onAddTask}
+                aria-label={t('actions.addTask')}
+              >
+                <Plus className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="top">{t('actions.addTask')}</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </div>
     </Card>
   );
 };

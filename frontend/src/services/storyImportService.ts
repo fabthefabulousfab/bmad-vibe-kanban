@@ -6,13 +6,23 @@
  */
 
 import { tasksApi } from '@/lib/api';
-import type { CreateTask } from 'shared/types';
+import type { CreateTask, Task } from 'shared/types';
 import {
   discoverStoryFiles,
   fetchStoryFile,
   parseStoryMarkdown,
   type ParsedStory,
 } from './storyParser';
+
+/**
+ * Valid BMAD workflow type identifiers
+ */
+export type WorkflowId =
+  | 'WORKFLOW_COMPLET'
+  | 'DOCUMENT_PROJECT'
+  | 'QUICK_FLOW'
+  | 'COMPLEX_FEATURE'
+  | 'DEBUG';
 
 /**
  * Import progress callback data
@@ -64,6 +74,11 @@ export interface ImportResult {
   total: number;
 
   /**
+   * Number of stories skipped (duplicates)
+   */
+  skipped: number;
+
+  /**
    * Error messages (if any)
    */
   errors?: string[];
@@ -72,7 +87,7 @@ export interface ImportResult {
 /**
  * Workflow ID to directory name mapping
  */
-const WORKFLOW_TO_DIR: Record<string, string> = {
+const WORKFLOW_TO_DIR: Record<WorkflowId, string> = {
   WORKFLOW_COMPLET: 'workflow-complet',
   DOCUMENT_PROJECT: 'document-project',
   QUICK_FLOW: 'quick-flow',
@@ -90,12 +105,13 @@ const WORKFLOW_TO_DIR: Record<string, string> = {
  */
 export async function importWorkflowStories(
   projectId: string,
-  workflowId: string,
+  workflowId: WorkflowId,
   onProgress?: (progress: ImportProgress) => void,
 ): Promise<ImportResult> {
   const errors: string[] = [];
   let imported = 0;
   let failed = 0;
+  let skipped = 0;
 
   try {
     // Map workflow ID to directory name
@@ -103,6 +119,10 @@ export async function importWorkflowStories(
     if (!workflowDir) {
       throw new Error(`Unknown workflow type: ${workflowId}`);
     }
+
+    // Get existing tasks to check for duplicates
+    const existingTasks = await getExistingTasks(projectId);
+    const existingTitles = new Set(existingTasks.map((t) => t.title));
 
     // Discover story files
     const storyFiles = await discoverStoryFiles(workflowDir);
@@ -113,6 +133,7 @@ export async function importWorkflowStories(
         success: true,
         imported: 0,
         total: 0,
+        skipped: 0,
       };
     }
 
@@ -142,6 +163,14 @@ export async function importWorkflowStories(
           });
         }
 
+        // Check for duplicate
+        const taskTitle = `[${parsedStory.sequenceNumber}] ${parsedStory.title}`;
+        if (existingTitles.has(taskTitle)) {
+          skipped++;
+          sequenceNumber--;
+          continue;
+        }
+
         // Create task via API
         await createTaskFromStory(projectId, parsedStory);
 
@@ -163,6 +192,7 @@ export async function importWorkflowStories(
       success: failed === 0,
       imported,
       total,
+      skipped,
       errors: errors.length > 0 ? errors : undefined,
     };
   } catch (error) {
@@ -174,8 +204,34 @@ export async function importWorkflowStories(
       success: false,
       imported,
       total: 0,
+      skipped: 0,
       errors,
     };
+  }
+}
+
+/**
+ * Get existing tasks for a project
+ *
+ * @param projectId - Project ID
+ * @returns Array of existing tasks
+ */
+async function getExistingTasks(projectId: string): Promise<Task[]> {
+  try {
+    // Use the tasks API to get all tasks for the project
+    // Note: This assumes there's a way to fetch tasks by project
+    // The actual implementation may need adjustment based on the API
+    const response = await fetch(`/api/tasks?project_id=${projectId}`);
+    if (!response.ok) {
+      // If we can't fetch tasks, return empty array (fail open)
+      console.warn('Could not fetch existing tasks for duplicate check');
+      return [];
+    }
+    const data = await response.json();
+    return data.data || [];
+  } catch (error) {
+    console.warn('Error fetching existing tasks:', error);
+    return [];
   }
 }
 

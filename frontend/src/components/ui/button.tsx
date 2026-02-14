@@ -20,6 +20,7 @@ const buttonVariants = cva(
         ghost: 'hover:text-primary-foreground/50',
         link: 'hover:underline',
         icon: 'bg-transparent rounded text-muted-foreground hover:text-foreground',
+        orange: 'bg-orange-500 text-white hover:bg-orange-600 focus-visible:ring-orange-500',
       },
       size: {
         default: 'h-10 px-4 py-2',

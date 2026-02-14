@@ -123,13 +123,29 @@ export function sortStoriesByWes(files: StoryFile[]): StoryFile[] {
  * @returns Markdown content
  */
 export async function fetchStoryFile(workflowDir: string, filename: string): Promise<string> {
-  const response = await fetch(`/stories/${workflowDir}/${filename}`);
+  try {
+    const response = await fetch(`/stories/${workflowDir}/${filename}`);
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch story: ${filename} (${response.status})`);
+    if (!response.ok) {
+      // Differentiate between HTTP errors
+      if (response.status === 404) {
+        throw new Error(`Story file not found: ${filename}`);
+      } else if (response.status >= 500) {
+        throw new Error(`Server error loading story: ${filename} (${response.status})`);
+      } else {
+        throw new Error(`Failed to load story: ${filename} (HTTP ${response.status})`);
+      }
+    }
+
+    return response.text();
+  } catch (error) {
+    // Network errors (offline, timeout, CORS, etc.)
+    if (error instanceof TypeError) {
+      throw new Error(`Network error: Cannot load story ${filename}. Check your connection.`);
+    }
+    // Re-throw HTTP errors
+    throw error;
   }
-
-  return response.text();
 }
 
 /**
@@ -139,12 +155,12 @@ export async function fetchStoryFile(workflowDir: string, filename: string): Pro
  * @returns Array of story file information
  */
 export async function discoverStoryFiles(workflowDir: string): Promise<StoryFile[]> {
-  // Since we can't list directory contents via HTTP, we need a manifest
-  // For now, use a predefined list or fetch from a known endpoint
-  // This is a limitation of browser-based file access
-
-  // Alternative: Load all .md files directly by trying common patterns
-  // For MVP, we'll use a hardcoded manifest per workflow
+  // IMPORTANT: These manifests are hardcoded because browsers cannot list directory contents via HTTP.
+  // When story files are added/removed/renamed in /stories/, run:
+  //   ./scripts/sync-story-manifests.sh
+  // to regenerate these manifests and update this file.
+  //
+  // TODO: Consider build-time generation or server-side endpoint for dynamic discovery.
 
   const workflowManifests: Record<string, string[]> = {
     'quick-flow': [

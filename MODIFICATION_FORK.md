@@ -165,6 +165,69 @@ En naviguant vers `/local-projects/{project_id}/tasks` (sans `attemptId`), cette
 
 ---
 
+---
+
+## Construction (Build)
+
+### macOS (Apple Silicon / Intel)
+
+```bash
+# Construire le frontend et le backend
+pnpm install
+pnpm run build:npx
+
+# Les binaires sont dans npx-cli/dist/macos-arm64/ (ou macos-x64/)
+```
+
+### Linux (Ubuntu x86_64)
+
+**Option 1: Build sur une machine Linux native** (recommandé)
+
+```bash
+# Sur une machine Ubuntu x86_64
+pnpm install
+pnpm run build:npx
+# Les binaires sont dans npx-cli/dist/linux-x64/
+```
+
+**Option 2: Build via Docker** (requiert Docker Desktop avec support QEMU)
+
+```bash
+# Depuis macOS avec Docker Desktop
+./scripts/build-linux.sh
+```
+
+> ⚠️ Note: La compilation via Docker/QEMU sur Apple Silicon peut être instable
+> en raison de l'émulation x86_64. Il est recommandé d'utiliser un serveur CI
+> (GitHub Actions) ou une VM Linux pour les builds de production.
+
+### Fichiers produits
+
+```
+npx-cli/dist/
+├── macos-arm64/
+│   ├── vibe-kanban.zip       # Serveur principal
+│   ├── vibe-kanban-mcp.zip   # Serveur MCP
+│   └── vibe-kanban-review.zip # Outil de review
+└── linux-x64/
+    ├── vibe-kanban.zip
+    ├── vibe-kanban-mcp.zip
+    └── vibe-kanban-review.zip
+```
+
+### Lancement
+
+```bash
+# Extraire et lancer
+unzip vibe-kanban.zip
+./vibe-kanban
+
+# L'application sera accessible sur http://localhost:3000
+# Voir la documentation officielle pour la configuration
+```
+
+---
+
 ## Historique des modifications
 
 | Date | Version | Description |

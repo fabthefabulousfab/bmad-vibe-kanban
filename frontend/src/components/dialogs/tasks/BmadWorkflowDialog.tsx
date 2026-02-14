@@ -31,7 +31,11 @@ import {
   Loader2,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { importWorkflowStories, type ImportProgress } from '@/services/storyImportService';
+import {
+  importWorkflowStories,
+  type ImportProgress,
+  type WorkflowId,
+} from '@/services/storyImportService';
 
 /**
  * BMAD Workflow definitions matching import-bmad-workflow.sh
@@ -84,7 +88,7 @@ export type BmadWorkflowResult = {
 const BmadWorkflowDialogImpl = NiceModal.create<BmadWorkflowDialogProps>(
   ({ projectId, todoTasks, onRefresh }) => {
     const modal = useModal();
-    const [selectedWorkflow, setSelectedWorkflow] = useState<string>(
+    const [selectedWorkflow, setSelectedWorkflow] = useState<WorkflowId>(
       BMAD_WORKFLOWS[0].id
     );
     const [isImporting, setIsImporting] = useState(false);
@@ -92,7 +96,10 @@ const BmadWorkflowDialogImpl = NiceModal.create<BmadWorkflowDialogProps>(
     const [isDeleting, setIsDeleting] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-    const [importSuccess, setImportSuccess] = useState<number | null>(null);
+    const [importSuccess, setImportSuccess] = useState<{
+      imported: number;
+      skipped: number;
+    } | null>(null);
 
 
     /**
@@ -118,7 +125,10 @@ const BmadWorkflowDialogImpl = NiceModal.create<BmadWorkflowDialogProps>(
           return;
         }
 
-        setImportSuccess(result.imported);
+        setImportSuccess({
+          imported: result.imported,
+          skipped: result.skipped,
+        });
 
         // Refresh the task list
         if (onRefresh) {
@@ -134,7 +144,7 @@ const BmadWorkflowDialogImpl = NiceModal.create<BmadWorkflowDialogProps>(
           };
           modal.resolve(workflowResult);
           modal.hide();
-        }, 1500);
+        }, 2500); // Increased from 1500ms to allow reading skipped message
       } catch (err: unknown) {
         const errorMessage =
           err instanceof Error ? err.message : 'Failed to import stories';
@@ -269,7 +279,12 @@ const BmadWorkflowDialogImpl = NiceModal.create<BmadWorkflowDialogProps>(
               <Alert className="border-green-500 bg-green-500/10">
                 <CheckCircle className="h-4 w-4 text-green-500" />
                 <div className="ml-2 text-sm">
-                  Successfully imported {importSuccess} stories!
+                  Successfully imported {importSuccess.imported} stories!
+                  {importSuccess.skipped > 0 && (
+                    <span className="block text-muted-foreground mt-1">
+                      ({importSuccess.skipped} duplicates skipped)
+                    </span>
+                  )}
                 </div>
               </Alert>
             )}

@@ -1,0 +1,318 @@
+[     374ms] [WARNING] PostHog API key or endpoint not set. Analytics will be disabled. @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[     384ms] [WARNING] ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition. @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[     384ms] [WARNING] ⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath. @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[     385ms] [WARNING] WebSocket connection to 'ws://localhost:3001/api/scratch/UI_PREFERENCES/00000000-0000-0000-0000-000000000001/stream/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:112
+[     385ms] [WARNING] WebSocket connection to 'ws://localhost:3001/api/projects/stream/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:112
+[     402ms] [WARNING] WebSocket connection to 'ws://localhost:3001/api/scratch/DRAFT_WORKSPACE/00000000-0000-0000-0000-000000000001/stream/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:112
+[     402ms] [WARNING] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=false' failed: WebSocket is closed before the connection is established. @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:112
+[     402ms] [WARNING] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=true' failed: WebSocket is closed before the connection is established. @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:112
+[     402ms] [WARNING] WebSocket connection to 'ws://localhost:3001/api/projects/stream/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:112
+[     402ms] [WARNING] WebSocket connection to 'ws://localhost:3001/api/scratch/DRAFT_WORKSPACE/00000000-0000-0000-0000-000000000001/stream/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:112
+[     402ms] [WARNING] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=false' failed: WebSocket is closed before the connection is established. @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:112
+[     402ms] [WARNING] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=true' failed: WebSocket is closed before the connection is established. @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:112
+[     521ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://api.github.com/repos/BloopAI/vibe-kanban:0
+[     521ms] [WARNING] GitHub API error: 403 @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[    1504ms] [WARNING] WebSocket connection to 'ws://localhost:3001/api/agents/slash-commands/ws?executor=CLAUDE_CODE&repo_id=c0de0c24-4b15-4a77-9fe1-4764a6a96b39' failed: WebSocket is closed before the connection is established. @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:112
+[   38617ms] [WARNING] DropdownMenu is changing from uncontrolled to controlled. Components should not switch from controlled to uncontrolled (or vice versa). Decide between using a controlled or uncontrolled value for the lifetime of the component. @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[  600610ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://api.github.com/repos/BloopAI/vibe-kanban:0
+[  600610ms] [WARNING] GitHub API error: 403 @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 1200698ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://api.github.com/repos/BloopAI/vibe-kanban:0
+[ 1200698ms] [WARNING] GitHub API error: 403 @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 1801115ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://api.github.com/repos/BloopAI/vibe-kanban:0
+[ 1801115ms] [WARNING] GitHub API error: 403 @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 2401216ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://api.github.com/repos/BloopAI/vibe-kanban:0
+[ 2401216ms] [WARNING] GitHub API error: 403 @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 3001318ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://api.github.com/repos/BloopAI/vibe-kanban:0
+[ 3001318ms] [WARNING] GitHub API error: 403 @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 3601579ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://api.github.com/repos/BloopAI/vibe-kanban:0
+[ 3601579ms] [WARNING] GitHub API error: 403 @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 4201919ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://api.github.com/repos/BloopAI/vibe-kanban:0
+[ 4201920ms] [WARNING] GitHub API error: 403 @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 4802003ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://api.github.com/repos/BloopAI/vibe-kanban:0
+[ 4802003ms] [WARNING] GitHub API error: 403 @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 5402144ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://api.github.com/repos/BloopAI/vibe-kanban:0
+[ 5402144ms] [WARNING] GitHub API error: 403 @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 6002241ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://api.github.com/repos/BloopAI/vibe-kanban:0
+[ 6002241ms] [WARNING] GitHub API error: 403 @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 6003726ms] [ERROR] Failed to load resource: the server responded with a status of 429 () @ https://discord.com/api/guilds/1423630976524877857/widget.json:0
+[ 6003726ms] [WARNING] Discord API error: 429 @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 6602327ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://api.github.com/repos/BloopAI/vibe-kanban:0
+[ 6602328ms] [WARNING] GitHub API error: 403 @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 7119606ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7120611ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7121596ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=false' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7121604ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=true' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7121614ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7121614ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/scratch/UI_PREFERENCES/00000000-0000-0000-0000-000000000001/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7121627ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/projects/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7122616ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7123620ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7124624ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7125601ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=false' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7125612ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=true' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7125623ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/scratch/UI_PREFERENCES/00000000-0000-0000-0000-000000000001/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7125626ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7125644ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/projects/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7126631ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7127634ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7128637ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7129639ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7130642ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7131645ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7132648ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7133637ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=false' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7133647ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=true' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7133649ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7133696ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/scratch/UI_PREFERENCES/00000000-0000-0000-0000-000000000001/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7133785ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/projects/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7134651ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7135653ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7136661ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7137663ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7138665ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7139667ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7140670ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7141673ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7141839ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=false' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7141990ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=true' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7142550ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/scratch/UI_PREFERENCES/00000000-0000-0000-0000-000000000001/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7142675ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7143678ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7144685ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7144804ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/projects/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7145689ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7146692ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7147695ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7148697ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7149703ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7150707ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7151528ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=true' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7151710ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7152634ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/scratch/UI_PREFERENCES/00000000-0000-0000-0000-000000000001/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7152712ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7153714ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7154220ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/projects/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7154466ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=false' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7154718ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7155720ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7156723ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7157726ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7158728ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7159732ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7160735ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7161554ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=true' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7161739ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7162740ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7163329ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/scratch/UI_PREFERENCES/00000000-0000-0000-0000-000000000001/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7163742ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7164744ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7165632ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/projects/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7165747ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7166750ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7167365ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=false' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7167752ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7168759ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7169761ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7170764ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7171767ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7172558ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=true' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7172770ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7173773ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7174403ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/scratch/UI_PREFERENCES/00000000-0000-0000-0000-000000000001/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7174776ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7175778ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7175969ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/projects/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7176780ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7177657ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=false' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7177782ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7178784ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7179787ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7180791ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7181795ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7182797ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7182996ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=true' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7183790ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/scratch/UI_PREFERENCES/00000000-0000-0000-0000-000000000001/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7183799ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7184802ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7185805ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7186807ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7187566ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/projects/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7187810ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7188491ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=false' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7188813ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7189816ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7190818ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7191821ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7191918ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/api/auth/token:0
+[ 7191918ms] [ERROR] [React Query Error] {queryKey: Array(2), error: TypeError: Failed to fetch
+    at http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=…, message: Failed to fetch, stack: TypeError: Failed to fetch
+    at http://localhost…lhost:3001/src/lib/electric/collections.ts:91:23)} @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 7192318ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/api/auth/token:0
+[ 7192318ms] [ERROR] [React Query Error] {queryKey: Array(2), error: TypeError: Failed to fetch
+    at http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=…, message: Failed to fetch, stack: TypeError: Failed to fetch
+    at http://localhost…lhost:3001/src/lib/electric/collections.ts:91:23)} @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 7192624ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=true' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7192824ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7193304ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/api/auth/token:0
+[ 7193305ms] [ERROR] [React Query Error] {queryKey: Array(2), error: TypeError: Failed to fetch
+    at http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=…, message: Failed to fetch, stack: TypeError: Failed to fetch
+    at http://localhost…lhost:3001/src/lib/electric/collections.ts:91:23)} @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 7193827ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7194203ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/scratch/UI_PREFERENCES/00000000-0000-0000-0000-000000000001/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7194831ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7195832ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7196837ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7196994ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/projects/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7197839ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7198841ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7199849ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7200620ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=false' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7200853ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7201857ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7202447ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://api.github.com/repos/BloopAI/vibe-kanban:0
+[ 7202447ms] [WARNING] GitHub API error: 403 @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 7202859ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7203195ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/api/auth/token:0
+[ 7203195ms] [ERROR] [React Query Error] {queryKey: Array(2), error: TypeError: Failed to fetch
+    at http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=…, message: Failed to fetch, stack: TypeError: Failed to fetch
+    at http://localhost…lhost:3001/src/lib/electric/collections.ts:91:23)} @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 7203861ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7204570ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/scratch/UI_PREFERENCES/00000000-0000-0000-0000-000000000001/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7204865ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7205022ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=true' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7205868ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7206704ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/projects/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7206871ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7207873ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7208876ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7209879ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7210881ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7211884ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7211925ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:3000/v1/shape/notifications?cursor=42394400&handle=125046119-1770819291765740&live=true&log=full&offset=0_inf&organization_id=ebae195f-9734-4e3e-86a6-13d4f3db5829&user_id=:0
+[ 7211928ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:3000/v1/shape/project/dfd1c73a-23b6-4a44-9e38-201d8e66b151/project_statuses?cursor=42394400&handle=4061454-1770819291920316&live=true&log=full&offset=0_inf&project_id=dfd1c73a-23b6-4a44-9e38-201d8e66b151:0
+[ 7211929ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/api/auth/token:0
+[ 7211929ms] [ERROR] [React Query Error] {queryKey: Array(2), error: TypeError: Failed to fetch
+    at http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=…, message: Failed to fetch, stack: TypeError: Failed to fetch
+    at http://localhost…lhost:3001/src/lib/electric/collections.ts:91:23)} @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 7211934ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/api/auth/token:0
+[ 7211934ms] [ERROR] [React Query Error] {queryKey: Array(2), error: TypeError: Failed to fetch
+    at http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=…, message: Failed to fetch, stack: TypeError: Failed to fetch
+    at http://localhost…ocalhost:3001/src/lib/auth/tokenManager.ts:83:38)} @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 7211934ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:3000/v1/shape/project/dfd1c73a-23b6-4a44-9e38-201d8e66b151/issue_followers?cursor=42394400&handle=41137884-1770819291975338&live=true&log=full&offset=0_inf&project_id=dfd1c73a-23b6-4a44-9e38-201d8e66b151:0
+[ 7211936ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:3000/v1/shape/project/dfd1c73a-23b6-4a44-9e38-201d8e66b151/issue_assignees?cursor=42394400&handle=123760697-1770819291960410&live=true&log=full&offset=0_inf&project_id=dfd1c73a-23b6-4a44-9e38-201d8e66b151:0
+[ 7211938ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:3000/v1/shape/project/dfd1c73a-23b6-4a44-9e38-201d8e66b151/workspaces?cursor=42394400&handle=51633743-1770819292097431&live=true&log=full&offset=0_inf&project_id=dfd1c73a-23b6-4a44-9e38-201d8e66b151:0
+[ 7211939ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:3000/v1/shape/project/dfd1c73a-23b6-4a44-9e38-201d8e66b151/issue_tags?cursor=42394420&handle=82928590-1770819291999198&live=true&log=full&offset=0_inf&project_id=dfd1c73a-23b6-4a44-9e38-201d8e66b151:0
+[ 7211941ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:3000/v1/shape/project/dfd1c73a-23b6-4a44-9e38-201d8e66b151/issue_relationships?cursor=42394420&handle=22251070-1770819292030391&live=true&log=full&offset=0_inf&project_id=dfd1c73a-23b6-4a44-9e38-201d8e66b151:0
+[ 7212329ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/api/auth/token:0
+[ 7212329ms] [ERROR] [React Query Error] {queryKey: Array(2), error: TypeError: Failed to fetch
+    at http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=…, message: Failed to fetch, stack: TypeError: Failed to fetch
+    at http://localhost…lhost:3001/src/lib/electric/collections.ts:91:23)} @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 7212333ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:3000/v1/shape/user/workspaces?cursor=42394420&handle=127296996-1770819242412251&live=true&log=full&offset=0_inf:0
+[ 7212612ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=false' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7212886ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7213310ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/api/auth/token:0
+[ 7213310ms] [ERROR] [React Query Error] {queryKey: Array(2), error: TypeError: Failed to fetch
+    at http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=…, message: Failed to fetch, stack: TypeError: Failed to fetch
+    at http://localhost…lhost:3001/src/lib/electric/collections.ts:91:23)} @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 7213315ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/api/auth/token:0
+[ 7213315ms] [ERROR] [React Query Error] {queryKey: Array(2), error: TypeError: Failed to fetch
+    at http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=…, message: Failed to fetch, stack: TypeError: Failed to fetch
+    at http://localhost…lhost:3001/src/lib/electric/collections.ts:91:23)} @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 7213315ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:3000/v1/shape/project/dfd1c73a-23b6-4a44-9e38-201d8e66b151/pull_requests?cursor=42394420&handle=113968404-1770819292091309&live=true&log=full&offset=0_inf&project_id=dfd1c73a-23b6-4a44-9e38-201d8e66b151:0
+[ 7213318ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:3000/v1/shape/projects?cursor=42394420&handle=20535263-1770819242413709&live=true&log=full&offset=29042552_0&organization_id=ebae195f-9734-4e3e-86a6-13d4f3db5829:0
+[ 7213319ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:3000/v1/shape/project/dfd1c73a-23b6-4a44-9e38-201d8e66b151/tags?cursor=42394420&handle=98346007-1770819291922591&live=true&log=full&offset=0_inf&project_id=dfd1c73a-23b6-4a44-9e38-201d8e66b151:0
+[ 7213888ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7214891ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7215612ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/scratch/UI_PREFERENCES/00000000-0000-0000-0000-000000000001/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7215899ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7216681ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=true' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7216902ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7217064ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/projects/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7217904ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7218907ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7219911ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7220915ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7221918ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7222893ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=false' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7222920ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7223204ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/api/auth/token:0
+[ 7223204ms] [ERROR] [React Query Error] {queryKey: Array(2), error: TypeError: Failed to fetch
+    at http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=…, message: Failed to fetch, stack: TypeError: Failed to fetch
+    at http://localhost…lhost:3001/src/lib/electric/collections.ts:91:23)} @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 7223208ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:3000/v1/shape/project/dfd1c73a-23b6-4a44-9e38-201d8e66b151/issues?cursor=42394440&handle=77689263-1770819291947699&live=true&log=full&offset=0_inf&project_id=dfd1c73a-23b6-4a44-9e38-201d8e66b151:0
+[ 7223927ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7224931ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7225496ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/scratch/UI_PREFERENCES/00000000-0000-0000-0000-000000000001/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7225935ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7226748ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/projects/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7226847ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=true' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7226938ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7227941ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7228943ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7229947ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7230956ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7231959ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7232961ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7233317ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/api/auth/token:0
+[ 7233318ms] [ERROR] [React Query Error] {queryKey: Array(2), error: TypeError: Failed to fetch
+    at http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=…, message: Failed to fetch, stack: TypeError: Failed to fetch
+    at http://localhost…lhost:3001/src/lib/electric/collections.ts:91:23)} @ http://localhost:3001/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[ 7233321ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:3000/v1/shape/projects?cursor=42394440&handle=20535263-1770819242413709&live=true&log=full&offset=29042552_0&organization_id=ebae195f-9734-4e3e-86a6-13d4f3db5829:0
+[ 7233966ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7234092ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=false' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7234971ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7235973ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7236886ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/scratch/UI_PREFERENCES/00000000-0000-0000-0000-000000000001/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7236976ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7237979ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7238510ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/projects/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7238982ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7239463ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=true' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7239984ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7240986ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7241989ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7242094ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=false' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7242991ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7243992ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7244889ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/scratch/UI_PREFERENCES/00000000-0000-0000-0000-000000000001/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7244994ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7245999ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7246513ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/projects/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7247002ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7247466ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=true' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7248005ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7249008ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7250011ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7250098ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=false' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7251014ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7252017ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7252897ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/scratch/UI_PREFERENCES/00000000-0000-0000-0000-000000000001/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7253020ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7254026ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7254527ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/projects/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7255029ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7255481ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=true' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7256032ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7257033ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7258035ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7258127ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=false' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7259038ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7260042ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7260964ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/scratch/UI_PREFERENCES/00000000-0000-0000-0000-000000000001/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7261044ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7262046ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7262624ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/projects/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7263049ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7263695ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=true' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7264051ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7265053ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7266055ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7266569ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/task-attempts/stream/ws?archived=false' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7267057ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7268063ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7269065ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7269756ms] [ERROR] WebSocket connection to 'ws://localhost:3001/api/scratch/UI_PREFERENCES/00000000-0000-0000-0000-000000000001/stream/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/src/hooks/useJsonPatchWsStream.ts:53
+[ 7270070ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3001/:0
+[ 7271073ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/:0
+[ 7271118ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/projects/dfd1c73a-23b6-4a44-9e38-201d8e66b151:0
+[ 7271126ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/favicon.ico:0

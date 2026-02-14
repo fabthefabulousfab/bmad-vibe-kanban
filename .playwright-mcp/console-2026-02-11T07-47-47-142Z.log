@@ -1,0 +1,31 @@
+[     692ms] [WARNING] PostHog API key or endpoint not set. Analytics will be disabled. @ http://localhost:3000/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[     712ms] [WARNING] ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition. @ http://localhost:3000/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[     712ms] [WARNING] ⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath. @ http://localhost:3000/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[     713ms] [WARNING] WebSocket connection to 'ws://localhost:3000/api/scratch/UI_PREFERENCES/00000000-0000-0000-0000-000000000001/stream/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:3000/src/hooks/useJsonPatchWsStream.ts:112
+[     713ms] [WARNING] WebSocket connection to 'ws://localhost:3000/api/projects/stream/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:3000/src/hooks/useJsonPatchWsStream.ts:112
+[     719ms] [WARNING] WebSocket connection to 'ws://localhost:3000/api/task-attempts/stream/ws?archived=false' failed: WebSocket is closed before the connection is established. @ http://localhost:3000/src/hooks/useJsonPatchWsStream.ts:112
+[     720ms] [WARNING] WebSocket connection to 'ws://localhost:3000/api/task-attempts/stream/ws?archived=true' failed: WebSocket is closed before the connection is established. @ http://localhost:3000/src/hooks/useJsonPatchWsStream.ts:112
+[     837ms] [WARNING] WebSocket connection to 'ws://localhost:3000/api/scratch/DRAFT_WORKSPACE/00000000-0000-0000-0000-000000000001/stream/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:3000/src/hooks/useJsonPatchWsStream.ts:112
+[     837ms] [WARNING] WebSocket connection to 'ws://localhost:3000/api/task-attempts/stream/ws?archived=false' failed: WebSocket is closed before the connection is established. @ http://localhost:3000/src/hooks/useJsonPatchWsStream.ts:112
+[     837ms] [WARNING] WebSocket connection to 'ws://localhost:3000/api/task-attempts/stream/ws?archived=true' failed: WebSocket is closed before the connection is established. @ http://localhost:3000/src/hooks/useJsonPatchWsStream.ts:112
+[     837ms] [WARNING] WebSocket connection to 'ws://localhost:3000/api/projects/stream/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:3000/src/hooks/useJsonPatchWsStream.ts:112
+[     837ms] [WARNING] WebSocket connection to 'ws://localhost:3000/api/scratch/DRAFT_WORKSPACE/00000000-0000-0000-0000-000000000001/stream/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:3000/src/hooks/useJsonPatchWsStream.ts:112
+[     998ms] [WARNING] WebSocket connection to 'ws://localhost:3000/api/agents/slash-commands/ws?executor=CLAUDE_CODE&repo_id=c0de0c24-4b15-4a77-9fe1-4764a6a96b39' failed: WebSocket is closed before the connection is established. @ http://localhost:3000/src/hooks/useJsonPatchWsStream.ts:112
+[   10188ms] [WARNING] WebSocket connection to 'ws://localhost:3000/api/scratch/DRAFT_WORKSPACE/00000000-0000-0000-0000-000000000001/stream/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:3000/src/hooks/useJsonPatchWsStream.ts:112
+[   10188ms] [WARNING] WebSocket connection to 'ws://localhost:3000/api/task-attempts/stream/ws?archived=false' failed: WebSocket is closed before the connection is established. @ http://localhost:3000/src/hooks/useJsonPatchWsStream.ts:112
+[   10188ms] [WARNING] WebSocket connection to 'ws://localhost:3000/api/task-attempts/stream/ws?archived=true' failed: WebSocket is closed before the connection is established. @ http://localhost:3000/src/hooks/useJsonPatchWsStream.ts:112
+[   10188ms] [WARNING] WebSocket connection to 'ws://localhost:3000/api/projects/stream/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:3000/src/hooks/useJsonPatchWsStream.ts:112
+[   10188ms] [WARNING] WebSocket connection to 'ws://localhost:3000/api/scratch/DRAFT_WORKSPACE/00000000-0000-0000-0000-000000000001/stream/ws' failed: WebSocket is closed before the connection is established. @ http://localhost:3000/src/hooks/useJsonPatchWsStream.ts:112
+[   10371ms] [WARNING] WebSocket connection to 'ws://localhost:3000/api/agents/slash-commands/ws?executor=CLAUDE_CODE&repo_id=c0de0c24-4b15-4a77-9fe1-4764a6a96b39' failed: WebSocket is closed before the connection is established. @ http://localhost:3000/src/hooks/useJsonPatchWsStream.ts:112
+[   28933ms] [ERROR] `DialogContent` requires a `DialogTitle` for the component to be accessible for screen reader users.
+
+If you want to hide the `DialogTitle`, you can wrap it with our VisuallyHidden component.
+
+For more information, see https://radix-ui.com/primitives/docs/components/dialog @ http://localhost:3000/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[   28933ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[   28934ms] [ERROR] `DialogContent` requires a `DialogTitle` for the component to be accessible for screen reader users.
+
+If you want to hide the `DialogTitle`, you can wrap it with our VisuallyHidden component.
+
+For more information, see https://radix-ui.com/primitives/docs/components/dialog @ http://localhost:3000/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
+[   28934ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/node_modules/.vite/deps/@sentry_react.js?v=0660cee8:6453
