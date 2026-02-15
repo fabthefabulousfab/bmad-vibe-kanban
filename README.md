@@ -147,10 +147,10 @@ mkdir /tmp/test && cd /tmp/test
 
 ```bash
 # Quick validation
-./scripts/quick-check.sh
+./quick-check.sh
 
 # Complete testing guide
-# See TESTING-CHECKLIST.md
+# See docs/TESTING-CHECKLIST.md
 ```
 
 ## Documentation
