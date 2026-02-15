@@ -40,10 +40,14 @@ cd bmad-vibe-kanban
 # Install dependencies
 pnpm install
 
-# Build everything
-./scripts/build-vibe-kanban.sh   # Build Vibe Kanban binary
-./scripts/build-installer.sh      # Build self-extracting installer
+# Build Vibe Kanban with BMAD stories
+./build-vibe-kanban.sh
+
+# Build self-extracting installer
+./build-installer.sh
 ```
+
+**📖 Complete build documentation:** See [BUILD-GUIDE.md](./BUILD-GUIDE.md)
 
 ## Project Structure
 
@@ -75,22 +79,49 @@ bmad-vibe-kanban/
 ### Story Modification Workflow
 
 ```bash
-# 1. Edit story templates
+# 1. Edit story templates in bmad-templates/stories/
 vim bmad-templates/stories/workflow-complet/1-1-0-brainstorm.md
 
-# 2. Build (auto-syncs stories)
-./scripts/build-vibe-kanban.sh
+# 2. Rebuild (auto-syncs stories to frontend)
+./build-vibe-kanban.sh
 
 # 3. Test in dev mode
 cd frontend && pnpm run dev
 ```
 
+**Key Concept:** Stories are sourced from `bmad-templates/stories/` and automatically synced to `frontend/public/stories/` during build. The build process also updates manifests in `storyParser.ts`.
+
+### Complete Build Workflow
+
+```bash
+# 1. Edit stories (if needed)
+vim bmad-templates/stories/workflow-complet/1-1-0-brainstorm.md
+
+# 2. Build Vibe Kanban (syncs stories + builds frontend + compiles backend)
+./build-vibe-kanban.sh
+
+# 3. Test the binary
+./target/release/server
+# Opens browser to http://127.0.0.1:{port}
+
+# 4. Build installer (when ready for distribution)
+./build-installer.sh
+
+# 5. Test installer
+mkdir /tmp/test && cd /tmp/test
+~/path/to/vibe-kanban/dist/install-bmad-vibe-kanban.sh --help
+```
+
+**Important:** The installer will always use the **latest stories from bmad-templates/** because `./build-vibe-kanban.sh` syncs them before compiling the backend.
+
 ### Testing
 
 ```bash
-# Run post-migration tests
-cd test-tools
-bats post-migration/*.bats
+# Quick validation
+./scripts/quick-check.sh
+
+# Complete testing guide
+# See TESTING-CHECKLIST.md
 ```
 
 ## Documentation
