@@ -46,16 +46,22 @@ echo "🔧 Using target directory: $CARGO_TARGET_DIR"
 export VK_SHARED_API_BASE="https://api.vibekanban.com"
 export VITE_VK_SHARED_API_BASE="https://api.vibekanban.com"
 
-echo "🧹 Cleaning previous builds..."
+echo "🧹 Cleaning previous NPX packages..."
 rm -rf npx-cli/dist
 mkdir -p npx-cli/dist/$PLATFORM
 
-echo "🔨 Building frontend..."
-(cd frontend && npm run build)
+# Check if binaries already exist (from build-vibe-kanban.sh)
+if [ -f "${CARGO_TARGET_DIR}/release/server" ]; then
+  echo "ℹ️  Using existing binaries from ${CARGO_TARGET_DIR}/release/"
+  echo "   (Skip rebuild - binaries already built by build-vibe-kanban.sh)"
+else
+  echo "🔨 Building frontend..."
+  (cd frontend && npm run build)
 
-echo "🔨 Building Rust binaries..."
-cargo build --release --manifest-path Cargo.toml
-cargo build --release --bin mcp_task_server --manifest-path Cargo.toml
+  echo "🔨 Building Rust binaries..."
+  cargo build --release --manifest-path Cargo.toml
+  cargo build --release --bin mcp_task_server --manifest-path Cargo.toml
+fi
 
 echo "📦 Creating distribution package..."
 
