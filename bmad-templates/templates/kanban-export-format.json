@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BMAD+TEA Kanban Export Format",
+  "description": "Format d'export pour integration avec Vibe Kanban et autres outils",
+
+  "metadata": {
+    "version": "1.0.0",
+    "project": "{PROJECT_NAME}",
+    "type": "{greenfield|brownfield_initial|feature_small|feature_large}",
+    "generated_at": "{ISO_DATE}",
+    "source": "BMAD+TEA Workflow"
+  },
+
+  "epics": [
+    {
+      "id": "1",
+      "slug": "epic-1-authentication",
+      "title": "Authentication",
+      "description": "User authentication and authorization",
+      "status": "in_progress",
+      "priority": "P0",
+      "stories_count": 6,
+      "completion": 0.33
+    }
+  ],
+
+  "stories": [
+    {
+      "id": "1.1.0",
+      "epic_id": "1",
+      "slug": "story-1.1.0-login-ui",
+      "title": "Login UI",
+      "description": "Create login form UI component",
+
+      "metadata": {
+        "bloc_parallele": 1,
+        "sequence": 0,
+        "priority": "P0",
+        "risk_level": "high",
+        "estimated_points": 3
+      },
+
+      "dependencies": {
+        "blocked_by": [],
+        "blocks": ["1.1.1"],
+        "parallel_with": ["1.2.0", "1.3.0"]
+      },
+
+      "status": "todo",
+      "assignee": null,
+      "sprint": null,
+
+      "acceptance_criteria": [
+        {
+          "id": "AC-1",
+          "description": "Form displays email and password fields",
+          "priority": "P0",
+          "test_type": "component"
+        },
+        {
+          "id": "AC-2",
+          "description": "Form validates input before submission",
+          "priority": "P0",
+          "test_type": "component"
+        }
+      ],
+
+      "test_requirements": {
+        "api_tests": 0,
+        "e2e_tests": 1,
+        "component_tests": 3,
+        "coverage_target": "100%"
+      },
+
+      "definition_of_done": {
+        "pre_implementation": [
+          {"id": "dod-1", "text": "Tests ATDD created", "checked": false},
+          {"id": "dod-2", "text": "Tests fail (RED)", "checked": false}
+        ],
+        "implementation": [
+          {"id": "dod-3", "text": "Code implemented", "checked": false},
+          {"id": "dod-4", "text": "Tests pass (GREEN)", "checked": false}
+        ],
+        "quality": [
+          {"id": "dod-5", "text": "Test review score >= 80", "checked": false},
+          {"id": "dod-6", "text": "Code review approved", "checked": false}
+        ],
+        "traceability": [
+          {"id": "dod-7", "text": "Trace matrix updated", "checked": false}
+        ]
+      },
+
+      "files": {
+        "story_file": "stories/story-1.1.0-login-ui.md",
+        "test_files": [
+          "tests/stories/1.1.0/component.spec.ts",
+          "tests/stories/1.1.0/e2e.spec.ts"
+        ]
+      }
+    }
+  ],
+
+  "tasks": [
+    {
+      "id": "ATDD-1.1.0",
+      "story_id": "1.1.0",
+      "type": "atdd",
+      "title": "ATDD - Login UI",
+      "description": "Create acceptance tests before implementation",
+      "actor": "Test Architect",
+      "status": "todo",
+
+      "dependencies": {
+        "blocked_by": [],
+        "blocks": ["DEV-1.1.0"]
+      },
+
+      "procedure": [
+        "Load TEA agent: tea",
+        "Run ATDD workflow: atdd",
+        "Provide story context",
+        "Select test levels: component",
+        "Verify tests fail"
+      ],
+
+      "validation": {
+        "command": "npm test -- --grep '1.1.0'",
+        "expected": "ALL FAIL"
+      },
+
+      "file": "tasks/ATDD-1.1.0.md"
+    },
+    {
+      "id": "DEV-1.1.0",
+      "story_id": "1.1.0",
+      "type": "development",
+      "title": "Development - Login UI",
+      "description": "Implement feature to pass tests",
+      "actor": "Developer",
+      "status": "todo",
+
+      "dependencies": {
+        "blocked_by": ["ATDD-1.1.0"],
+        "blocks": ["TEST-REVIEW-1.1.0"]
+      },
+
+      "validation": {
+        "command": "npm test",
+        "expected": "ALL PASS"
+      },
+
+      "file": "tasks/DEV-1.1.0.md"
+    },
+    {
+      "id": "TEST-REVIEW-1.1.0",
+      "story_id": "1.1.0",
+      "type": "test_review",
+      "title": "Test Review - Login UI",
+      "description": "Audit test quality",
+      "actor": "Test Architect",
+      "status": "todo",
+
+      "dependencies": {
+        "blocked_by": ["DEV-1.1.0"],
+        "blocks": ["CODE-REVIEW-1.1.0"]
+      },
+
+      "validation": {
+        "minimum_score": 80
+      },
+
+      "file": "tasks/TEST-REVIEW-1.1.0.md"
+    },
+    {
+      "id": "CODE-REVIEW-1.1.0",
+      "story_id": "1.1.0",
+      "type": "code_review",
+      "title": "Code Review - Login UI",
+      "description": "Review code quality",
+      "actor": "Developer + Reviewer",
+      "status": "todo",
+
+      "dependencies": {
+        "blocked_by": ["TEST-REVIEW-1.1.0"],
+        "blocks": ["TRACE-1.1.0"]
+      },
+
+      "file": "tasks/CODE-REVIEW-1.1.0.md"
+    },
+    {
+      "id": "TRACE-1.1.0",
+      "story_id": "1.1.0",
+      "type": "trace",
+      "title": "Trace - Login UI",
+      "description": "Update traceability matrix",
+      "actor": "Test Architect",
+      "status": "todo",
+
+      "dependencies": {
+        "blocked_by": ["CODE-REVIEW-1.1.0"],
+        "blocks": []
+      },
+
+      "file": "tasks/TRACE-1.1.0.md"
+    }
+  ],
+
+  "parallelization": {
+    "timeline": [
+      {
+        "time_slot": "T1",
+        "parallel_tasks": ["ATDD-1.1.0", "ATDD-1.2.0", "ATDD-1.3.0"],
+        "max_parallel_workers": 3
+      },
+      {
+        "time_slot": "T2",
+        "parallel_tasks": ["DEV-1.1.0", "DEV-1.2.0", "DEV-1.3.0"],
+        "max_parallel_workers": 3
+      }
+    ],
+    "critical_path": ["ATDD-1.1.0", "DEV-1.1.0", "TEST-REVIEW-1.1.0", "CODE-REVIEW-1.1.0", "TRACE-1.1.0"],
+    "optimization_notes": "Blocks 1.1, 1.2, 1.3 can be worked in parallel by 3 developers"
+  },
+
+  "statistics": {
+    "total_epics": 1,
+    "total_stories": 6,
+    "total_tasks": 30,
+    "parallelizable_blocks": 3,
+    "max_parallel_workers": 3,
+    "critical_path_length": 5
+  }
+}

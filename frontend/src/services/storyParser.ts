@@ -164,13 +164,10 @@ export async function discoverStoryFiles(workflowDir: string): Promise<StoryFile
 
   const workflowManifests: Record<string, string[]> = {
     'quick-flow': [
+      '0-0-0-bmad-setup.md',
+      '0-0-1-project-context.md',
       '1-1-0-quick-spec.md',
-      '1-1-1-regression-analysis.md',
-      '1-2-0-atdd.md',
       '1-2-1-dev.md',
-      '1-2-2-test-review.md',
-      '1-2-3-code-review.md',
-      '1-2-4-trace.md',
     ],
     'debug': [
       '1-1-0-quick-spec.md',
@@ -182,6 +179,7 @@ export async function discoverStoryFiles(workflowDir: string): Promise<StoryFile
       '1-2-4-trace.md',
     ],
     'document-project': [
+      '0-0-0-bmad-setup.md',
       '0-1-0-analyze-codebase.md',
       '0-1-1-import-docs.md',
       '0-1-2-reconcile-docs.md',
@@ -190,26 +188,30 @@ export async function discoverStoryFiles(workflowDir: string): Promise<StoryFile
       '3-1-1-test-design.md',
       '3-1-2-nfr-assessment.md',
       '3-1-3-transition.md',
+      '3-1-4-project-context.md',
     ],
     'workflow-complet': [
+      '0-0-0-bmad-setup.md',
       '1-1-0-brainstorm.md',
       '1-1-1-research.md',
       '1-1-2-product-brief.md',
       '2-1-0-prd.md',
       '2-1-1-ux-design.md',
+      '2-1-2-excalidraw-arch.md',
       '3-1-0-architecture.md',
       '3-1-1-test-design.md',
       '3-1-2-nfr-assessment.md',
       '3-2-0-epics-stories.md',
       '3-2-1-sprint-planning.md',
+      '3-2-2-check-readiness.md',
+      '4-0-0-project-context.md',
       '4-1-0-sprint0-framework.md',
       '4-1-1-sprint0-ci.md',
-      '4-2-0-prepare-stories.md',
-      '4-2-1-renumber-waves.md',
-      '4-2-2-import-vibe-kanban.md',
-      '5-1-0-release-trace.md',
+      '4-2-0-import-vibe-kanban.md',
+      '4-3-0-create-stories.md',
     ],
   };
+
 
   const filenames = workflowManifests[workflowDir] || [];
 

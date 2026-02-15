@@ -86,3 +86,24 @@ vibe-kanban-cloud/
 
 .jj
 .sisyphus/
+# BMAD additions to .gitignore
+
+# BMAD output (generated content)
+_bmad-output/
+
+# Installer build artifacts
+dist/
+*.sh.tmp
+
+# Test artifacts
+test-tools/tmp/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+venv/
+.venv/
+
+# macOS
+.DS_Store
