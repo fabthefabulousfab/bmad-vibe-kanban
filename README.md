@@ -13,6 +13,35 @@ This project is a **fork of Vibe Kanban 0.1.4** ([upstream](https://github.com/B
 - ✅ **Claude Code Integration** - Pre-configured workflows for Claude
 - ✅ **Unified Repository** - BMAD templates + Vibe Kanban in one place
 
+## BMAD Story Philosophy
+
+BMAD stories are designed as **executable workflows** for AI-assisted development. Unlike traditional user stories, they:
+
+- **Guide AI agents** through complete development workflows (from ideation to deployment)
+- **Organize by phases** using Wave-Epic-Story (WES) numbering (e.g., 1-2-3 = Wave 1, Epic 2, Story 3)
+- **Provide context** with acceptance criteria, test plans, and traceability
+- **Enable automation** through structured markdown that AI agents can parse and execute
+
+### Story Workflows
+
+| Workflow | Stories | Purpose |
+|----------|---------|---------|
+| **workflow-complet** | 18 | Complete product development (ideation → deployment) |
+| **document-project** | 10 | Documentation-first approach for existing codebases |
+| **quick-flow** | 4 | Fast feature development workflow |
+| **debug** | 7 | Bug investigation and resolution workflow |
+
+Each story includes:
+- Clear objectives and context
+- Acceptance criteria
+- Test specifications
+- Traceability to epics and waves
+- AI agent instructions
+
+For complete philosophy and specifications, see:
+- [bmad-templates/docs/01-WORKFLOW-PHASES-COMPLETE.md](./bmad-templates/docs/01-WORKFLOW-PHASES-COMPLETE.md) - Complete workflow phases
+- [bmad-templates/docs/03-GUIDE-CHOIX-WORKFLOW.md](./bmad-templates/docs/03-GUIDE-CHOIX-WORKFLOW.md) - Workflow selection guide
+
 ## Quick Start
 
 ### For Users (Installing BMAD in a Project)
@@ -126,29 +155,47 @@ mkdir /tmp/test && cd /tmp/test
 
 ## Documentation
 
-### Repository Documentation
+### Build & Testing Documentation
+
+- **[BUILD-GUIDE.md](./BUILD-GUIDE.md)** - Complete build documentation
+- **[TESTING-CHECKLIST.md](./TESTING-CHECKLIST.md)** - Complete testing guide for validating builds (6 phases)
+- **[docs/BUILD-WORKFLOW-TEST-REPORT.md](./docs/BUILD-WORKFLOW-TEST-REPORT.md)** - Build workflow test results
+- **[docs/IMPORT-VERIFICATION.md](./docs/IMPORT-VERIFICATION.md)** - Story import verification report
+- **[docs/INSTALLER-TEST-REPORT.md](./docs/INSTALLER-TEST-REPORT.md)** - Installer testing results
+
+### Fork & Modifications
 
 - **[FORK.md](./FORK.md)** - Fork relationship with upstream Vibe Kanban, syncing strategy, version numbering
-- **[TESTING-CHECKLIST.md](./TESTING-CHECKLIST.md)** - Complete testing guide for validating builds (6 phases)
-- **[CLAUDE-VERIFICATION-GUIDE.md](./CLAUDE-VERIFICATION-GUIDE.md)** - Quick reference for Claude Code verification sessions
-- **[README-VK-ORIGINAL.md](./README-VK-ORIGINAL.md)** - Original Vibe Kanban documentation and features
-- **[AGENTS.md](./AGENTS.md)** - Development guidelines, build commands, project structure
-- **[CODE-OF-CONDUCT.md](./CODE-OF-CONDUCT.md)** - Community guidelines (inherited from upstream)
+- **[docs/fork-history/MODIFICATION_FORK.md](./docs/fork-history/MODIFICATION_FORK.md)** - Detailed modifications made to Vibe Kanban fork
+- **[docs/integration-architecture.md](./docs/integration-architecture.md)** - BMAD-Vibe Kanban integration architecture
+- **[docs/architecture.md](./docs/architecture.md)** - Vibe Kanban architecture overview
 
-### Additional Documentation
+### BMAD Story Philosophy & Methodology
 
-- **[docs/fork-history/](./docs/fork-history/)** - Historical fork modifications and changes
-- **[bmad-templates/docs/](./bmad-templates/docs/)** - BMAD methodology documentation
+- **[bmad-templates/docs/00-BMAD-TEA-MASTER-GUIDE.md](./bmad-templates/docs/00-BMAD-TEA-MASTER-GUIDE.md)** - BMAD methodology master guide
+- **[bmad-templates/docs/01-WORKFLOW-PHASES-COMPLETE.md](./bmad-templates/docs/01-WORKFLOW-PHASES-COMPLETE.md)** - Complete workflow phases specification (philosophy and usage of BMAD stories)
+- **[bmad-templates/docs/03-GUIDE-CHOIX-WORKFLOW.md](./bmad-templates/docs/03-GUIDE-CHOIX-WORKFLOW.md)** - Workflow selection guide
+- **[bmad-templates/docs/traceability-matrix.md](./bmad-templates/docs/traceability-matrix.md)** - Story traceability matrix
+
+### Development
+
+- **[docs/AGENTS.md](./docs/AGENTS.md)** - Development guidelines, build commands, project structure
+- **[docs/development-guide.md](./docs/development-guide.md)** - Developer guide
 - **[.claude/CLAUDE.md](./.claude/CLAUDE.md)** - Claude Code project instructions
+- **[CODE-OF-CONDUCT.md](./CODE-OF-CONDUCT.md)** - Community guidelines
 
 ## Fork Information
 
 **Upstream:** [github.com/BloopAI/vibe-kanban](https://github.com/BloopAI/vibe-kanban)
 **Fork Point:** v0.1.4
-**License:** MIT
+**License:** Apache 2.0
 
-For detailed fork information, see [FORK.md](./FORK.md).
+For detailed fork information and modifications, see:
+- [FORK.md](./FORK.md) - Fork relationship and strategy
+- [docs/fork-history/MODIFICATION_FORK.md](./docs/fork-history/MODIFICATION_FORK.md) - Detailed modifications
 
 ## License
 
-MIT License (same as Vibe Kanban upstream)
+Apache License 2.0
+
+This project is licensed under the Apache License 2.0. See the [LICENSE](./LICENSE) file for details.
