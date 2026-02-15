@@ -76,7 +76,7 @@ pnpm install
 ./build-installer.sh
 ```
 
-**📖 Complete build documentation:** See [BUILD-GUIDE.md](./BUILD-GUIDE.md)
+**📖 Complete build documentation:** See [BUILD-GUIDE.md](./docs/BUILD-GUIDE.md)
 
 ## Project Structure
 
@@ -190,7 +190,7 @@ For the complete documentation structure, see [DOCUMENTATION.md](./DOCUMENTATION
 **License:** Apache 2.0
 
 For detailed fork information and modifications, see:
-- [FORK.md](./FORK.md) - Fork relationship and strategy
+- [FORK.md](./docs/FORK.md) - Fork relationship and strategy
 - [docs/fork-history/MODIFICATION_FORK.md](./docs/fork-history/MODIFICATION_FORK.md) - Detailed modifications
 
 ## License
