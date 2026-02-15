@@ -30,5 +30,5 @@
 
 ## Definition of Done
 - [ ] Bug spec created
-- [ ] Reproduction reliable
+- [ ] Reproduction reliable 
 - [ ] Root cause hypothesized
