@@ -23,6 +23,14 @@ Complete documentation for the BMAD-Vibe-Kanban project - a fork of Vibe Kanban 
 - **[docs/INSTALLER-TEST-REPORT.md](./docs/INSTALLER-TEST-REPORT.md)** - Installer testing results
 - **[docs/CLAUDE-VERIFICATION-GUIDE.md](./docs/CLAUDE-VERIFICATION-GUIDE.md)** - Quick reference for Claude Code verification sessions
 
+### BMAD Tools
+- **[docs/WORKFLOW-SYNC-TOOL.md](./docs/WORKFLOW-SYNC-TOOL.md)** - Workflow ↔ Story synchronization analyzer
+  - Semantic analysis using LLM (GPT-4, Claude)
+  - Identifies stories to delete, modify, or add
+  - SHA256 checksum-based cache system
+  - Detailed usage guide and troubleshooting
+- **[tools/workflow-sync/README.md](./tools/workflow-sync/README.md)** - Quick reference for workflow sync tool
+
 ## Architecture & Design
 
 ### Vibe Kanban Architecture
