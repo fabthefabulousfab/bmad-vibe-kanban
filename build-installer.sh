@@ -57,9 +57,9 @@ cd "$PROJECT_ROOT/npx-cli"
 if [ -f "./local-build.sh" ]; then
   ./local-build.sh
 elif command -v pnpm &> /dev/null; then
-  pnpm run build:npx
+  pnpm run build:npx || echo "      ⚠ NPX build failed, using existing build..."
 else
-  echo "WARN: Cannot build NPX package (no build script found)"
+  echo "      ⚠ Cannot build NPX package (no build script found)"
   echo "      Continuing with existing build..."
 fi
 

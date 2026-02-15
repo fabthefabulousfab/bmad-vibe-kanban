@@ -46,7 +46,7 @@ generate_manifest() {
     return
   fi
 
-  echo "    '$workflow_key': [" >&2
+  echo "    '$workflow_key': ["
   for file in $files; do
     echo "      '$file',"
   done
@@ -59,10 +59,10 @@ cat > "$temp_manifest" << 'EOF'
   const workflowManifests: Record<string, string[]> = {
 EOF
 
-generate_manifest "quick-flow" "quick-flow" >> "$temp_manifest" 2>/dev/null
-generate_manifest "debug" "debug" >> "$temp_manifest" 2>/dev/null
-generate_manifest "document-project" "document-project" >> "$temp_manifest" 2>/dev/null
-generate_manifest "workflow-complet" "workflow-complet" >> "$temp_manifest" 2>/dev/null
+generate_manifest "quick-flow" "quick-flow" >> "$temp_manifest"
+generate_manifest "debug" "debug" >> "$temp_manifest"
+generate_manifest "document-project" "document-project" >> "$temp_manifest"
+generate_manifest "workflow-complet" "workflow-complet" >> "$temp_manifest"
 
 cat >> "$temp_manifest" << 'EOF'
   };
