@@ -67,8 +67,17 @@ else
   ERRORS=$((ERRORS + 1))
 fi
 
-# Test 6: Documentation
-echo "▶ Test 6: Documentation"
+# Test 6: BMAD at root
+echo "▶ Test 6: BMAD native structure"
+if [ -d "_bmad" ] && [ -d ".claude" ]; then
+  echo "  ✓ _bmad and .claude at root (BMAD native)"
+else
+  echo "  ✗ Missing _bmad or .claude at root"
+  ERRORS=$((ERRORS + 1))
+fi
+
+# Test 7: Documentation
+echo "▶ Test 7: Documentation"
 if [ -f "README.md" ] && [ -f "FORK.md" ] && [ -f "TESTING-CHECKLIST.md" ]; then
   echo "  ✓ Documentation complete"
 else

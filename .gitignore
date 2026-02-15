@@ -90,6 +90,7 @@ vibe-kanban-cloud/
 
 # BMAD output (generated content)
 _bmad-output/
+**/[DRY-RUN]-*.md
 
 # Installer build artifacts
 dist/

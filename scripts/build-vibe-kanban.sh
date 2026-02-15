@@ -35,9 +35,21 @@ cargo build --release
 echo ""
 echo "[INFO] Building NPX binary..."
 cd "$PROJECT_ROOT/npx-cli"
-./local-build.sh
+if [ -f "./local-build.sh" ]; then
+  ./local-build.sh
+else
+  echo "[SKIP] local-build.sh not found - NPX packaging skipped"
+  echo "       Binary available at: target/release/server"
+fi
 
 echo ""
 echo "=========================================="
 echo "[OK] Vibe Kanban build complete"
 echo "=========================================="
+echo ""
+echo "Build artifacts:"
+echo "  - Backend binary: target/release/server"
+echo "  - Frontend dist:  frontend/dist/"
+if [ -d "$PROJECT_ROOT/npx-cli/dist" ]; then
+  echo "  - NPX package:    npx-cli/dist/"
+fi

@@ -36,13 +36,13 @@ generate_manifest() {
   local workflow_dir="$1"
   local workflow_key="$2"
 
-  echo "Processing $workflow_key..."
+  echo "Processing $workflow_key..." >&2
 
   # List all .md files (excluding templates starting with X-)
   files=$(cd "$VIBE_STORIES_DEST/$workflow_dir" && ls *.md 2>/dev/null | grep -v '^X-' | sort || true)
 
   if [ -z "$files" ]; then
-    echo "  No stories found for $workflow_key"
+    echo "  No stories found for $workflow_key" >&2
     return
   fi
 

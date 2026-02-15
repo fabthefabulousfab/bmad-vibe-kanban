@@ -52,18 +52,22 @@ bmad-vibe-kanban/
 ├── frontend/              # Vibe Kanban React app (fork)
 ├── crates/                # Vibe Kanban Rust backend (fork)
 ├── npx-cli/               # Binary packaging (fork)
-├── bmad-templates/        # BMAD framework addition
+├── _bmad/                 # BMAD methodology (root for active use)
+├── .claude/               # Claude Code configuration (root for active use)
+├── bmad-templates/        # BMAD sources for installer
 │   ├── stories/           # Workflow story templates
-│   ├── _bmad/             # BMAD methodology docs
+│   ├── _bmad/             # BMAD sources (copied to root)
 │   ├── scripts/           # BMAD tooling scripts
 │   ├── templates/         # Project templates
-│   └── .claude/           # Claude Code configuration
+│   ├── .claude/           # Claude config sources
+│   └── docs/              # BMAD documentation
 ├── scripts/               # Root build scripts
 │   ├── sync-stories.sh    # Sync templates → frontend
 │   ├── build-vibe-kanban.sh
 │   └── build-installer.sh
 ├── dist/                  # Build artifacts (gitignored)
-└── docs/                  # Documentation
+├── _bmad-output/          # BMAD generated content (gitignored)
+└── docs/                  # Vibe Kanban documentation
 ```
 
 ## Development
@@ -89,13 +93,30 @@ cd test-tools
 bats post-migration/*.bats
 ```
 
+## Documentation
+
+### Repository Documentation
+
+- **[FORK.md](./FORK.md)** - Fork relationship with upstream Vibe Kanban, syncing strategy, version numbering
+- **[TESTING-CHECKLIST.md](./TESTING-CHECKLIST.md)** - Complete testing guide for validating builds (6 phases)
+- **[CLAUDE-VERIFICATION-GUIDE.md](./CLAUDE-VERIFICATION-GUIDE.md)** - Quick reference for Claude Code verification sessions
+- **[README-VK-ORIGINAL.md](./README-VK-ORIGINAL.md)** - Original Vibe Kanban documentation and features
+- **[AGENTS.md](./AGENTS.md)** - Development guidelines, build commands, project structure
+- **[CODE-OF-CONDUCT.md](./CODE-OF-CONDUCT.md)** - Community guidelines (inherited from upstream)
+
+### Additional Documentation
+
+- **[docs/fork-history/](./docs/fork-history/)** - Historical fork modifications and changes
+- **[bmad-templates/docs/](./bmad-templates/docs/)** - BMAD methodology documentation
+- **[.claude/CLAUDE.md](./.claude/CLAUDE.md)** - Claude Code project instructions
+
 ## Fork Information
 
 **Upstream:** [github.com/BloopAI/vibe-kanban](https://github.com/BloopAI/vibe-kanban)
 **Fork Point:** v0.1.4
 **License:** MIT
 
-See [README-VK-ORIGINAL.md](./README-VK-ORIGINAL.md) for original Vibe Kanban documentation.
+For detailed fork information, see [FORK.md](./FORK.md).
 
 ## License
 
