@@ -1,0 +1,11 @@
+# BMAD Workflow Sync Analyzer Dependencies
+# Version pinning for reproducibility
+# Review/update periodically for security patches
+
+litellm==1.81.11
+python-dotenv==1.0.1
+python-frontmatter==1.1.0
+pyyaml==6.0.2
+
+# Google Cloud AI Platform (required for vertex_ai models)
+google-cloud-aiplatform>=1.38

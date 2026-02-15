@@ -131,3 +131,7 @@ scripts/story-parser.sh
 scripts/sync-story-manifests.sh
 scripts/test-changed.sh
 scripts/workflow-runner.sh
+
+# Workflow sync tool
+tools/workflow-sync/.venv/
+tools/workflow-sync/.env
