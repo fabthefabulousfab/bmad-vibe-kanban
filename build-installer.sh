@@ -49,13 +49,15 @@ echo "      ✓ $story_count stories found"
 echo ""
 
 # ===========================================================================
-# Build NPX Package (if not already built)
+# Build NPX Package (copies target/release/server to npx-cli/dist/)
 # ===========================================================================
 echo "[2/3] Building NPX package..."
 
-cd "$PROJECT_ROOT/npx-cli"
+cd "$PROJECT_ROOT"
 if [ -f "./local-build.sh" ]; then
+  echo "      Running local-build.sh to package binaries..."
   ./local-build.sh
+  echo "      ✓ NPX package built"
 elif command -v pnpm &> /dev/null; then
   pnpm run build:npx || echo "      ⚠ NPX build failed, using existing build..."
 else
