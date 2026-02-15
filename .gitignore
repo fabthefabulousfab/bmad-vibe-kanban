@@ -117,11 +117,17 @@ venv/
 /templates/
 /VERSION
 
-# BMAD scripts duplicates (use bmad-templates/scripts/ instead)
+# BMAD scripts (extracted from installer, use bmad-templates/scripts/ instead)
+scripts/api.sh
+scripts/build-installer.sh
+scripts/burn-in.sh
+scripts/ci-local.sh
+scripts/common.sh
 scripts/import-bmad-workflow.sh
 scripts/import-project-stories.sh
 scripts/import-stories-to-vibe-kanban.sh
 scripts/project-story-parser.sh
 scripts/story-parser.sh
 scripts/sync-story-manifests.sh
+scripts/test-changed.sh
 scripts/workflow-runner.sh
