@@ -51,14 +51,19 @@ cp .env.example .env
 
 ## Utilisation
 
+**Détection Automatique du Projet** : Le script détecte automatiquement la racine du projet `vibe-kanban` en cherchant les marqueurs `bmad-templates/` et `frontend/`. Vous pouvez l'exécuter depuis n'importe quel sous-répertoire du projet. Les rapports seront toujours générés dans `vibe-kanban/_bmad-output/planning-artifacts/`.
+
 ### Mode Dry-Run (Recommandé pour débuter)
 
 Prévisualise l'analyse sans appeler le LLM (utilise le cache ou données mock) :
 
 ```bash
-cd /path/to/vibe-kanban  # IMPORTANT: lancer depuis la racine du projet
+# Depuis n'importe où dans vibe-kanban (racine ou sous-répertoire)
+cd /path/to/vibe-kanban
 source tools/workflow-sync/.venv/bin/activate
 python3 tools/workflow-sync/analyze-workflow-sync.py --dry-run
+
+# Le script affichera : [INFO] Detected project root: /path/to/vibe-kanban
 ```
 
 ### Analyse Complète

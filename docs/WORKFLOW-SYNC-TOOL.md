@@ -103,12 +103,26 @@ BASE_MODEL=gpt-4
 
 ## Utilisation
 
+### Détection Automatique du Projet
+
+Le script détecte automatiquement la racine du projet vibe-kanban :
+- Recherche les marqueurs : `bmad-templates/`, `frontend/`, `crates/`
+- Fonctionne depuis n'importe quel sous-répertoire du projet
+- Génère toujours les rapports dans `vibe-kanban/_bmad-output/planning-artifacts/`
+
+**Message de détection :**
+```
+[INFO] Detected project root: /path/to/vibe-kanban
+[INFO] Detected project root: /path/to/vibe-kanban (from /path/to/vibe-kanban/tools)
+```
+
 ### Workflow Recommandé
 
 #### 1. Dry-Run Initial (Gratuit)
 
 ```bash
-cd /path/to/vibe-kanban
+# Depuis n'importe où dans le projet vibe-kanban
+cd /path/to/vibe-kanban  # ou cd /path/to/vibe-kanban/tools
 source tools/workflow-sync/.venv/bin/activate
 python3 tools/workflow-sync/analyze-workflow-sync.py --dry-run
 ```

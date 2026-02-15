@@ -968,8 +968,31 @@ def main():
     # Load configuration
     llm_config = load_llm_config(logger)
 
+    # Detect project root (vibe-kanban directory)
+    # Look for markers: bmad-templates/, frontend/, crates/
+    current_dir = Path.cwd()
+    project_root = None
+
+    # Check if current directory is vibe-kanban root
+    if (current_dir / "bmad-templates").exists() and (current_dir / "frontend").exists():
+        project_root = current_dir
+        logger.info(f"Detected project root: {project_root}")
+    # Check if we're in a subdirectory of vibe-kanban
+    else:
+        for parent in [current_dir] + list(current_dir.parents):
+            if (parent / "bmad-templates").exists() and (parent / "frontend").exists():
+                project_root = parent
+                logger.info(f"Detected project root: {project_root} (from {current_dir})")
+                break
+
+    if not project_root:
+        logger.error("Could not detect vibe-kanban project root!")
+        logger.error("Please run this script from within the vibe-kanban repository.")
+        logger.error(f"Current directory: {current_dir}")
+        logger.error("Expected markers: bmad-templates/, frontend/, crates/")
+        sys.exit(1)
+
     # Setup paths
-    project_root = Path.cwd()
     bmm_workflows_path = project_root / "bmad-templates" / "_bmad" / "bmm" / "workflows"
     tea_workflows_path = project_root / "bmad-templates" / "_bmad" / "tea" / "workflows"
     stories_base = project_root / "bmad-templates" / "stories"
