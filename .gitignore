@@ -111,3 +111,17 @@ venv/
 
 # BMAD: Allow .claude at root (project configuration)
 !/.claude/
+
+# Extracted installer content (should not be committed)
+/stories/
+/templates/
+/VERSION
+
+# BMAD scripts duplicates (use bmad-templates/scripts/ instead)
+scripts/import-bmad-workflow.sh
+scripts/import-project-stories.sh
+scripts/import-stories-to-vibe-kanban.sh
+scripts/project-story-parser.sh
+scripts/story-parser.sh
+scripts/sync-story-manifests.sh
+scripts/workflow-runner.sh

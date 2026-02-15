@@ -155,34 +155,33 @@ mkdir /tmp/test && cd /tmp/test
 
 ## Documentation
 
-### Build & Testing Documentation
+📚 **[Complete Documentation Index](./DOCUMENTATION.md)** - Browse all documentation organized by topic and audience
 
-- **[BUILD-GUIDE.md](./BUILD-GUIDE.md)** - Complete build documentation
-- **[TESTING-CHECKLIST.md](./TESTING-CHECKLIST.md)** - Complete testing guide for validating builds (6 phases)
-- **[docs/BUILD-WORKFLOW-TEST-REPORT.md](./docs/BUILD-WORKFLOW-TEST-REPORT.md)** - Build workflow test results
-- **[docs/IMPORT-VERIFICATION.md](./docs/IMPORT-VERIFICATION.md)** - Story import verification report
-- **[docs/INSTALLER-TEST-REPORT.md](./docs/INSTALLER-TEST-REPORT.md)** - Installer testing results
+### Quick Links
 
-### Fork & Modifications
+**Build & Deploy:**
+- [BUILD-GUIDE.md](./docs/BUILD-GUIDE.md) - Complete build documentation
+- [TESTING-CHECKLIST.md](./docs/TESTING-CHECKLIST.md) - Testing guide (6 phases)
 
-- **[FORK.md](./FORK.md)** - Fork relationship with upstream Vibe Kanban, syncing strategy, version numbering
-- **[docs/fork-history/MODIFICATION_FORK.md](./docs/fork-history/MODIFICATION_FORK.md)** - Detailed modifications made to Vibe Kanban fork
-- **[docs/integration-architecture.md](./docs/integration-architecture.md)** - BMAD-Vibe Kanban integration architecture
-- **[docs/architecture.md](./docs/architecture.md)** - Vibe Kanban architecture overview
+**Architecture:**
+- [architecture.md](./docs/architecture.md) - System architecture
+- [integration-architecture.md](./docs/integration-architecture.md) - BMAD integration
 
-### BMAD Story Philosophy & Methodology
+**Fork Information:**
+- [FORK.md](./docs/FORK.md) - Fork relationship and strategy
+- [MODIFICATION_FORK.md](./docs/fork-history/MODIFICATION_FORK.md) - Detailed modifications
 
-- **[bmad-templates/docs/00-BMAD-TEA-MASTER-GUIDE.md](./bmad-templates/docs/00-BMAD-TEA-MASTER-GUIDE.md)** - BMAD methodology master guide
-- **[bmad-templates/docs/01-WORKFLOW-PHASES-COMPLETE.md](./bmad-templates/docs/01-WORKFLOW-PHASES-COMPLETE.md)** - Complete workflow phases specification (philosophy and usage of BMAD stories)
-- **[bmad-templates/docs/03-GUIDE-CHOIX-WORKFLOW.md](./bmad-templates/docs/03-GUIDE-CHOIX-WORKFLOW.md)** - Workflow selection guide
-- **[bmad-templates/docs/traceability-matrix.md](./bmad-templates/docs/traceability-matrix.md)** - Story traceability matrix
+**BMAD Philosophy:**
+- [BMAD Master Guide](./bmad-templates/docs/00-BMAD-TEA-MASTER-GUIDE.md) - Methodology overview
+- [Complete Workflow Phases](./bmad-templates/docs/01-WORKFLOW-PHASES-COMPLETE.md) - Story philosophy
+- [Workflow Selection](./bmad-templates/docs/03-GUIDE-CHOIX-WORKFLOW.md) - Choose the right workflow
 
-### Development
+**Development:**
+- [AGENTS.md](./docs/AGENTS.md) - Development guidelines
+- [development-guide.md](./docs/development-guide.md) - Developer setup
+- [CLAUDE.md](./.claude/CLAUDE.md) - Claude Code instructions
 
-- **[docs/AGENTS.md](./docs/AGENTS.md)** - Development guidelines, build commands, project structure
-- **[docs/development-guide.md](./docs/development-guide.md)** - Developer guide
-- **[.claude/CLAUDE.md](./.claude/CLAUDE.md)** - Claude Code project instructions
-- **[CODE-OF-CONDUCT.md](./CODE-OF-CONDUCT.md)** - Community guidelines
+For the complete documentation structure, see [DOCUMENTATION.md](./DOCUMENTATION.md).
 
 ## Fork Information
 
