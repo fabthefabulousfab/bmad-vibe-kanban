@@ -107,3 +107,6 @@ venv/
 
 # macOS
 .DS_Store
+
+# BMAD: Allow .claude at root (project configuration)
+!/.claude/
