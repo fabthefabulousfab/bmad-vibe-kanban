@@ -405,12 +405,9 @@ extract_vibe_binary() {
             ;;
     esac
 
-    # Check if binary already extracted
+    # Always extract binary to ensure it's up-to-date
+    # (Previous bug: early return prevented binary updates)
     local vibe_binary="${VIBE_BINARY_DIR}/vibe-kanban"
-    if [[ -x "$vibe_binary" ]]; then
-        echo "$vibe_binary"
-        return 0
-    fi
 
     # Create binary directory
     mkdir -p "$VIBE_BINARY_DIR"
