@@ -48,9 +48,9 @@ For complete philosophy and specifications, see:
 
 ```bash
 # Download and run the installer
-curl -L -O https://github.com/fabthefabulousfab/bmad-vibe-kanban/releases/download/v0.1.4/install-bmad-vibe-kanban.sh
-chmod +x install-bmad-vibe-kanban.sh
-./install-bmad-vibe-kanban.sh
+curl -L -O https://github.com/fabthefabulousfab/bmad-vibe-kanban/releases/download/v0.1.4/launch-bmad-vibe-kanban.sh
+chmod +x launch-bmad-vibe-kanban.sh
+./launch-bmad-vibe-kanban.sh
 ```
 
 The installer:
@@ -138,7 +138,7 @@ vim bmad-templates/stories/workflow-complet/1-1-0-brainstorm.md
 
 # 5. Test installer
 mkdir /tmp/test && cd /tmp/test
-~/path/to/vibe-kanban/dist/install-bmad-vibe-kanban.sh --help
+~/path/to/vibe-kanban/dist/launch-bmad-vibe-kanban.sh --help
 ```
 
 **Important:** The installer will always use the **latest stories from bmad-templates/** because `./build-vibe-kanban.sh` syncs them before compiling the backend.
