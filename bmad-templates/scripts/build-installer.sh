@@ -32,9 +32,9 @@ log_debug "build-installer.sh starting"
 
 # Support new unified structure
 BMAD_TEMPLATES_DIR="${BMAD_TEMPLATES_DIR:-${PROJECT_ROOT}}"
-OUTPUT_FILE="${OUTPUT_FILE:-${PROJECT_ROOT}/install-bmad-vibe-kanban.sh}"
+OUTPUT_FILE="${OUTPUT_FILE:-${PROJECT_ROOT}/launch-bmad-vibe-kanban.sh}"
 SOURCE_DIR="${BMAD_TEMPLATES_DIR}"
-INSTALLER_NAME="install-bmad-vibe-kanban.sh"
+INSTALLER_NAME="launch-bmad-vibe-kanban.sh"
 
 # Directories to include in the installer (relative to SOURCE_DIR)
 INCLUDE_DIRS=(
@@ -73,7 +73,7 @@ Build self-extracting installer for bmad-vibe-kanban.
 
 Options:
     --help              Show this help message
-    --output FILE       Output installer path (default: ./install-bmad-vibe-kanban.sh)
+    --output FILE       Output installer path (default: ./launch-bmad-vibe-kanban.sh)
     --source-dir DIR    Source directory (default: project root)
 
 The installer embeds:
@@ -275,7 +275,7 @@ ORIGINAL_ARGS=("$@")
 
 show_help() {
     cat << 'EOF'
-Usage: install-bmad-vibe-kanban.sh [OPTIONS]
+Usage: launch-bmad-vibe-kanban.sh [OPTIONS]
 
 Complete BMAD-Vibe-Kanban installer with automatic setup.
 
@@ -301,10 +301,10 @@ Options:
     --verbose           Show debug output
 
 Examples:
-    ./install-bmad-vibe-kanban.sh
-    ./install-bmad-vibe-kanban.sh --clean
-    ./install-bmad-vibe-kanban.sh --target ~/my-project
-    ./install-bmad-vibe-kanban.sh --vibe-path /opt/vibe-kanban
+    ./launch-bmad-vibe-kanban.sh
+    ./launch-bmad-vibe-kanban.sh --clean
+    ./launch-bmad-vibe-kanban.sh --target ~/my-project
+    ./launch-bmad-vibe-kanban.sh --vibe-path /opt/vibe-kanban
 EOF
 }
 

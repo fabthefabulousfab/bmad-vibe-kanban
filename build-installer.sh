@@ -11,7 +11,7 @@
 #   - Vibe Kanban must be built first (run ./build-vibe-kanban.sh)
 #
 # Output:
-#   - dist/install-bmad-vibe-kanban.sh (55+ MB)
+#   - dist/launch-bmad-vibe-kanban.sh (55+ MB)
 # ===========================================================================
 
 set -euo pipefail
@@ -84,31 +84,31 @@ export OUTPUT_DIR="$PROJECT_ROOT/dist"
 mkdir -p "$OUTPUT_DIR"
 
 # Call the installer build script
-./scripts/build-installer.sh --output "$OUTPUT_DIR/install-bmad-vibe-kanban.sh"
+./scripts/build-installer.sh --output "$OUTPUT_DIR/launch-bmad-vibe-kanban.sh"
 
 echo ""
 
 # ===========================================================================
 # Summary
 # ===========================================================================
-if [ -f "$OUTPUT_DIR/install-bmad-vibe-kanban.sh" ]; then
-  INSTALLER_SIZE=$(du -h "$OUTPUT_DIR/install-bmad-vibe-kanban.sh" | cut -f1)
+if [ -f "$OUTPUT_DIR/launch-bmad-vibe-kanban.sh" ]; then
+  INSTALLER_SIZE=$(du -h "$OUTPUT_DIR/launch-bmad-vibe-kanban.sh" | cut -f1)
 
   echo "╔════════════════════════════════════════════════════════╗"
   echo "║              INSTALLER BUILD COMPLETE                  ║"
   echo "╚════════════════════════════════════════════════════════╝"
   echo ""
   echo "Installer created:"
-  echo "  • File: dist/install-bmad-vibe-kanban.sh"
+  echo "  • File: dist/launch-bmad-vibe-kanban.sh"
   echo "  • Size: $INSTALLER_SIZE"
   echo "  • Stories: $story_count markdown files"
   echo ""
   echo "To test the installer:"
   echo "  mkdir /tmp/test-install && cd /tmp/test-install"
-  echo "  $OUTPUT_DIR/install-bmad-vibe-kanban.sh --help"
+  echo "  $OUTPUT_DIR/launch-bmad-vibe-kanban.sh --help"
   echo ""
   echo "To distribute:"
-  echo "  Upload dist/install-bmad-vibe-kanban.sh to GitHub Releases"
+  echo "  Upload dist/launch-bmad-vibe-kanban.sh to GitHub Releases"
   echo ""
 else
   echo "ERROR: Installer build failed!"
