@@ -123,7 +123,7 @@ Le **Workflow Sync Analyzer** est un outil d'analyse sémantique qui maintient l
 
 **Installation :**
 ```bash
-cd tools/workflow-sync
+cd bmad-templates/tools/workflow-sync
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -133,13 +133,13 @@ cp .env.example .env  # Configurer BASE_URL, BASE_KEY, BASE_MODEL
 **Usage rapide :**
 ```bash
 # Dry run gratuit (utilise cache uniquement)
-python3 tools/workflow-sync/analyze-workflow-sync.py --dry-run
+python3 bmad-templates/tools/workflow-sync/analyze-workflow-sync.py --dry-run
 
 # Analyse complète avec LLM (~$0.54 avec Claude Opus)
-python3 tools/workflow-sync/analyze-workflow-sync.py --verbose
+python3 bmad-templates/tools/workflow-sync/analyze-workflow-sync.py --verbose
 
 # Analyser un scénario spécifique
-python3 tools/workflow-sync/analyze-workflow-sync.py --scenario workflow-complet
+python3 bmad-templates/tools/workflow-sync/analyze-workflow-sync.py --scenario workflow-complet
 ```
 
 **Note :** Le coût d'une analyse complète est d'environ $0.50-0.60 avec Claude Opus. Utilisez d'abord `--dry-run` pour valider que l'outil fonctionne sans frais.
