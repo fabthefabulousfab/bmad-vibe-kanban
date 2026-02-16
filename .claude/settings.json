@@ -1,0 +1,56 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "notify-send 'Claude Code' 'Tâche terminée'"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "notify-send 'Claude Code' 'En attente de votre entrée'"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun ./validate-command.js"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "playwright@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "hookify@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "mgrep@Mixedbread-Grep": true,
+    "commit-commands@claude-code-plugins": true,
+    "explanatory-output-style@claude-code-plugins": true
+  },
+  "autoUpdatesChannel": "latest",
+  "skipDangerousModePermissionPrompt": true,
+  "terminal.integrated.enableBell": true,
+  "window.title": "${dirty}${activeEditorShort}${separator}${rootName}${separator}${appName}",
+  "window.titleBarStyle": "custom",
+  "effortLevel": "medium"
+}
