@@ -12,12 +12,24 @@
 
 set -euo pipefail
 
+# ===========================================================================
+# Environment Setup
+# ===========================================================================
+# Ensure Rust/Cargo is in PATH (required for Ubuntu builds)
+if [ -d "$HOME/.cargo/bin" ]; then
+  export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$SCRIPT_DIR"
 
 echo "╔════════════════════════════════════════════════════════╗"
 echo "║           Building BMAD-Vibe-Kanban                    ║"
 echo "╚════════════════════════════════════════════════════════╝"
+echo ""
+
+# Verify build tools are available
+command -v cargo &> /dev/null && echo "      [OK] cargo found: $(cargo --version | head -1)" || echo "      [WARN] cargo not found"
 echo ""
 
 # ===========================================================================
