@@ -2,6 +2,14 @@
 
 Complete documentation for the BMAD-Vibe-Kanban project - a fork of Vibe Kanban 0.1.4 with integrated BMAD methodology.
 
+## Documentation Structure
+
+Documentation is organized into three main areas:
+
+- **[docs/](./docs/)** - Vibe Kanban technical documentation
+- **[docs-bmad/](./docs-bmad/)** - BMAD methodology and stories
+- **[docs-integration/](./docs-integration/)** - Fork and integration documentation
+
 ## Quick Start
 
 - **[README.md](./README.md)** - Project overview, quick start guide, and license information
@@ -24,7 +32,7 @@ Complete documentation for the BMAD-Vibe-Kanban project - a fork of Vibe Kanban 
 - **[docs/CLAUDE-VERIFICATION-GUIDE.md](./docs/CLAUDE-VERIFICATION-GUIDE.md)** - Quick reference for Claude Code verification sessions
 
 ### BMAD Tools
-- **[docs/WORKFLOW-SYNC-TOOL.md](./docs/WORKFLOW-SYNC-TOOL.md)** - Workflow ↔ Story synchronization analyzer
+- **[docs-bmad/tools/WORKFLOW-SYNC-TOOL.md](./docs-bmad/tools/WORKFLOW-SYNC-TOOL.md)** - Workflow ↔ Story synchronization analyzer
   - Semantic analysis using LLM (GPT-4, Claude)
   - Identifies stories to delete, modify, or add
   - SHA256 checksum-based cache system
@@ -35,21 +43,25 @@ Complete documentation for the BMAD-Vibe-Kanban project - a fork of Vibe Kanban 
 
 ### Vibe Kanban Architecture
 - **[docs/architecture.md](./docs/architecture.md)** - Vibe Kanban architecture overview
-- **[docs/integration-architecture.md](./docs/integration-architecture.md)** - BMAD-Vibe Kanban integration architecture
 - **[docs/component-inventory.md](./docs/component-inventory.md)** - Component inventory and structure
 - **[docs/source-tree-analysis.md](./docs/source-tree-analysis.md)** - Source tree analysis
+
+### Integration Architecture
+- **[docs-integration/integration-architecture.md](./docs-integration/integration-architecture.md)** - BMAD-Vibe Kanban integration architecture
 
 ### Technical Specifications
 - **[docs/api-contracts.md](./docs/api-contracts.md)** - API contracts and interfaces
 - **[docs/data-models.md](./docs/data-models.md)** - Data models and schemas
 - **[docs/project-overview.md](./docs/project-overview.md)** - Project technical overview
 
-## Fork & Modifications
+## Fork & Integration
 
-- **[docs/FORK.md](./docs/FORK.md)** - Fork relationship with upstream Vibe Kanban
+- **[docs-integration/FORK.md](./docs-integration/FORK.md)** - Fork relationship with upstream Vibe Kanban
   - Syncing strategy
   - Version numbering
   - Upstream compatibility
+- **[docs-integration/FORK-RESTORATION.md](./docs-integration/FORK-RESTORATION.md)** - Fork restoration to v0.1.4
+- **[docs-integration/PRIVACY-VERIFICATION.md](./docs-integration/PRIVACY-VERIFICATION.md)** - Privacy audit report
 - **[docs/fork-history/MODIFICATION_FORK.md](./docs/fork-history/MODIFICATION_FORK.md)** - Detailed modifications made to Vibe Kanban fork
   - Feature additions
   - Code changes
@@ -58,17 +70,17 @@ Complete documentation for the BMAD-Vibe-Kanban project - a fork of Vibe Kanban 
 ## BMAD Methodology
 
 ### Philosophy & Specifications
-- **[bmad-templates/docs/00-BMAD-TEA-MASTER-GUIDE.md](./bmad-templates/docs/00-BMAD-TEA-MASTER-GUIDE.md)** - BMAD methodology master guide
-- **[bmad-templates/docs/01-WORKFLOW-PHASES-COMPLETE.md](./bmad-templates/docs/01-WORKFLOW-PHASES-COMPLETE.md)** - Complete workflow phases specification
+- **[docs-bmad/methodology/00-BMAD-TEA-MASTER-GUIDE.md](./docs-bmad/methodology/00-BMAD-TEA-MASTER-GUIDE.md)** - BMAD methodology master guide
+- **[docs-bmad/methodology/01-WORKFLOW-PHASES-COMPLETE.md](./docs-bmad/methodology/01-WORKFLOW-PHASES-COMPLETE.md)** - Complete workflow phases specification
   - Philosophy of BMAD stories
   - Wave-Epic-Story (WES) structure
   - Workflow execution model
-- **[bmad-templates/docs/03-GUIDE-CHOIX-WORKFLOW.md](./bmad-templates/docs/03-GUIDE-CHOIX-WORKFLOW.md)** - Workflow selection guide
-- **[bmad-templates/docs/traceability-matrix.md](./bmad-templates/docs/traceability-matrix.md)** - Story traceability matrix
+- **[docs-bmad/methodology/03-GUIDE-CHOIX-WORKFLOW.md](./docs-bmad/methodology/03-GUIDE-CHOIX-WORKFLOW.md)** - Workflow selection guide
+- **[docs-bmad/methodology/traceability-matrix.md](./docs-bmad/methodology/traceability-matrix.md)** - Story traceability matrix
 
 ### Story Workflows
 
-BMAD includes 4 pre-built workflows with 39 total stories:
+BMAD includes 4 pre-built workflows with 40 total stories:
 
 | Workflow | Location | Stories | Purpose |
 |----------|----------|---------|---------|
@@ -98,31 +110,43 @@ BMAD includes 4 pre-built workflows with 39 total stories:
 ## Project Structure
 
 ```
-vibe-kanban/
+bmad-vibe-kanban/
 ├── README.md                  # Project overview
 ├── DOCUMENTATION.md           # This file (documentation index)
 ├── LICENSE                    # Apache 2.0 license
 ├── CODE-OF-CONDUCT.md         # Community guidelines
 │
-├── docs/                      # All documentation
+├── docs/                      # Vibe Kanban technical documentation
 │   ├── BUILD-GUIDE.md
 │   ├── TESTING-CHECKLIST.md
-│   ├── FORK.md
 │   ├── AGENTS.md
 │   ├── architecture.md
-│   ├── integration-architecture.md
 │   ├── api-contracts.md
 │   ├── data-models.md
 │   └── fork-history/
 │       └── MODIFICATION_FORK.md
 │
+├── docs-bmad/                 # BMAD methodology documentation
+│   ├── methodology/           # BMAD guides and workflow specs
+│   │   ├── 00-BMAD-TEA-MASTER-GUIDE.md
+│   │   ├── 01-WORKFLOW-PHASES-COMPLETE.md
+│   │   └── 03-GUIDE-CHOIX-WORKFLOW.md
+│   ├── stories/               # Story documentation
+│   └── tools/                 # BMAD tools documentation
+│       └── WORKFLOW-SYNC-TOOL.md
+│
+├── docs-integration/          # Fork and integration documentation
+│   ├── FORK.md
+│   ├── FORK-RESTORATION.md
+│   ├── PRIVACY-VERIFICATION.md
+│   └── integration-architecture.md
+│
 ├── bmad-templates/            # BMAD framework source
-│   ├── stories/               # 39 workflow story templates
+│   ├── stories/               # 40 workflow story templates
 │   │   ├── workflow-complet/
 │   │   ├── document-project/
 │   │   ├── quick-flow/
 │   │   └── debug/
-│   ├── docs/                  # BMAD methodology docs
 │   ├── scripts/               # BMAD build scripts
 │   ├── _bmad/                 # BMAD framework
 │   └── .claude/               # Claude config
@@ -149,7 +173,7 @@ graph TD
     A[bmad-templates/stories/] -->|rsync| B[frontend/public/stories/]
     B -->|vite build| C[frontend/dist/]
     C -->|RustEmbed| D[target/release/server]
-    D -->|build-installer.sh| E[dist/install-bmad-vibe-kanban.sh]
+    D -->|build-installer.sh| E[dist/launch-bmad-vibe-kanban.sh]
 ```
 
 **Key Scripts:**
@@ -163,7 +187,7 @@ graph TD
 
 **For Users:**
 - README.md - Getting started
-- bmad-templates/docs/03-GUIDE-CHOIX-WORKFLOW.md - Choose the right workflow
+- docs-bmad/methodology/03-GUIDE-CHOIX-WORKFLOW.md - Choose the right workflow
 
 **For Developers:**
 - docs/BUILD-GUIDE.md - How to build
@@ -171,13 +195,13 @@ graph TD
 - docs/development-guide.md - Development setup
 
 **For Contributors:**
-- docs/FORK.md - Fork relationship
+- docs-integration/FORK.md - Fork relationship
 - docs/fork-history/MODIFICATION_FORK.md - What we changed
 - CODE-OF-CONDUCT.md - Community rules
 
 **For Architects:**
 - docs/architecture.md - System architecture
-- docs/integration-architecture.md - Integration design
+- docs-integration/integration-architecture.md - Integration design
 - docs/api-contracts.md - API specifications
 
 ### By Phase
@@ -185,7 +209,7 @@ graph TD
 **Phase 1: Setup**
 1. README.md - Project overview
 2. docs/BUILD-GUIDE.md - Build setup
-3. bmad-templates/docs/00-BMAD-TEA-MASTER-GUIDE.md - BMAD intro
+3. docs-bmad/methodology/00-BMAD-TEA-MASTER-GUIDE.md - BMAD intro
 
 **Phase 2: Development**
 1. docs/AGENTS.md - Development guidelines
@@ -215,5 +239,5 @@ For issues, questions, or contributions, please refer to the documentation above
 
 ---
 
-**Last Updated:** 2026-02-15
-**Documentation Version:** 1.0.0
+**Last Updated:** 2026-02-16
+**Documentation Version:** 2.0.0
