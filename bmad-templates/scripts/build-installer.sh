@@ -634,15 +634,18 @@ MISSING_DEPS=()
 BASH_VERSION_MAJOR="${BASH_VERSINFO[0]}"
 if [[ $BASH_VERSION_MAJOR -lt 4 ]]; then
     log_warning "Current Bash version is too old: $BASH_VERSION"
-    log_info "Looking for newer Bash version on system..."
+    echo ""
+    echo "macOS uses Bash 3.2 by default. This installer requires Bash 4+."
+    echo ""
+    echo "🔍 Looking for newer Bash version on system..."
+    echo ""
 
     # Try to find Bash 4+ in common locations
     BASH_4_PLUS=""
     for bash_path in \
-        "/usr/local/bin/bash" \
         "/opt/homebrew/bin/bash" \
-        "/opt/local/bin/bash" \
-        "/usr/bin/env bash"; do
+        "/usr/local/bin/bash" \
+        "/opt/local/bin/bash"; do
 
         if [[ -x "$bash_path" ]]; then
             # Get version of this bash
@@ -651,7 +654,7 @@ if [[ $BASH_VERSION_MAJOR -lt 4 ]]; then
 
             if [[ "$FOUND_MAJOR" -ge 4 ]]; then
                 BASH_4_PLUS="$bash_path"
-                log_success "Found Bash $FOUND_VERSION at: $bash_path"
+                echo "✅ Found Bash $FOUND_VERSION at: $bash_path"
                 break
             fi
         fi
@@ -659,7 +662,9 @@ if [[ $BASH_VERSION_MAJOR -lt 4 ]]; then
 
     if [[ -n "$BASH_4_PLUS" ]]; then
         # Re-execute this script with the correct Bash version
-        log_info "Re-executing installer with Bash 4+..."
+        echo ""
+        echo "🔄 Re-launching installer with Bash ${FOUND_VERSION}..."
+        echo ""
         exec "$BASH_4_PLUS" "$0" ${ORIGINAL_ARGS[@]:+"${ORIGINAL_ARGS[@]}"}
     else
         # No Bash 4+ found, try to install
@@ -688,9 +693,17 @@ if [[ $BASH_VERSION_MAJOR -lt 4 ]]; then
                 exit 1
             fi
         else
-            log_error "Cannot automatically install Bash"
-            log_error "Please run: brew install bash"
-            log_error "Then re-run this installer"
+            echo ""
+            echo "❌ No Bash 4+ found on your system."
+            echo ""
+            echo "Please install Bash 5 via Homebrew:"
+            echo ""
+            echo "  brew install bash"
+            echo ""
+            echo "Then run the installer with the new Bash:"
+            echo ""
+            echo "  /opt/homebrew/bin/bash $0"
+            echo ""
             exit 1
         fi
     fi
