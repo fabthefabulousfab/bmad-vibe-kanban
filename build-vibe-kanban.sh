@@ -80,7 +80,13 @@ cat >> "$temp_manifest" << 'EOF'
   };
 EOF
 
-perl -i -pe "BEGIN{undef $/;} s/  const workflowManifests: Record<string, string\[\]> = \{.*?  \};/$(cat $temp_manifest | sed 's/\//\\\//g' | tr '\n' '§' | sed 's/§/\\n/g')/s" "$PARSER_FILE"
+# Use awk for more reliable multi-line replacement
+awk -v manifest="$temp_manifest" '
+  BEGIN { in_block=0; FS=""; }
+  /^  const workflowManifests: Record<string, string\[\]> = \{/ { in_block=1; system("cat " manifest); next; }
+  /^  \};/ && in_block { in_block=0; next; }
+  !in_block { print; }
+' "$PARSER_FILE" > "$PARSER_FILE.tmp" && mv "$PARSER_FILE.tmp" "$PARSER_FILE"
 
 rm "$temp_manifest"
 

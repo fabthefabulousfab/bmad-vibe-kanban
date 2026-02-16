@@ -1051,7 +1051,12 @@ check_and_rebuild_vibe_if_needed() {
 
     # Find most recent story file modification time
     local newest_story
-    newest_story=$(find "${PROJECT_ROOT}/stories" -type f -name "*.md" -exec stat -f "%m %N" {} \; 2>/dev/null | sort -rn | head -1 | cut -d' ' -f1)
+    # Cross-platform stat command for file modification time
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        newest_story=$(find "${PROJECT_ROOT}/stories" -type f -name "*.md" -exec stat -f "%m %N" {} \; 2>/dev/null | sort -rn | head -1 | cut -d' ' -f1)
+    else
+        newest_story=$(find "${PROJECT_ROOT}/stories" -type f -name "*.md" -exec stat -c "%Y %n" {} \; 2>/dev/null | sort -rn | head -1 | cut -d' ' -f1)
+    fi
 
     if [[ -z "$newest_story" ]]; then
         log_warning "No story files found in ${PROJECT_ROOT}/stories"
@@ -1063,7 +1068,11 @@ check_and_rebuild_vibe_if_needed() {
     local binary_mtime=0
 
     if [[ -f "$binary_path" ]]; then
-        binary_mtime=$(stat -f "%m" "$binary_path" 2>/dev/null || echo 0)
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            binary_mtime=$(stat -f "%m" "$binary_path" 2>/dev/null || echo 0)
+        else
+            binary_mtime=$(stat -c "%Y" "$binary_path" 2>/dev/null || echo 0)
+        fi
     fi
 
     log_debug "Newest story timestamp: $newest_story"
