@@ -2,7 +2,7 @@
 
 **Build, Manage, Analyze, Deploy workflows with Vibe Kanban**
 
-This project is a **fork of Vibe Kanban 0.1.4** ([upstream](https://github.com/BloopAI/vibe-kanban)) with integrated BMAD methodology for automated workflow and story generation.
+This project is a **permanent fork of Vibe Kanban 0.1.4** with integrated BMAD methodology for automated workflow and story generation. This fork is **isolated from upstream** for data sovereignty and privacy reasons.
 
 ## What's New in This Fork
 
@@ -221,8 +221,9 @@ For the complete documentation structure, see [DOCUMENTATION.md](./DOCUMENTATION
 
 ## Fork Information
 
-**Upstream:** [github.com/BloopAI/vibe-kanban](https://github.com/BloopAI/vibe-kanban)
-**Fork Point:** v0.1.4
+**Original Project:** [Vibe Kanban by BloopAI](https://github.com/BloopAI/vibe-kanban)
+**Fork Point:** v0.1.4 (commit 41d51377, February 5, 2026)
+**Fork Status:** 🔒 **Permanently isolated** - No upstream synchronization
 **License:** Apache 2.0
 
 ### Why This Fork?
@@ -243,8 +244,9 @@ For detailed fork information and modifications, see:
 ## Credits
 
 **Original Project:** [Vibe Kanban](https://github.com/BloopAI/vibe-kanban) by BloopAI and contributors
-- All commits prior to the fork point (v0.1.4) are the work of the original Vibe Kanban team
-- See [upstream repository](https://github.com/BloopAI/vibe-kanban/graphs/contributors) for full contributor list
+- All commits prior to the fork point (v0.1.4, commit 41d51377) are the work of the original Vibe Kanban team
+- This fork preserves git history and attributions as required by Apache 2.0 license
+- See [original repository](https://github.com/BloopAI/vibe-kanban/graphs/contributors) for full contributor list
 
 **This Fork (BMAD Integration):**
 - BMAD methodology, workflows, and templates
