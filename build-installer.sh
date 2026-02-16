@@ -58,7 +58,7 @@ case "$OS" in
 esac
 
 PLATFORM="${OS}-${ARCH}"
-echo "      ✓ Detected platform: $PLATFORM"
+echo "      [OK] Detected platform: $PLATFORM"
 echo ""
 
 echo "╔════════════════════════════════════════════════════════╗"
@@ -86,8 +86,8 @@ if [ "$story_count" -lt 30 ]; then
   exit 1
 fi
 
-echo "      ✓ Vibe Kanban binary found"
-echo "      ✓ $story_count stories found"
+echo "      [OK] Vibe Kanban binary found"
+echo "      [OK] $story_count stories found"
 echo ""
 
 # ===========================================================================
@@ -99,15 +99,15 @@ cd "$PROJECT_ROOT"
 if [ -f "./local-build.sh" ]; then
   echo "      Running local-build.sh to package binaries..."
   ./local-build.sh
-  echo "      ✓ NPX package built"
+  echo "      [OK] NPX package built"
 elif command -v pnpm &> /dev/null; then
-  pnpm run build:npx || echo "      ⚠ NPX build failed, using existing build..."
+  pnpm run build:npx || echo "      [WARN] NPX build failed, using existing build..."
 else
-  echo "      ⚠ Cannot build NPX package (no build script found)"
+  echo "      [WARN] Cannot build NPX package (no build script found)"
   echo "      Continuing with existing build..."
 fi
 
-echo "      ✓ NPX package ready"
+echo "      [OK] NPX package ready"
 echo ""
 
 # ===========================================================================
