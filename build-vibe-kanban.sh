@@ -80,15 +80,26 @@ echo ""
 # ===========================================================================
 echo "[2/3] Building frontend..."
 cd "$PROJECT_ROOT/frontend"
+
+# Clean previous build to avoid stale artifacts
+echo "      Cleaning previous build..."
+rm -rf dist/
+
+# Build fresh frontend
 pnpm run build
 echo "      ✓ Frontend built: frontend/dist/"
 echo ""
 
 # ===========================================================================
-# Step 3: Build Rust Backend
+# Step 3: Build Rust Backend (with embedded frontend)
 # ===========================================================================
 echo "[3/3] Building Rust backend..."
 cd "$PROJECT_ROOT"
+
+# Touch server main.rs to force RustEmbed to re-embed the frontend
+# This ensures frontend changes are always picked up
+touch crates/server/src/main.rs
+
 cargo build --release
 echo "      ✓ Backend built: target/release/server"
 echo ""
