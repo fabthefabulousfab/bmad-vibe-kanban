@@ -33,6 +33,7 @@ log_debug "build-installer.sh starting"
 # Support new unified structure
 BMAD_TEMPLATES_DIR="${BMAD_TEMPLATES_DIR:-${PROJECT_ROOT}}"
 OUTPUT_FILE="${OUTPUT_FILE:-${PROJECT_ROOT}/launch-bmad-vibe-kanban.sh}"
+PLATFORM="${PLATFORM:-}"  # Will be set by caller or auto-detected
 SOURCE_DIR="${BMAD_TEMPLATES_DIR}"
 INSTALLER_NAME="launch-bmad-vibe-kanban.sh"
 
@@ -75,6 +76,7 @@ Options:
     --help              Show this help message
     --output FILE       Output installer path (default: ./launch-bmad-vibe-kanban.sh)
     --source-dir DIR    Source directory (default: project root)
+    --platform PLATFORM Target platform (default: auto-detect, e.g., linux-x64, macos-arm64)
 
 The installer embeds:
     - scripts/          Import scripts and libraries
@@ -107,6 +109,10 @@ while [[ $# -gt 0 ]]; do
             SOURCE_DIR="$2"
             shift 2
             ;;
+        --platform)
+            PLATFORM="$2"
+            shift 2
+            ;;
         *)
             log_error "Unknown option: $1"
             show_help
@@ -114,6 +120,32 @@ while [[ $# -gt 0 ]]; do
             ;;
     esac
 done
+
+# ===========================================================================
+# Auto-detect platform if not specified
+# ===========================================================================
+
+if [[ -z "$PLATFORM" ]]; then
+    log_debug "No platform specified, auto-detecting..."
+
+    OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+    ARCH=$(uname -m)
+
+    case "$ARCH" in
+        x86_64) ARCH="x64" ;;
+        arm64|aarch64) ARCH="arm64" ;;
+        *) log_error "Unknown architecture: $ARCH"; exit 1 ;;
+    esac
+
+    case "$OS" in
+        linux) OS="linux" ;;
+        darwin) OS="macos" ;;
+        *) log_error "Unknown OS: $OS"; exit 1 ;;
+    esac
+
+    PLATFORM="${OS}-${ARCH}"
+    log_info "Auto-detected platform: $PLATFORM"
+fi
 
 # ===========================================================================
 # Validation
