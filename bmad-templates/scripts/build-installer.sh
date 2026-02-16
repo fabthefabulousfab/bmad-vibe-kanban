@@ -464,7 +464,7 @@ extract_vibe_binary() {
 # Version information (embedded in installer)
 # ===========================================================================
 
-INSTALLER_VERSION="0.1"
+INSTALLER_VERSION="0.1.4"
 INSTALLER_BMAD_VERSION="1.0"
 
 # ===========================================================================
