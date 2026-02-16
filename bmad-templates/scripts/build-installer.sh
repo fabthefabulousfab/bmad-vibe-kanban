@@ -445,62 +445,29 @@ extract_vibe_binary() {
     # NOTE: This function outputs the binary path to stdout
     # All logging MUST use >&2 to avoid polluting the return value
 
-    # Determine platform
-    local platform=""
-    local marker=""
-    case "$(uname -s)-$(uname -m)" in
-        Darwin-arm64)
-            platform="macos-arm64"
-            marker="__VIBE_MACOS_ARM64_START__"
-            ;;
-        Darwin-x86_64)
-            platform="macos-x64"
-            marker="__VIBE_MACOS_X64_START__"
-            ;;
-        Linux-x86_64)
-            platform="linux-x64"
-            marker="__VIBE_LINUX_X64_START__"
-            ;;
-        *)
-            echo "[ERROR] Unsupported platform: $(uname -s)-$(uname -m)" >&2
-            exit 1
-            ;;
-    esac
-
-    # Always extract binary to ensure it's up-to-date
-    # (Previous bug: early return prevented binary updates)
     local vibe_binary="${VIBE_BINARY_DIR}/vibe-kanban"
 
     # Create binary directory
     mkdir -p "$VIBE_BINARY_DIR"
 
-    # Find marker line in installer
+    # Find binary marker in installer
     local marker_line
-    marker_line=$(grep -n "^${marker}$" "$0" | cut -d: -f1 | head -1)
+    marker_line=$(grep -n "^__VIBE_BINARY_START__$" "$0" | cut -d: -f1 | head -1)
 
     if [[ -z "$marker_line" ]]; then
-        echo "[ERROR] Embedded binary for $platform not found in installer" >&2
-        echo "[ERROR] This installer may not support your platform" >&2
+        echo "[ERROR] Embedded binary not found in installer" >&2
+        echo "[ERROR] This installer may be corrupted" >&2
         exit 1
     fi
 
     echo "[INFO] Extracting embedded vibe-kanban binary..." >&2
 
-    # Extract binary data (from marker+1 to next marker or EOF)
+    # Extract binary data (from marker+1 to EOF)
     local start_line=$((marker_line + 1))
     local zip_file="${VIBE_BINARY_DIR}/vibe-kanban.zip"
 
-    # Find end line (next marker or EOF)
-    # Disable pipefail temporarily to avoid SIGPIPE errors
-    set +o pipefail
-    local end_line
-    end_line=$(tail -n "+${start_line}" "$0" | awk '/^__VIBE_/{print NR-1; exit}')
-    if [[ -n "$end_line" && "$end_line" -gt 0 ]]; then
-        tail -n "+${start_line}" "$0" | head -n "$end_line" | base64 -d > "$zip_file"
-    else
-        tail -n "+${start_line}" "$0" | base64 -d > "$zip_file"
-    fi
-    set -o pipefail
+    # Extract to EOF
+    tail -n "+${start_line}" "$0" | base64 -d > "$zip_file"
 
     # Unzip binary
     if command -v unzip &> /dev/null; then
@@ -1049,33 +1016,17 @@ INSTALLER_HEADER
     # Append the base64 encoded archive
     echo "$encoded" >> "$OUTPUT_FILE"
 
-    # Append vibe-kanban binaries marker and data
-    log_info "Embedding vibe-kanban binaries..."
+    # Append vibe-kanban binary marker and data for current platform only
+    log_info "Embedding vibe-kanban binary for $PLATFORM..."
 
-    # Embed macOS ARM64 binary
-    if [[ -f "${VIBE_KANBAN_BINARY_DIR}/macos-arm64/vibe-kanban.zip" ]]; then
-        echo "" >> "$OUTPUT_FILE"
-        echo "__VIBE_MACOS_ARM64_START__" >> "$OUTPUT_FILE"
-        encode_vibe_binary "macos-arm64" >> "$OUTPUT_FILE"
-        log_success "Embedded macos-arm64 binary"
+    echo "" >> "$OUTPUT_FILE"
+    echo "__VIBE_BINARY_START__" >> "$OUTPUT_FILE"
+
+    if encode_vibe_binary "$PLATFORM" >> "$OUTPUT_FILE"; then
+        log_success "Embedded $PLATFORM binary"
     else
-        log_warning "macos-arm64 binary not found, skipping"
-    fi
-
-    # Embed macOS x64 binary (if available)
-    if [[ -f "${VIBE_KANBAN_BINARY_DIR}/macos-x64/vibe-kanban.zip" ]]; then
-        echo "" >> "$OUTPUT_FILE"
-        echo "__VIBE_MACOS_X64_START__" >> "$OUTPUT_FILE"
-        encode_vibe_binary "macos-x64" >> "$OUTPUT_FILE"
-        log_success "Embedded macos-x64 binary"
-    fi
-
-    # Embed Linux x64 binary (if available)
-    if [[ -f "${VIBE_KANBAN_BINARY_DIR}/linux-x64/vibe-kanban.zip" ]]; then
-        echo "" >> "$OUTPUT_FILE"
-        echo "__VIBE_LINUX_X64_START__" >> "$OUTPUT_FILE"
-        encode_vibe_binary "linux-x64" >> "$OUTPUT_FILE"
-        log_success "Embedded linux-x64 binary"
+        log_error "Failed to embed $PLATFORM binary"
+        exit 1
     fi
 
     # Make executable
