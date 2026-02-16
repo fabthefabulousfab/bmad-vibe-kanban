@@ -225,9 +225,32 @@ For the complete documentation structure, see [DOCUMENTATION.md](./DOCUMENTATION
 **Fork Point:** v0.1.4
 **License:** Apache 2.0
 
+### Why This Fork?
+
+This fork exists for two primary reasons:
+
+1. **BMAD Integration**: Integration of the BMAD (Build, Manage, Analyze, Deploy) methodology within Vibe Kanban, providing pre-built executable workflows for AI-assisted development. BMAD stories guide AI agents through complete development lifecycles with structured, traceable workflows.
+
+2. **Sovereignty & Privacy**: The need to work independently from a central server for data sovereignty and privacy reasons. Starting from v0.1.4 (the last fully local version) ensures complete control over data and execution environment, with no required cloud dependencies.
+
+**Technical Note:** Version 0.1.4 was chosen as the fork point because it represents the last version with full local-only operation capabilities, before the introduction of cloud-dependent features in later versions. See [FORK-RESTORATION.md](./FORK-RESTORATION.md) for restoration history.
+
 For detailed fork information and modifications, see:
 - [FORK.md](./docs/FORK.md) - Fork relationship and strategy
 - [docs/fork-history/MODIFICATION_FORK.md](./docs/fork-history/MODIFICATION_FORK.md) - Detailed modifications
+- [FORK-RESTORATION.md](./FORK-RESTORATION.md) - Fork restoration to v0.1.4
+
+## Credits
+
+**Original Project:** [Vibe Kanban](https://github.com/BloopAI/vibe-kanban) by BloopAI and contributors
+- All commits prior to the fork point (v0.1.4) are the work of the original Vibe Kanban team
+- See [upstream repository](https://github.com/BloopAI/vibe-kanban/graphs/contributors) for full contributor list
+
+**This Fork (BMAD Integration):**
+- BMAD methodology, workflows, and templates
+- Build system modifications for story embedding
+- Documentation and guides
+- Installer and distribution tools
 
 ## License
 
