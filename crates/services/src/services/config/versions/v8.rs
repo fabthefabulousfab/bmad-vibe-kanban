@@ -21,6 +21,10 @@ fn default_commit_reminder_enabled() -> bool {
     true
 }
 
+fn default_beta_workspaces() -> bool {
+    true
+}
+
 #[derive(Clone, Debug, Default, Serialize, Deserialize, TS, PartialEq, Eq)]
 pub enum SendMessageShortcut {
     #[default]
@@ -52,7 +56,7 @@ pub struct Config {
     pub pr_auto_description_enabled: bool,
     #[serde(default)]
     pub pr_auto_description_prompt: Option<String>,
-    #[serde(default)]
+    #[serde(default = "default_beta_workspaces")]
     pub beta_workspaces: bool,
     #[serde(default)]
     pub beta_workspaces_invitation_sent: bool,
@@ -87,7 +91,7 @@ impl Config {
             showcases: old_config.showcases,
             pr_auto_description_enabled: true,
             pr_auto_description_prompt: None,
-            beta_workspaces: false,
+            beta_workspaces: true,
             beta_workspaces_invitation_sent: false,
             commit_reminder_enabled: true,
             commit_reminder_prompt: None,
@@ -142,7 +146,7 @@ impl Default for Config {
             showcases: ShowcaseState::default(),
             pr_auto_description_enabled: true,
             pr_auto_description_prompt: None,
-            beta_workspaces: false,
+            beta_workspaces: true,
             beta_workspaces_invitation_sent: false,
             commit_reminder_enabled: true,
             commit_reminder_prompt: None,
