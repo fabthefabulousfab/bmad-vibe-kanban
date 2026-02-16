@@ -133,7 +133,7 @@ scripts/test-changed.sh
 scripts/workflow-runner.sh
 
 # Workflow sync tool
-tools/workflow-sync/.venv/
-tools/workflow-sync/.env
+bmad-templates/tools/workflow-sync/.venv/
+bmad-templates/tools/workflow-sync/.env
 
 bmad-vibe-kanban.code-workspace

@@ -98,17 +98,51 @@ cd test-tools
 bats *.bats
 ```
 
-### Analyze workflow-story synchronization
+### Workflow Sync Analyzer - Maintain Story Consistency
+
+**[→ Complete Documentation](./tools/workflow-sync/README.md)**
+
+Le **Workflow Sync Analyzer** est un outil d'analyse sémantique qui maintient la cohérence entre les workflows BMAD et les stories générées. Il utilise un LLM (GPT-4, Claude, etc.) pour :
+
+**Fonctionnalités :**
+- 🔍 Scanner automatiquement tous les workflows et stories
+- 🧠 Analyser sémantiquement les différences (pas juste textuel)
+- 📊 Générer des rapports détaillés avec recommandations :
+  - Stories obsolètes à supprimer
+  - Stories à modifier (avec diffs détaillés)
+  - Stories manquantes à créer
+  - Nouveaux scénarios à ajouter
+- 💾 Système de cache intelligent (SHA256) pour réduire les coûts LLM
+- 🆓 Mode dry-run gratuit utilisant uniquement le cache
+
+**Cas d'usage :**
+- Après modification d'un workflow, vérifier quelles stories doivent être mises à jour
+- Détecter les incohérences entre workflows théoriques et stories pratiques
+- Identifier les doublons ou stories obsolètes
+- Valider que tous les workflows ont leurs stories correspondantes
+
+**Installation :**
 ```bash
-# Dry run first to preview without LLM costs
-python3 scripts/analyze-workflow-sync.py --dry-run
-
-# Full analysis with verbose logging
-python3 scripts/analyze-workflow-sync.py --verbose
-
-# Analyze single scenario
-python3 scripts/analyze-workflow-sync.py --scenario workflow-complet
+cd tools/workflow-sync
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env  # Configurer BASE_URL, BASE_KEY, BASE_MODEL
 ```
+
+**Usage rapide :**
+```bash
+# Dry run gratuit (utilise cache uniquement)
+python3 tools/workflow-sync/analyze-workflow-sync.py --dry-run
+
+# Analyse complète avec LLM (~$0.54 avec Claude Opus)
+python3 tools/workflow-sync/analyze-workflow-sync.py --verbose
+
+# Analyser un scénario spécifique
+python3 tools/workflow-sync/analyze-workflow-sync.py --scenario workflow-complet
+```
+
+**Note :** Le coût d'une analyse complète est d'environ $0.50-0.60 avec Claude Opus. Utilisez d'abord `--dry-run` pour valider que l'outil fonctionne sans frais.
 
 ---
 

@@ -75,7 +75,7 @@ BMAD includes 4 pre-built workflows with 40 total stories:
   - Identifies stories to delete, modify, or add
   - SHA256 checksum-based cache system
   - Detailed usage guide and troubleshooting
-- **[tools/workflow-sync/README.md](./tools/workflow-sync/README.md)** - Quick reference for workflow sync tool
+- **[bmad-templates/tools/workflow-sync/README.md](./bmad-templates/tools/workflow-sync/README.md)** - Quick reference for workflow sync tool
 
 ## Fork & Integration Documentation
 

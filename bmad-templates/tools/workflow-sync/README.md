@@ -28,7 +28,7 @@ python3 --version
 L'outil nécessite un environnement virtuel Python pour isoler les dépendances :
 
 ```bash
-cd tools/workflow-sync
+cd bmad-templates/tools/workflow-sync
 python3 -m venv .venv
 source .venv/bin/activate  # Sur Windows: .venv\Scripts\activate
 pip install -r requirements.txt
@@ -60,8 +60,8 @@ Prévisualise l'analyse sans appeler le LLM (utilise le cache ou données mock) 
 ```bash
 # Depuis n'importe où dans vibe-kanban (racine ou sous-répertoire)
 cd /path/to/vibe-kanban
-source tools/workflow-sync/.venv/bin/activate
-python3 tools/workflow-sync/analyze-workflow-sync.py --dry-run
+source bmad-templates/tools/workflow-sync/.venv/bin/activate
+python3 bmad-templates/tools/workflow-sync/analyze-workflow-sync.py --dry-run
 
 # Le script affichera : [INFO] Detected project root: /path/to/vibe-kanban
 ```
@@ -72,8 +72,8 @@ Analyse tous les scénarios (coût ~$0.54 avec Claude Opus 4) :
 
 ```bash
 cd /path/to/vibe-kanban
-source tools/workflow-sync/.venv/bin/activate
-python3 tools/workflow-sync/analyze-workflow-sync.py
+source bmad-templates/tools/workflow-sync/.venv/bin/activate
+python3 bmad-templates/tools/workflow-sync/analyze-workflow-sync.py
 ```
 
 ### Analyse d'un Scénario Spécifique
@@ -81,7 +81,7 @@ python3 tools/workflow-sync/analyze-workflow-sync.py
 Pour réduire les coûts, analyser un seul scénario :
 
 ```bash
-python3 tools/workflow-sync/analyze-workflow-sync.py --scenario workflow-complet
+python3 bmad-templates/tools/workflow-sync/analyze-workflow-sync.py --scenario workflow-complet
 ```
 
 Scénarios disponibles :
@@ -94,7 +94,7 @@ Scénarios disponibles :
 Pour déboguer ou voir les détails (prompts, tokens, opérations) :
 
 ```bash
-python3 tools/workflow-sync/analyze-workflow-sync.py --verbose
+python3 bmad-templates/tools/workflow-sync/analyze-workflow-sync.py --verbose
 ```
 
 ## Sorties
@@ -145,13 +145,13 @@ Avec Claude Opus 4.5 ($15/1M tokens in, $75/1M tokens out) :
 
 1. **Dry-run initial** :
    ```bash
-   python3 tools/workflow-sync/analyze-workflow-sync.py --dry-run
+   python3 bmad-templates/tools/workflow-sync/analyze-workflow-sync.py --dry-run
    ```
    → Vérifie que l'outil fonctionne, utilise cache si disponible
 
 2. **Analyse réelle** :
    ```bash
-   python3 tools/workflow-sync/analyze-workflow-sync.py
+   python3 bmad-templates/tools/workflow-sync/analyze-workflow-sync.py
    ```
    → Génère rapport avec LLM (~$0.54)
 
@@ -168,7 +168,7 @@ Avec Claude Opus 4.5 ($15/1M tokens in, $75/1M tokens out) :
 
 5. **Nouvelle analyse** :
    ```bash
-   python3 tools/workflow-sync/analyze-workflow-sync.py --dry-run
+   python3 bmad-templates/tools/workflow-sync/analyze-workflow-sync.py --dry-run
    ```
    → Vérifier que cache invalide (checksums changés)
    → Réanalyser pour confirmer sync
@@ -194,13 +194,13 @@ Avec Claude Opus 4.5 ($15/1M tokens in, $75/1M tokens out) :
 ### Erreur "Missing required dependency"
 
 ```bash
-pip install -r tools/workflow-sync/requirements.txt
+pip install -r bmad-templates/tools/workflow-sync/requirements.txt
 ```
 
 ### Erreur ".env file not found"
 
 ```bash
-cp tools/workflow-sync/.env.example tools/workflow-sync/.env
+cp bmad-templates/tools/workflow-sync/.env.example bmad-templates/tools/workflow-sync/.env
 # Éditer .env avec vos clés API
 ```
 
@@ -208,7 +208,7 @@ cp tools/workflow-sync/.env.example tools/workflow-sync/.env
 
 Ajouter `.env` au `.gitignore` :
 ```bash
-echo "tools/workflow-sync/.env" >> .gitignore
+echo "bmad-templates/tools/workflow-sync/.env" >> .gitignore
 ```
 
 ### Erreur LLM "Authentication failed"
@@ -250,7 +250,7 @@ Le prompt LLM se trouve dans la fonction `analyze_scenario()` ligne ~452.
 ## Structure des Fichiers
 
 ```
-tools/workflow-sync/
+bmad-templates/tools/workflow-sync/
 ├── analyze-workflow-sync.py  # Script principal
 ├── requirements.txt           # Dépendances Python
 ├── .env.example              # Template configuration
