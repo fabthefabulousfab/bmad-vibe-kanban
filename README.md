@@ -39,18 +39,14 @@ Each story includes:
 - AI agent instructions
 
 For complete philosophy and specifications, see:
-- [bmad-templates/docs/01-WORKFLOW-PHASES-COMPLETE.md](./bmad-templates/docs/01-WORKFLOW-PHASES-COMPLETE.md) - Complete workflow phases
-- [bmad-templates/docs/03-GUIDE-CHOIX-WORKFLOW.md](./bmad-templates/docs/03-GUIDE-CHOIX-WORKFLOW.md) - Workflow selection guide
+- [docs-bmad/methodology/01-WORKFLOW-PHASES-COMPLETE.md](./docs-bmad/methodology/01-WORKFLOW-PHASES-COMPLETE.md) - Complete workflow phases
+- [docs-bmad/methodology/03-GUIDE-CHOIX-WORKFLOW.md](./docs-bmad/methodology/03-GUIDE-CHOIX-WORKFLOW.md) - Workflow selection guide
 
 ## Quick Start
 
 ### For Users (Installing BMAD in a Project)
-# One-line install (downloads and executes)
 
-```bash
-curl -L https://github.com/fabthefabulousfab/bmad-vibe-kanban/releases/download/v0.1.4/launch-bmad-vibe-kanban.sh | bash
-```
-# Or download first, then run
+# download first, then run
 ```bash
 curl -L -O https://github.com/fabthefabulousfab/bmad-vibe-kanban/releases/download/v0.1.4/launch-bmad-vibe-kanban.sh
 chmod +x launch-bmad-vibe-kanban.sh
@@ -80,7 +76,37 @@ pnpm install
 ./build-installer.sh
 ```
 
-**📖 Complete build documentation:** See [BUILD-GUIDE.md](./docs/BUILD-GUIDE.md)
+**📖 Complete build documentation:** See [BUILD-GUIDE.md](./docs-vibe-kanban/BUILD-GUIDE.md)
+
+## Documentation
+
+📚 **[Complete Documentation Index](./DOCUMENTATION.md)** - Browse all documentation organized by topic and audience
+
+### Quick Links
+
+**Build & Deploy:**
+- [BUILD-GUIDE.md](./docs-vibe-kanban/BUILD-GUIDE.md) - Complete build documentation
+- [TESTING-CHECKLIST.md](./docs-vibe-kanban/TESTING-CHECKLIST.md) - Testing guide (6 phases)
+
+**Architecture:**
+- [architecture.md](./docs-vibe-kanban/architecture.md) - System architecture
+- [integration-architecture.md](./docs-integration/integration-architecture.md) - BMAD integration
+
+**Fork Information:**
+- [FORK.md](./docs-integration/FORK.md) - Fork relationship and strategy
+- [MODIFICATION_FORK.md](./docs-vibe-kanban/fork-history/MODIFICATION_FORK.md) - Detailed modifications
+
+**BMAD Philosophy:**
+- [BMAD Master Guide](./docs-bmad/methodology/00-BMAD-TEA-MASTER-GUIDE.md) - Methodology overview
+- [Complete Workflow Phases](./docs-bmad/methodology/01-WORKFLOW-PHASES-COMPLETE.md) - Story philosophy
+- [Workflow Selection](./docs-bmad/methodology/03-GUIDE-CHOIX-WORKFLOW.md) - Choose the right workflow
+
+**Development:**
+- [AGENTS.md](./docs-vibe-kanban/AGENTS.md) - Development guidelines
+- [development-guide.md](./docs-vibe-kanban/development-guide.md) - Developer setup
+- [CLAUDE.md](./.claude/CLAUDE.md) - Claude Code instructions
+
+For the complete documentation structure, see [DOCUMENTATION.md](./DOCUMENTATION.md).
 
 ## Project Structure
 
@@ -97,14 +123,14 @@ bmad-vibe-kanban/
 │   ├── scripts/           # BMAD tooling scripts
 │   ├── templates/         # Project templates
 │   ├── .claude/           # Claude config sources
-│   └── docs/              # BMAD documentation
+│   └── docs-vibe-kanban/              # BMAD documentation
 ├── scripts/               # Root build scripts
 │   ├── sync-stories.sh    # Sync templates → frontend
 │   ├── build-vibe-kanban.sh
 │   └── build-installer.sh
 ├── dist/                  # Build artifacts (gitignored)
 ├── _bmad-output/          # BMAD generated content (gitignored)
-└── docs/                  # Vibe Kanban documentation
+└── docs-vibe-kanban/                  # Vibe Kanban documentation
 ```
 
 ## Development
@@ -154,7 +180,7 @@ mkdir /tmp/test && cd /tmp/test
 ./quick-check.sh
 
 # Complete testing guide
-# See docs/TESTING-CHECKLIST.md
+# See docs-vibe-kanban/TESTING-CHECKLIST.md
 ```
 
 ## BMAD Tools
@@ -193,35 +219,7 @@ python3 tools/workflow-sync/analyze-workflow-sync.py --scenario workflow-complet
 
 **Documentation complète:** [tools/workflow-sync/README.md](./tools/workflow-sync/README.md)
 
-## Documentation
 
-📚 **[Complete Documentation Index](./DOCUMENTATION.md)** - Browse all documentation organized by topic and audience
-
-### Quick Links
-
-**Build & Deploy:**
-- [BUILD-GUIDE.md](./docs/BUILD-GUIDE.md) - Complete build documentation
-- [TESTING-CHECKLIST.md](./docs/TESTING-CHECKLIST.md) - Testing guide (6 phases)
-
-**Architecture:**
-- [architecture.md](./docs/architecture.md) - System architecture
-- [integration-architecture.md](./docs/integration-architecture.md) - BMAD integration
-
-**Fork Information:**
-- [FORK.md](./docs/FORK.md) - Fork relationship and strategy
-- [MODIFICATION_FORK.md](./docs/fork-history/MODIFICATION_FORK.md) - Detailed modifications
-
-**BMAD Philosophy:**
-- [BMAD Master Guide](./bmad-templates/docs/00-BMAD-TEA-MASTER-GUIDE.md) - Methodology overview
-- [Complete Workflow Phases](./bmad-templates/docs/01-WORKFLOW-PHASES-COMPLETE.md) - Story philosophy
-- [Workflow Selection](./bmad-templates/docs/03-GUIDE-CHOIX-WORKFLOW.md) - Choose the right workflow
-
-**Development:**
-- [AGENTS.md](./docs/AGENTS.md) - Development guidelines
-- [development-guide.md](./docs/development-guide.md) - Developer setup
-- [CLAUDE.md](./.claude/CLAUDE.md) - Claude Code instructions
-
-For the complete documentation structure, see [DOCUMENTATION.md](./DOCUMENTATION.md).
 
 ## Fork Information
 
@@ -241,8 +239,8 @@ This fork exists for two primary reasons:
 **Technical Note:** Version 0.1.4 was chosen as the fork point because it represents the last version with full local-only operation capabilities, before the introduction of cloud-dependent features in later versions. See [FORK-RESTORATION.md](./FORK-RESTORATION.md) for restoration history.
 
 For detailed fork information and modifications, see:
-- [FORK.md](./docs/FORK.md) - Fork relationship and strategy
-- [docs/fork-history/MODIFICATION_FORK.md](./docs/fork-history/MODIFICATION_FORK.md) - Detailed modifications
+- [FORK.md](./docs-integration/FORK.md) - Fork relationship and strategy
+- [docs-vibe-kanban/fork-history/MODIFICATION_FORK.md](./docs-vibe-kanban/fork-history/MODIFICATION_FORK.md) - Detailed modifications
 - [FORK-RESTORATION.md](./FORK-RESTORATION.md) - Fork restoration to v0.1.4
 
 ## Credits

@@ -6,7 +6,7 @@ Complete documentation for the BMAD-Vibe-Kanban project - a fork of Vibe Kanban 
 
 Documentation is organized into three main areas:
 
-- **[docs/](./docs/)** - Vibe Kanban technical documentation
+- **[docs-vibe-kanban/](./docs-vibe-kanban/)** - Vibe Kanban technical documentation
 - **[docs-bmad/](./docs-bmad/)** - BMAD methodology and stories
 - **[docs-integration/](./docs-integration/)** - Fork and integration documentation
 
@@ -19,26 +19,26 @@ Each section has its own README for detailed navigation.
 ## Vibe Kanban Documentation
 
 ### Build & Development
-- **[docs/BUILD-GUIDE.md](./docs/BUILD-GUIDE.md)** - Complete build documentation
+- **[docs-vibe-kanban/BUILD-GUIDE.md](./docs-vibe-kanban/BUILD-GUIDE.md)** - Complete build documentation
   - Story sync workflow
   - Frontend and backend build process
   - Installer creation
   - Troubleshooting guide
   - CI/CD integration examples
-- **[docs/AGENTS.md](./docs/AGENTS.md)** - Development guidelines and build commands
-- **[docs/development-guide.md](./docs/development-guide.md)** - Developer setup and workflow
-- **[docs/CLAUDE-VERIFICATION-GUIDE.md](./docs/CLAUDE-VERIFICATION-GUIDE.md)** - Quick reference for Claude Code verification
+- **[docs-vibe-kanban/AGENTS.md](./docs-vibe-kanban/AGENTS.md)** - Development guidelines and build commands
+- **[docs-vibe-kanban/development-guide.md](./docs-vibe-kanban/development-guide.md)** - Developer setup and workflow
+- **[docs-vibe-kanban/CLAUDE-VERIFICATION-GUIDE.md](./docs-vibe-kanban/CLAUDE-VERIFICATION-GUIDE.md)** - Quick reference for Claude Code verification
 
 ### Testing
-- **[docs/TESTING-CHECKLIST.md](./docs/TESTING-CHECKLIST.md)** - Complete testing guide (6 phases)
+- **[docs-vibe-kanban/TESTING-CHECKLIST.md](./docs-vibe-kanban/TESTING-CHECKLIST.md)** - Complete testing guide (6 phases)
 
 ### Architecture
-- **[docs/architecture.md](./docs/architecture.md)** - Vibe Kanban system architecture
-- **[docs/component-inventory.md](./docs/component-inventory.md)** - Component inventory and structure
-- **[docs/source-tree-analysis.md](./docs/source-tree-analysis.md)** - Source tree analysis
-- **[docs/api-contracts.md](./docs/api-contracts.md)** - API contracts and interfaces
-- **[docs/data-models.md](./docs/data-models.md)** - Data models and schemas
-- **[docs/project-overview.md](./docs/project-overview.md)** - Project technical overview
+- **[docs-vibe-kanban/architecture.md](./docs-vibe-kanban/architecture.md)** - Vibe Kanban system architecture
+- **[docs-vibe-kanban/component-inventory.md](./docs-vibe-kanban/component-inventory.md)** - Component inventory and structure
+- **[docs-vibe-kanban/source-tree-analysis.md](./docs-vibe-kanban/source-tree-analysis.md)** - Source tree analysis
+- **[docs-vibe-kanban/api-contracts.md](./docs-vibe-kanban/api-contracts.md)** - API contracts and interfaces
+- **[docs-vibe-kanban/data-models.md](./docs-vibe-kanban/data-models.md)** - Data models and schemas
+- **[docs-vibe-kanban/project-overview.md](./docs-vibe-kanban/project-overview.md)** - Project technical overview
 
 ## BMAD Documentation
 
@@ -79,7 +79,7 @@ BMAD includes 4 pre-built workflows with 40 total stories:
   - Upstream compatibility
 - **[docs-integration/FORK-RESTORATION.md](./docs-integration/FORK-RESTORATION.md)** - Fork restoration to v0.1.4
 - **[docs-integration/PRIVACY-VERIFICATION.md](./docs-integration/PRIVACY-VERIFICATION.md)** - Privacy audit report (Discord/external API removal)
-- **[docs/fork-history/MODIFICATION_FORK.md](./docs/fork-history/MODIFICATION_FORK.md)** - Detailed modifications log
+- **[docs-vibe-kanban/fork-history/MODIFICATION_FORK.md](./docs-vibe-kanban/fork-history/MODIFICATION_FORK.md)** - Detailed modifications log
 
 ### Integration Architecture
 - **[docs-integration/integration-architecture.md](./docs-integration/integration-architecture.md)** - BMAD-Vibe Kanban integration architecture
@@ -115,7 +115,7 @@ bmad-vibe-kanban/
 ├── LICENSE                    # Apache 2.0 license
 ├── CODE-OF-CONDUCT.md         # Community guidelines
 │
-├── docs/                      # Vibe Kanban technical documentation
+├── docs-vibe-kanban/                      # Vibe Kanban technical documentation
 │   ├── README.md
 │   ├── BUILD-GUIDE.md
 │   ├── TESTING-CHECKLIST.md
@@ -198,43 +198,43 @@ graph TD
 - **Story Templates**: [bmad-templates/stories/](./bmad-templates/stories/)
 
 ### For Developers
-- **Build Setup**: [docs/BUILD-GUIDE.md](./docs/BUILD-GUIDE.md)
-- **Development Guidelines**: [docs/AGENTS.md](./docs/AGENTS.md)
-- **Dev Environment**: [docs/development-guide.md](./docs/development-guide.md)
-- **Testing**: [docs/TESTING-CHECKLIST.md](./docs/TESTING-CHECKLIST.md)
+- **Build Setup**: [docs-vibe-kanban/BUILD-GUIDE.md](./docs-vibe-kanban/BUILD-GUIDE.md)
+- **Development Guidelines**: [docs-vibe-kanban/AGENTS.md](./docs-vibe-kanban/AGENTS.md)
+- **Dev Environment**: [docs-vibe-kanban/development-guide.md](./docs-vibe-kanban/development-guide.md)
+- **Testing**: [docs-vibe-kanban/TESTING-CHECKLIST.md](./docs-vibe-kanban/TESTING-CHECKLIST.md)
 
 ### For Contributors
 - **Fork Strategy**: [docs-integration/FORK.md](./docs-integration/FORK.md)
-- **Modifications Log**: [docs/fork-history/MODIFICATION_FORK.md](./docs/fork-history/MODIFICATION_FORK.md)
+- **Modifications Log**: [docs-vibe-kanban/fork-history/MODIFICATION_FORK.md](./docs-vibe-kanban/fork-history/MODIFICATION_FORK.md)
 - **Community Rules**: [CODE-OF-CONDUCT.md](./CODE-OF-CONDUCT.md)
 
 ### For Architects
-- **System Architecture**: [docs/architecture.md](./docs/architecture.md)
+- **System Architecture**: [docs-vibe-kanban/architecture.md](./docs-vibe-kanban/architecture.md)
 - **Integration Design**: [docs-integration/integration-architecture.md](./docs-integration/integration-architecture.md)
-- **API Specifications**: [docs/api-contracts.md](./docs/api-contracts.md)
-- **Data Models**: [docs/data-models.md](./docs/data-models.md)
+- **API Specifications**: [docs-vibe-kanban/api-contracts.md](./docs-vibe-kanban/api-contracts.md)
+- **Data Models**: [docs-vibe-kanban/data-models.md](./docs-vibe-kanban/data-models.md)
 
 ## Documentation by Development Phase
 
 ### Phase 1: Setup & Understanding
 1. [README.md](./README.md) - Project overview
-2. [docs/BUILD-GUIDE.md](./docs/BUILD-GUIDE.md) - Build setup
+2. [docs-vibe-kanban/BUILD-GUIDE.md](./docs-vibe-kanban/BUILD-GUIDE.md) - Build setup
 3. [docs-bmad/methodology/00-BMAD-TEA-MASTER-GUIDE.md](./docs-bmad/methodology/00-BMAD-TEA-MASTER-GUIDE.md) - BMAD introduction
 4. [docs-integration/FORK.md](./docs-integration/FORK.md) - Fork relationship
 
 ### Phase 2: Development
-1. [docs/AGENTS.md](./docs/AGENTS.md) - Development guidelines
+1. [docs-vibe-kanban/AGENTS.md](./docs-vibe-kanban/AGENTS.md) - Development guidelines
 2. [.claude/CLAUDE.md](./.claude/CLAUDE.md) - Claude integration
-3. [docs/development-guide.md](./docs/development-guide.md) - Dev workflow
-4. [docs/architecture.md](./docs/architecture.md) - System architecture
+3. [docs-vibe-kanban/development-guide.md](./docs-vibe-kanban/development-guide.md) - Dev workflow
+4. [docs-vibe-kanban/architecture.md](./docs-vibe-kanban/architecture.md) - System architecture
 
 ### Phase 3: Testing & Validation
-1. [docs/TESTING-CHECKLIST.md](./docs/TESTING-CHECKLIST.md) - Testing guide
+1. [docs-vibe-kanban/TESTING-CHECKLIST.md](./docs-vibe-kanban/TESTING-CHECKLIST.md) - Testing guide
 2. [docs-integration/testing-reports/BUILD-WORKFLOW-TEST-REPORT.md](./docs-integration/testing-reports/BUILD-WORKFLOW-TEST-REPORT.md) - Build validation
 3. [docs-integration/testing-reports/IMPORT-VERIFICATION.md](./docs-integration/testing-reports/IMPORT-VERIFICATION.md) - Import verification
 
 ### Phase 4: Build & Deployment
-1. [docs/BUILD-GUIDE.md](./docs/BUILD-GUIDE.md) - Build process
+1. [docs-vibe-kanban/BUILD-GUIDE.md](./docs-vibe-kanban/BUILD-GUIDE.md) - Build process
 2. [docs-integration/build-process/INSTALLER-BUILD-FLOW.md](./docs-integration/build-process/INSTALLER-BUILD-FLOW.md) - Installer workflow
 3. [docs-integration/build-process/BUILD-SYNC-BEHAVIOR.md](./docs-integration/build-process/BUILD-SYNC-BEHAVIOR.md) - Story sync mechanism
 
