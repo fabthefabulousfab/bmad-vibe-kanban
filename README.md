@@ -47,7 +47,10 @@ For complete philosophy and specifications, see:
 ### For Users (Installing BMAD in a Project)
 
 ```bash
-# Download and run the installer
+# One-line install (downloads and executes)
+curl -L https://github.com/fabthefabulousfab/bmad-vibe-kanban/releases/download/v0.1.4/launch-bmad-vibe-kanban.sh | bash
+
+# Or download first, then run
 curl -L -O https://github.com/fabthefabulousfab/bmad-vibe-kanban/releases/download/v0.1.4/launch-bmad-vibe-kanban.sh
 chmod +x launch-bmad-vibe-kanban.sh
 ./launch-bmad-vibe-kanban.sh
