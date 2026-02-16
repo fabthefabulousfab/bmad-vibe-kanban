@@ -42,6 +42,13 @@ Each section has its own README for detailed navigation.
 
 ## BMAD Documentation
 
+### User Guide
+- **[bmad-templates/README.md](./bmad-templates/README.md)** - Complete BMAD user guide
+  - One-command installation
+  - Workflow import and usage
+  - Project story generation
+  - Build and deployment instructions
+
 ### Methodology & Philosophy
 - **[docs/docs-bmad-template/methodology/00-BMAD-TEA-MASTER-GUIDE.md](./docs/docs-bmad-template/methodology/00-BMAD-TEA-MASTER-GUIDE.md)** - BMAD methodology master guide
 - **[docs/docs-bmad-template/methodology/01-WORKFLOW-PHASES-COMPLETE.md](./docs/docs-bmad-template/methodology/01-WORKFLOW-PHASES-COMPLETE.md)** - Complete workflow phases specification

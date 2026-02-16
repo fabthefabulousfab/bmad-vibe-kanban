@@ -2,6 +2,14 @@
 
 Documentation for the BMAD (Build, Manage, Analyze, Deploy) methodology.
 
+## Quick Links
+
+**[BMAD Templates User Guide](../../bmad-templates/README.md)** - Complete guide for installing and using BMAD templates, including:
+- One-command installation
+- Workflow import and usage
+- Project story generation
+- Build and deployment instructions
+
 ## Structure
 
 - `methodology/` - BMAD-TEA master guides and workflow phases
