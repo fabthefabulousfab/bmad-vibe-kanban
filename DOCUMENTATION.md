@@ -10,66 +10,39 @@ Documentation is organized into three main areas:
 - **[docs-bmad/](./docs-bmad/)** - BMAD methodology and stories
 - **[docs-integration/](./docs-integration/)** - Fork and integration documentation
 
+Each section has its own README for detailed navigation.
+
 ## Quick Start
 
 - **[README.md](./README.md)** - Project overview, quick start guide, and license information
 
-## Build & Deployment
+## Vibe Kanban Documentation
 
-### Build Guides
+### Build & Development
 - **[docs/BUILD-GUIDE.md](./docs/BUILD-GUIDE.md)** - Complete build documentation
   - Story sync workflow
   - Frontend and backend build process
   - Installer creation
   - Troubleshooting guide
   - CI/CD integration examples
+- **[docs/AGENTS.md](./docs/AGENTS.md)** - Development guidelines and build commands
+- **[docs/development-guide.md](./docs/development-guide.md)** - Developer setup and workflow
+- **[docs/CLAUDE-VERIFICATION-GUIDE.md](./docs/CLAUDE-VERIFICATION-GUIDE.md)** - Quick reference for Claude Code verification
 
-### Testing & Verification
+### Testing
 - **[docs/TESTING-CHECKLIST.md](./docs/TESTING-CHECKLIST.md)** - Complete testing guide (6 phases)
-- **[docs/BUILD-WORKFLOW-TEST-REPORT.md](./docs/BUILD-WORKFLOW-TEST-REPORT.md)** - Build workflow validation results
-- **[docs/IMPORT-VERIFICATION.md](./docs/IMPORT-VERIFICATION.md)** - Story import functionality verification
-- **[docs/INSTALLER-TEST-REPORT.md](./docs/INSTALLER-TEST-REPORT.md)** - Installer testing results
-- **[docs/CLAUDE-VERIFICATION-GUIDE.md](./docs/CLAUDE-VERIFICATION-GUIDE.md)** - Quick reference for Claude Code verification sessions
 
-### BMAD Tools
-- **[docs-bmad/tools/WORKFLOW-SYNC-TOOL.md](./docs-bmad/tools/WORKFLOW-SYNC-TOOL.md)** - Workflow ↔ Story synchronization analyzer
-  - Semantic analysis using LLM (GPT-4, Claude)
-  - Identifies stories to delete, modify, or add
-  - SHA256 checksum-based cache system
-  - Detailed usage guide and troubleshooting
-- **[tools/workflow-sync/README.md](./tools/workflow-sync/README.md)** - Quick reference for workflow sync tool
-
-## Architecture & Design
-
-### Vibe Kanban Architecture
-- **[docs/architecture.md](./docs/architecture.md)** - Vibe Kanban architecture overview
+### Architecture
+- **[docs/architecture.md](./docs/architecture.md)** - Vibe Kanban system architecture
 - **[docs/component-inventory.md](./docs/component-inventory.md)** - Component inventory and structure
 - **[docs/source-tree-analysis.md](./docs/source-tree-analysis.md)** - Source tree analysis
-
-### Integration Architecture
-- **[docs-integration/integration-architecture.md](./docs-integration/integration-architecture.md)** - BMAD-Vibe Kanban integration architecture
-
-### Technical Specifications
 - **[docs/api-contracts.md](./docs/api-contracts.md)** - API contracts and interfaces
 - **[docs/data-models.md](./docs/data-models.md)** - Data models and schemas
 - **[docs/project-overview.md](./docs/project-overview.md)** - Project technical overview
 
-## Fork & Integration
+## BMAD Documentation
 
-- **[docs-integration/FORK.md](./docs-integration/FORK.md)** - Fork relationship with upstream Vibe Kanban
-  - Syncing strategy
-  - Version numbering
-  - Upstream compatibility
-- **[docs-integration/FORK-RESTORATION.md](./docs-integration/FORK-RESTORATION.md)** - Fork restoration to v0.1.4
-- **[docs-integration/PRIVACY-VERIFICATION.md](./docs-integration/PRIVACY-VERIFICATION.md)** - Privacy audit report
-- **[docs/fork-history/MODIFICATION_FORK.md](./docs/fork-history/MODIFICATION_FORK.md)** - Detailed modifications made to Vibe Kanban fork
-  - Feature additions
-  - Code changes
-  - Integration points
-
-## BMAD Methodology
-
-### Philosophy & Specifications
+### Methodology & Philosophy
 - **[docs-bmad/methodology/00-BMAD-TEA-MASTER-GUIDE.md](./docs-bmad/methodology/00-BMAD-TEA-MASTER-GUIDE.md)** - BMAD methodology master guide
 - **[docs-bmad/methodology/01-WORKFLOW-PHASES-COMPLETE.md](./docs-bmad/methodology/01-WORKFLOW-PHASES-COMPLETE.md)** - Complete workflow phases specification
   - Philosophy of BMAD stories
@@ -89,23 +62,49 @@ BMAD includes 4 pre-built workflows with 40 total stories:
 | **quick-flow** | [bmad-templates/stories/quick-flow/](./bmad-templates/stories/quick-flow/) | 4 | Fast feature development workflow |
 | **debug** | [bmad-templates/stories/debug/](./bmad-templates/stories/debug/) | 7 | Bug investigation and resolution workflow |
 
-## Development
+### BMAD Tools
+- **[docs-bmad/tools/WORKFLOW-SYNC-TOOL.md](./docs-bmad/tools/WORKFLOW-SYNC-TOOL.md)** - Workflow ↔ Story synchronization analyzer
+  - Semantic analysis using LLM (GPT-4, Claude)
+  - Identifies stories to delete, modify, or add
+  - SHA256 checksum-based cache system
+  - Detailed usage guide and troubleshooting
+- **[tools/workflow-sync/README.md](./tools/workflow-sync/README.md)** - Quick reference for workflow sync tool
 
-### Developer Guides
-- **[docs/AGENTS.md](./docs/AGENTS.md)** - Development guidelines and build commands
-- **[docs/development-guide.md](./docs/development-guide.md)** - Developer guide
-  - Development environment setup
-  - Local development workflow
-  - Debugging tips
+## Fork & Integration Documentation
 
-### Claude Code Integration
+### Fork Information
+- **[docs-integration/FORK.md](./docs-integration/FORK.md)** - Fork relationship with upstream Vibe Kanban
+  - Syncing strategy
+  - Version numbering
+  - Upstream compatibility
+- **[docs-integration/FORK-RESTORATION.md](./docs-integration/FORK-RESTORATION.md)** - Fork restoration to v0.1.4
+- **[docs-integration/PRIVACY-VERIFICATION.md](./docs-integration/PRIVACY-VERIFICATION.md)** - Privacy audit report (Discord/external API removal)
+- **[docs/fork-history/MODIFICATION_FORK.md](./docs/fork-history/MODIFICATION_FORK.md)** - Detailed modifications log
+
+### Integration Architecture
+- **[docs-integration/integration-architecture.md](./docs-integration/integration-architecture.md)** - BMAD-Vibe Kanban integration architecture
+  - Component interactions
+  - Data flow
+  - Story embedding mechanism
+
+### Build Process Documentation
+- **[docs-integration/build-process/BUILD-SYNC-BEHAVIOR.md](./docs-integration/build-process/BUILD-SYNC-BEHAVIOR.md)** - Story synchronization mechanism
+- **[docs-integration/build-process/INSTALLER-BUILD-FLOW.md](./docs-integration/build-process/INSTALLER-BUILD-FLOW.md)** - Installer build workflow
+- **[docs-integration/build-process/INSTALLER-VS-DIRECT-BINARY.md](./docs-integration/build-process/INSTALLER-VS-DIRECT-BINARY.md)** - Behavioral differences
+- **[docs-integration/build-process/INSTALLER-FIX-SUMMARY.md](./docs-integration/build-process/INSTALLER-FIX-SUMMARY.md)** - Installer fixes summary
+- **[docs-integration/build-process/INSTALLER-BINARY-UPDATE-BUG.md](./docs-integration/build-process/INSTALLER-BINARY-UPDATE-BUG.md)** - Binary update issue resolution
+
+### Testing & Verification Reports
+- **[docs-integration/testing-reports/BUILD-WORKFLOW-TEST-REPORT.md](./docs-integration/testing-reports/BUILD-WORKFLOW-TEST-REPORT.md)** - Build workflow validation
+- **[docs-integration/testing-reports/IMPORT-VERIFICATION.md](./docs-integration/testing-reports/IMPORT-VERIFICATION.md)** - Story import functionality verification
+- **[docs-integration/testing-reports/LINK-VERIFICATION-REPORT.md](./docs-integration/testing-reports/LINK-VERIFICATION-REPORT.md)** - Link verification results
+
+## Claude Code Integration
+
 - **[.claude/CLAUDE.md](./.claude/CLAUDE.md)** - Claude Code project instructions
   - Code organization rules
   - Testing requirements
   - Development workflow
-
-### Community
-- **[CODE-OF-CONDUCT.md](./CODE-OF-CONDUCT.md)** - Community guidelines
 
 ## Project Structure
 
@@ -117,29 +116,39 @@ bmad-vibe-kanban/
 ├── CODE-OF-CONDUCT.md         # Community guidelines
 │
 ├── docs/                      # Vibe Kanban technical documentation
+│   ├── README.md
 │   ├── BUILD-GUIDE.md
 │   ├── TESTING-CHECKLIST.md
 │   ├── AGENTS.md
 │   ├── architecture.md
 │   ├── api-contracts.md
-│   ├── data-models.md
+│   ├── development-guide.md
 │   └── fork-history/
 │       └── MODIFICATION_FORK.md
 │
 ├── docs-bmad/                 # BMAD methodology documentation
+│   ├── README.md
 │   ├── methodology/           # BMAD guides and workflow specs
 │   │   ├── 00-BMAD-TEA-MASTER-GUIDE.md
 │   │   ├── 01-WORKFLOW-PHASES-COMPLETE.md
 │   │   └── 03-GUIDE-CHOIX-WORKFLOW.md
-│   ├── stories/               # Story documentation
 │   └── tools/                 # BMAD tools documentation
 │       └── WORKFLOW-SYNC-TOOL.md
 │
 ├── docs-integration/          # Fork and integration documentation
+│   ├── README.md
 │   ├── FORK.md
 │   ├── FORK-RESTORATION.md
 │   ├── PRIVACY-VERIFICATION.md
-│   └── integration-architecture.md
+│   ├── integration-architecture.md
+│   ├── build-process/         # Build and installer docs
+│   │   ├── BUILD-SYNC-BEHAVIOR.md
+│   │   ├── INSTALLER-BUILD-FLOW.md
+│   │   └── INSTALLER-*.md (5 more files)
+│   └── testing-reports/       # Integration test reports
+│       ├── BUILD-WORKFLOW-TEST-REPORT.md
+│       ├── IMPORT-VERIFICATION.md
+│       └── LINK-VERIFICATION-REPORT.md
 │
 ├── bmad-templates/            # BMAD framework source
 │   ├── stories/               # 40 workflow story templates
@@ -181,49 +190,53 @@ graph TD
 2. `./build-installer.sh` - Creates self-extracting installer
 3. `./quick-check.sh` - Validates repository state
 
-## Documentation Categories
+## Documentation Navigation by Audience
 
-### By Audience
+### For Users
+- **Getting Started**: [README.md](./README.md)
+- **Workflow Selection**: [docs-bmad/methodology/03-GUIDE-CHOIX-WORKFLOW.md](./docs-bmad/methodology/03-GUIDE-CHOIX-WORKFLOW.md)
+- **Story Templates**: [bmad-templates/stories/](./bmad-templates/stories/)
 
-**For Users:**
-- README.md - Getting started
-- docs-bmad/methodology/03-GUIDE-CHOIX-WORKFLOW.md - Choose the right workflow
+### For Developers
+- **Build Setup**: [docs/BUILD-GUIDE.md](./docs/BUILD-GUIDE.md)
+- **Development Guidelines**: [docs/AGENTS.md](./docs/AGENTS.md)
+- **Dev Environment**: [docs/development-guide.md](./docs/development-guide.md)
+- **Testing**: [docs/TESTING-CHECKLIST.md](./docs/TESTING-CHECKLIST.md)
 
-**For Developers:**
-- docs/BUILD-GUIDE.md - How to build
-- docs/AGENTS.md - Development guidelines
-- docs/development-guide.md - Development setup
+### For Contributors
+- **Fork Strategy**: [docs-integration/FORK.md](./docs-integration/FORK.md)
+- **Modifications Log**: [docs/fork-history/MODIFICATION_FORK.md](./docs/fork-history/MODIFICATION_FORK.md)
+- **Community Rules**: [CODE-OF-CONDUCT.md](./CODE-OF-CONDUCT.md)
 
-**For Contributors:**
-- docs-integration/FORK.md - Fork relationship
-- docs/fork-history/MODIFICATION_FORK.md - What we changed
-- CODE-OF-CONDUCT.md - Community rules
+### For Architects
+- **System Architecture**: [docs/architecture.md](./docs/architecture.md)
+- **Integration Design**: [docs-integration/integration-architecture.md](./docs-integration/integration-architecture.md)
+- **API Specifications**: [docs/api-contracts.md](./docs/api-contracts.md)
+- **Data Models**: [docs/data-models.md](./docs/data-models.md)
 
-**For Architects:**
-- docs/architecture.md - System architecture
-- docs-integration/integration-architecture.md - Integration design
-- docs/api-contracts.md - API specifications
+## Documentation by Development Phase
 
-### By Phase
+### Phase 1: Setup & Understanding
+1. [README.md](./README.md) - Project overview
+2. [docs/BUILD-GUIDE.md](./docs/BUILD-GUIDE.md) - Build setup
+3. [docs-bmad/methodology/00-BMAD-TEA-MASTER-GUIDE.md](./docs-bmad/methodology/00-BMAD-TEA-MASTER-GUIDE.md) - BMAD introduction
+4. [docs-integration/FORK.md](./docs-integration/FORK.md) - Fork relationship
 
-**Phase 1: Setup**
-1. README.md - Project overview
-2. docs/BUILD-GUIDE.md - Build setup
-3. docs-bmad/methodology/00-BMAD-TEA-MASTER-GUIDE.md - BMAD intro
+### Phase 2: Development
+1. [docs/AGENTS.md](./docs/AGENTS.md) - Development guidelines
+2. [.claude/CLAUDE.md](./.claude/CLAUDE.md) - Claude integration
+3. [docs/development-guide.md](./docs/development-guide.md) - Dev workflow
+4. [docs/architecture.md](./docs/architecture.md) - System architecture
 
-**Phase 2: Development**
-1. docs/AGENTS.md - Development guidelines
-2. .claude/CLAUDE.md - Claude integration
-3. docs/development-guide.md - Dev workflow
+### Phase 3: Testing & Validation
+1. [docs/TESTING-CHECKLIST.md](./docs/TESTING-CHECKLIST.md) - Testing guide
+2. [docs-integration/testing-reports/BUILD-WORKFLOW-TEST-REPORT.md](./docs-integration/testing-reports/BUILD-WORKFLOW-TEST-REPORT.md) - Build validation
+3. [docs-integration/testing-reports/IMPORT-VERIFICATION.md](./docs-integration/testing-reports/IMPORT-VERIFICATION.md) - Import verification
 
-**Phase 3: Testing**
-1. docs/TESTING-CHECKLIST.md - Test guide
-2. docs/BUILD-WORKFLOW-TEST-REPORT.md - Test results
-3. docs/IMPORT-VERIFICATION.md - Import verification
-
-**Phase 4: Deployment**
-1. docs/BUILD-GUIDE.md - Build process
-2. docs/INSTALLER-TEST-REPORT.md - Installer validation
+### Phase 4: Build & Deployment
+1. [docs/BUILD-GUIDE.md](./docs/BUILD-GUIDE.md) - Build process
+2. [docs-integration/build-process/INSTALLER-BUILD-FLOW.md](./docs-integration/build-process/INSTALLER-BUILD-FLOW.md) - Installer workflow
+3. [docs-integration/build-process/BUILD-SYNC-BEHAVIOR.md](./docs-integration/build-process/BUILD-SYNC-BEHAVIOR.md) - Story sync mechanism
 
 ## Contributing
 
@@ -240,4 +253,4 @@ For issues, questions, or contributions, please refer to the documentation above
 ---
 
 **Last Updated:** 2026-02-16
-**Documentation Version:** 2.0.0
+**Documentation Version:** 2.1.0
