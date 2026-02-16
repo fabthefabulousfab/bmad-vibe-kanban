@@ -135,3 +135,5 @@ scripts/workflow-runner.sh
 # Workflow sync tool
 tools/workflow-sync/.venv/
 tools/workflow-sync/.env
+
+bmad-vibe-kanban.code-workspace
