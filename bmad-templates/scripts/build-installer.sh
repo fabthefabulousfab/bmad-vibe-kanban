@@ -122,28 +122,58 @@ while [[ $# -gt 0 ]]; do
 done
 
 # ===========================================================================
+# Platform Detection Function
+# ===========================================================================
+
+# Detect current platform (OS and architecture)
+# Returns platform string in format: {os}-{arch} (e.g., linux-x64, macos-arm64)
+# Supported platforms: linux-x64, linux-arm64, macos-x64, macos-arm64
+detect_platform() {
+    log_debug "detect_platform called"
+
+    local os arch
+    os=$(uname -s | tr '[:upper:]' '[:lower:]')
+    arch=$(uname -m)
+
+    log_debug "Raw detection: OS=$os, ARCH=$arch"
+
+    # Normalize architecture names to standard format
+    # x86_64 -> x64 (Intel/AMD 64-bit processors)
+    # arm64/aarch64 -> arm64 (ARM 64-bit processors, including Apple Silicon)
+    case "$arch" in
+        x86_64) arch="x64" ;;
+        arm64|aarch64) arch="arm64" ;;
+        *)
+            log_error "Unknown architecture: $arch"
+            log_error "Supported: x86_64, arm64, aarch64"
+            exit 1
+            ;;
+    esac
+
+    # Normalize OS names to standard format
+    # linux -> linux (Linux distributions)
+    # darwin -> macos (macOS/OS X)
+    case "$os" in
+        linux) os="linux" ;;
+        darwin) os="macos" ;;
+        *)
+            log_error "Unknown OS: $os"
+            log_error "Supported: Linux, macOS (Darwin)"
+            exit 1
+            ;;
+    esac
+
+    local platform="${os}-${arch}"
+    log_debug "detect_platform completed: $platform"
+    echo "$platform"
+}
+
+# ===========================================================================
 # Auto-detect platform if not specified
 # ===========================================================================
 
 if [[ -z "$PLATFORM" ]]; then
-    log_debug "No platform specified, auto-detecting..."
-
-    OS=$(uname -s | tr '[:upper:]' '[:lower:]')
-    ARCH=$(uname -m)
-
-    case "$ARCH" in
-        x86_64) ARCH="x64" ;;
-        arm64|aarch64) ARCH="arm64" ;;
-        *) log_error "Unknown architecture: $ARCH"; exit 1 ;;
-    esac
-
-    case "$OS" in
-        linux) OS="linux" ;;
-        darwin) OS="macos" ;;
-        *) log_error "Unknown OS: $OS"; exit 1 ;;
-    esac
-
-    PLATFORM="${OS}-${ARCH}"
+    PLATFORM=$(detect_platform)
     log_info "Auto-detected platform: $PLATFORM"
 fi
 
