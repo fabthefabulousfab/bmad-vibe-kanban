@@ -96,9 +96,10 @@ echo ""
 echo "[3/3] Building Rust backend..."
 cd "$PROJECT_ROOT"
 
-# Touch server main.rs to force RustEmbed to re-embed the frontend
-# This ensures frontend changes are always picked up
-touch crates/server/src/main.rs
+# Clean server package cache to force RustEmbed to re-embed the frontend
+# This is more reliable than just touching files
+echo "      Cleaning server cache..."
+cargo clean -p server
 
 cargo build --release
 echo "      ✓ Backend built: target/release/server"
