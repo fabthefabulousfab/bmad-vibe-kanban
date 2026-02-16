@@ -11,13 +11,55 @@
 #   - Vibe Kanban must be built first (run ./build-vibe-kanban.sh)
 #
 # Output:
-#   - dist/launch-bmad-vibe-kanban.sh (55+ MB)
+#   - dist/launch-bmad-vibe-kanban-{platform}.sh (55+ MB)
+#     where {platform} is linux-x64, linux-arm64, macos-x64, or macos-arm64
 # ===========================================================================
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$SCRIPT_DIR"
+
+# ===========================================================================
+# Platform Detection
+# ===========================================================================
+echo "[Platform] Detecting current platform..."
+
+# Detect OS and architecture (same logic as local-build.sh)
+OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+ARCH=$(uname -m)
+
+# Map architecture names
+case "$ARCH" in
+  x86_64)
+    ARCH="x64"
+    ;;
+  arm64|aarch64)
+    ARCH="arm64"
+    ;;
+  *)
+    echo "ERROR: Unknown architecture $ARCH"
+    exit 1
+    ;;
+esac
+
+# Map OS names
+case "$OS" in
+  linux)
+    OS="linux"
+    ;;
+  darwin)
+    OS="macos"
+    ;;
+  *)
+    echo "ERROR: Unknown OS $OS"
+    exit 1
+    ;;
+esac
+
+PLATFORM="${OS}-${ARCH}"
+echo "      ✓ Detected platform: $PLATFORM"
+echo ""
 
 echo "╔════════════════════════════════════════════════════════╗"
 echo "║         Building BMAD-Vibe-Kanban Installer            ║"
@@ -84,31 +126,32 @@ export OUTPUT_DIR="$PROJECT_ROOT/dist"
 mkdir -p "$OUTPUT_DIR"
 
 # Call the installer build script
-./scripts/build-installer.sh --output "$OUTPUT_DIR/launch-bmad-vibe-kanban.sh"
+./scripts/build-installer.sh --output "$OUTPUT_DIR/launch-bmad-vibe-kanban-${PLATFORM}.sh" --platform "$PLATFORM"
 
 echo ""
 
 # ===========================================================================
 # Summary
 # ===========================================================================
-if [ -f "$OUTPUT_DIR/launch-bmad-vibe-kanban.sh" ]; then
-  INSTALLER_SIZE=$(du -h "$OUTPUT_DIR/launch-bmad-vibe-kanban.sh" | cut -f1)
+if [ -f "$OUTPUT_DIR/launch-bmad-vibe-kanban-${PLATFORM}.sh" ]; then
+  INSTALLER_SIZE=$(du -h "$OUTPUT_DIR/launch-bmad-vibe-kanban-${PLATFORM}.sh" | cut -f1)
 
   echo "╔════════════════════════════════════════════════════════╗"
   echo "║              INSTALLER BUILD COMPLETE                  ║"
   echo "╚════════════════════════════════════════════════════════╝"
   echo ""
   echo "Installer created:"
-  echo "  • File: dist/launch-bmad-vibe-kanban.sh"
+  echo "  • File: dist/launch-bmad-vibe-kanban-${PLATFORM}.sh"
+  echo "  • Platform: $PLATFORM"
   echo "  • Size: $INSTALLER_SIZE"
   echo "  • Stories: $story_count markdown files"
   echo ""
   echo "To test the installer:"
   echo "  mkdir /tmp/test-install && cd /tmp/test-install"
-  echo "  $OUTPUT_DIR/launch-bmad-vibe-kanban.sh --help"
+  echo "  $OUTPUT_DIR/launch-bmad-vibe-kanban-${PLATFORM}.sh --help"
   echo ""
   echo "To distribute:"
-  echo "  Upload dist/launch-bmad-vibe-kanban.sh to GitHub Releases"
+  echo "  Upload dist/launch-bmad-vibe-kanban-${PLATFORM}.sh to GitHub Releases"
   echo ""
 else
   echo "ERROR: Installer build failed!"
