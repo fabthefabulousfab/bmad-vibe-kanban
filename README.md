@@ -48,7 +48,7 @@ For complete philosophy and specifications, see:
 
 ```bash
 # Download and run the installer
-curl -O https://github.com/your-org/bmad-vibe-kanban/releases/latest/download/install-bmad-vibe-kanban.sh
+curl -L -O https://github.com/fabthefabulousfab/bmad-vibe-kanban/releases/download/v0.1.4/install-bmad-vibe-kanban.sh
 chmod +x install-bmad-vibe-kanban.sh
 ./install-bmad-vibe-kanban.sh
 ```
@@ -63,7 +63,7 @@ The installer:
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/bmad-vibe-kanban.git
+git clone https://github.com/fabthefabulousfab/bmad-vibe-kanban.git
 cd bmad-vibe-kanban
 
 # Install dependencies
