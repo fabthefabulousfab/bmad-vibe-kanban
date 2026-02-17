@@ -1,0 +1,488 @@
+{
+  "scan_metadata": {
+    "scan_type": "deep",
+    "scope": "Rust backend crates",
+    "timestamp": "2026-02-17",
+    "crates_scanned": [
+      "server", "db", "services", "executors", "git",
+      "utils", "deployment", "local-deployment", "review", "remote"
+    ],
+    "total_migration_files": 44,
+    "initial_migration_date": "2025-06-17",
+    "latest_migration_date": "2026-02-03"
+  },
+
+  "1_api_routes_and_endpoints": {
+    "local_server": {
+      "description": "Axum-based local desktop server, all routes under /api, frontend served at /",
+      "base_url": "/api",
+      "origin_validation": "CSRF-like origin check via VK_ALLOWED_ORIGINS env var",
+      "state_type": "LocalDeployment (implements Deployment trait)",
+
+      "routes": {
+        "health": {
+          "GET /health": { "handler": "health::health_check", "auth": "none" }
+        },
+        "projects": {
+          "GET /projects": { "handler": "projects::list_projects", "response": "Vec<Project>" },
+          "POST /projects": { "handler": "projects::create_project", "request": "CreateProject", "response": "Project" },
+          "GET /projects/:project_id": { "handler": "projects::get_project", "middleware": "load_project_middleware" },
+          "PUT /projects/:project_id": { "handler": "projects::update_project", "request": "UpdateProject" },
+          "DELETE /projects/:project_id": { "handler": "projects::delete_project" },
+          "GET /projects/:project_id/auto-setup": { "handler": "projects::project_auto_setup" },
+          "GET /projects/:project_id/repos": { "handler": "projects::get_project_repos" },
+          "POST /projects/:project_id/repos": { "handler": "projects::add_repo_to_project" },
+          "PUT /projects/:project_id/repos/:project_repo_id": { "handler": "projects::update_project_repo" },
+          "DELETE /projects/:project_id/repos/:project_repo_id": { "handler": "projects::remove_repo_from_project" }
+        },
+        "tasks": {
+          "GET /tasks": { "handler": "tasks::list_tasks_by_project", "query": "project_id" },
+          "POST /tasks": { "handler": "tasks::create_task", "request": "CreateTask" },
+          "GET /tasks/:task_id": { "handler": "tasks::get_task", "middleware": "load_task_middleware" },
+          "PUT /tasks/:task_id": { "handler": "tasks::update_task", "request": "UpdateTask" },
+          "DELETE /tasks/:task_id": { "handler": "tasks::delete_task" },
+          "GET /tasks/:task_id/relationships/:workspace_id": { "handler": "tasks::get_task_relationships" }
+        },
+        "workspaces": {
+          "GET /task-attempts": { "handler": "task_attempts::list_task_attempts", "query": "task_id" },
+          "POST /task-attempts": { "handler": "task_attempts::create_task_attempt" },
+          "GET /task-attempts/:workspace_id": { "handler": "task_attempts::get_task_attempt", "middleware": "load_workspace_middleware" },
+          "PUT /task-attempts/:workspace_id": { "handler": "task_attempts::update_task_attempt" },
+          "DELETE /task-attempts/:workspace_id": { "handler": "task_attempts::delete_task_attempt" },
+          "POST /task-attempts/:workspace_id/start": { "handler": "task_attempts::start_task_attempt" },
+          "POST /task-attempts/:workspace_id/follow-up": { "handler": "task_attempts::follow_up_task_attempt" },
+          "POST /task-attempts/:workspace_id/review": { "handler": "task_attempts::review_task_attempt" },
+          "POST /task-attempts/:workspace_id/merge": { "handler": "task_attempts::merge" },
+          "POST /task-attempts/:workspace_id/merge-branch": { "handler": "task_attempts::merge_branch" },
+          "POST /task-attempts/:workspace_id/create-pr": { "handler": "task_attempts::create_pr" },
+          "POST /task-attempts/:workspace_id/merge-squash": { "handler": "task_attempts::merge_squash" },
+          "POST /task-attempts/:workspace_id/rebase": { "handler": "task_attempts::rebase" },
+          "POST /task-attempts/:workspace_id/archive": { "handler": "task_attempts::archive" },
+          "POST /task-attempts/:workspace_id/unarchive": { "handler": "task_attempts::unarchive" },
+          "POST /task-attempts/:workspace_id/pin": { "handler": "task_attempts::pin" },
+          "POST /task-attempts/:workspace_id/unpin": { "handler": "task_attempts::unpin" },
+          "POST /task-attempts/:workspace_id/rename": { "handler": "task_attempts::rename" }
+        },
+        "sessions": {
+          "GET /sessions/latest/:workspace_id": { "handler": "sessions::get_latest_session" },
+          "POST /sessions": { "handler": "sessions::create_session" },
+          "POST /sessions/:session_id/fork": { "handler": "sessions::fork_session" }
+        },
+        "execution_processes": {
+          "GET /execution-processes": { "handler": "execution_processes::list", "query": "session_id" },
+          "GET /execution-processes/:execution_process_id": { "handler": "execution_processes::get" },
+          "POST /execution-processes/:execution_process_id/kill": { "handler": "execution_processes::kill" },
+          "GET /execution-processes/:execution_process_id/stream": { "handler": "execution_processes::stream (SSE)" },
+          "GET /execution-processes/:execution_process_id/diff-stream": { "handler": "execution_processes::diff_stream (SSE)" }
+        },
+        "containers": {
+          "POST /container/start": { "handler": "containers::start_container" },
+          "POST /container/stop": { "handler": "containers::stop_container" },
+          "POST /container/slash-commands": { "handler": "containers::get_slash_commands (SSE)" },
+          "POST /container/send-message": { "handler": "containers::send_message" }
+        },
+        "events": {
+          "GET /events": { "handler": "events::events_stream (SSE)" },
+          "GET /events/scratch/:scratch_type/:id/stream/ws": { "handler": "events::scratch WS stream" }
+        },
+        "config": {
+          "GET /config": { "handler": "config::get_config" },
+          "PUT /config": { "handler": "config::update_config" },
+          "GET /config/executor-profiles": { "handler": "config::get_executor_profiles" },
+          "GET /config/login-status": { "handler": "config::get_login_status" }
+        },
+        "filesystem": {
+          "GET /filesystem/list": { "handler": "filesystem::list_directory" },
+          "GET /filesystem/read": { "handler": "filesystem::read_file" },
+          "POST /filesystem/write": { "handler": "filesystem::write_file" },
+          "GET /filesystem/discover-repos": { "handler": "filesystem::discover_repos" }
+        },
+        "search": {
+          "GET /search": { "handler": "search::search_files", "query": "q, mode, repo_ids" }
+        },
+        "tags": {
+          "GET /tags": { "handler": "tags::list_tags" },
+          "POST /tags": { "handler": "tags::create_tag" },
+          "PUT /tags/:tag_id": { "handler": "tags::update_tag" },
+          "DELETE /tags/:tag_id": { "handler": "tags::delete_tag" }
+        },
+        "scratch": {
+          "GET /scratch": { "handler": "scratch::list_scratch" },
+          "GET /scratch/:scratch_type/:id": { "handler": "scratch::get_scratch" },
+          "POST /scratch/:scratch_type/:id": { "handler": "scratch::create_scratch" },
+          "PUT /scratch/:scratch_type/:id": { "handler": "scratch::update_scratch" },
+          "DELETE /scratch/:scratch_type/:id": { "handler": "scratch::delete_scratch" },
+          "GET /scratch/:scratch_type/:id/stream/ws": { "handler": "scratch::stream_scratch_ws (WebSocket)" }
+        },
+        "repo": {
+          "GET /repos": { "handler": "repo::list_repos" },
+          "GET /repos/:repo_id": { "handler": "repo::get_repo" },
+          "PUT /repos/:repo_id": { "handler": "repo::update_repo" }
+        },
+        "oauth": {
+          "GET /oauth/status": { "handler": "oauth::status" },
+          "POST /oauth/logout": { "handler": "oauth::logout" },
+          "GET /oauth/callback": { "handler": "oauth::callback" }
+        },
+        "organizations": {
+          "GET /organizations": { "handler": "organizations::list_organizations" }
+        },
+        "approvals": {
+          "GET /approvals/:execution_process_id": { "handler": "approvals::list_approvals" },
+          "POST /approvals/:execution_process_id/:tool_call_id": { "handler": "approvals::respond_to_approval" }
+        },
+        "images": {
+          "POST /images/upload": { "handler": "images::upload_image" },
+          "GET /images/:image_id": { "handler": "images::get_image" }
+        },
+        "terminal": {
+          "GET /terminal/ws": { "handler": "terminal::terminal_ws (WebSocket)", "query": "workspace_id, cols, rows" }
+        },
+        "migration": {
+          "POST /migration/start": { "handler": "migration::start_migration" }
+        }
+      }
+    },
+
+    "remote_server": {
+      "description": "Axum-based cloud server with PostgreSQL, JWT auth, OAuth (GitHub/Google)",
+      "base_url": "/v1",
+      "auth": "JWT session tokens, require_session middleware on protected routes",
+
+      "public_routes": [
+        "/health",
+        "oauth/*",
+        "organization-members/*",
+        "tokens/*",
+        "review/*",
+        "github-app/*",
+        "billing/*"
+      ],
+      "protected_routes": [
+        "identity/*",
+        "projects/*",
+        "organizations/*",
+        "organization-members/*",
+        "oauth/*",
+        "electric-proxy/*",
+        "github-app/*",
+        "project-statuses/*",
+        "tags/*",
+        "issue-comments/*",
+        "issue-comment-reactions/*",
+        "issues/* (CRUD + bulk update)",
+        "issue-assignees/*",
+        "issue-followers/*",
+        "issue-tags/*",
+        "issue-relationships/*",
+        "pull-requests/*",
+        "notifications/*",
+        "workspaces/*",
+        "billing/*",
+        "migration/*"
+      ]
+    }
+  },
+
+  "2_data_models": {
+    "database": "SQLite (local server) / PostgreSQL (remote server)",
+    "orm": "sqlx with compile-time query checking",
+    "type_generation": "ts-rs for TypeScript type export",
+
+    "tables": {
+      "projects": {
+        "columns": ["id BLOB PK", "name TEXT", "default_agent_working_dir TEXT?", "remote_project_id BLOB?", "created_at TEXT", "updated_at TEXT"],
+        "relationships": "has_many tasks, has_many project_repos"
+      },
+      "repos": {
+        "columns": ["id BLOB PK", "path TEXT UNIQUE", "name TEXT", "display_name TEXT", "setup_script TEXT?", "cleanup_script TEXT?", "archive_script TEXT?", "copy_files TEXT?", "parallel_setup_script BOOL", "dev_server_script TEXT?", "default_target_branch TEXT?", "default_working_dir TEXT?", "created_at TEXT", "updated_at TEXT"],
+        "relationships": "has_many project_repos, has_many workspace_repos"
+      },
+      "project_repos": {
+        "columns": ["id BLOB PK", "project_id BLOB FK", "repo_id BLOB FK"],
+        "note": "Junction table linking projects to repos (many-to-many)"
+      },
+      "tasks": {
+        "columns": ["id BLOB PK", "project_id BLOB FK", "title TEXT", "description TEXT?", "status TEXT CHECK (todo/inprogress/done/cancelled/inreview)", "parent_workspace_id BLOB? FK", "created_at TEXT", "updated_at TEXT"],
+        "relationships": "belongs_to project, has_many workspaces, optional parent_workspace"
+      },
+      "workspaces": {
+        "columns": ["id BLOB PK", "task_id BLOB FK", "container_ref TEXT?", "branch TEXT", "agent_working_dir TEXT?", "setup_completed_at TEXT?", "created_at TEXT", "updated_at TEXT", "archived BOOL", "pinned BOOL", "name TEXT?"],
+        "relationships": "belongs_to task, has_many sessions, has_many workspace_repos, has_many merges",
+        "note": "Formerly task_attempts; renamed in migration 20251216"
+      },
+      "workspace_repos": {
+        "columns": ["id BLOB PK", "workspace_id BLOB FK", "repo_id BLOB FK", "target_branch TEXT", "created_at TEXT", "updated_at TEXT"],
+        "note": "Tracks which repos are used in a workspace with their target branches"
+      },
+      "sessions": {
+        "columns": ["id BLOB PK", "workspace_id BLOB FK", "executor TEXT?", "created_at TEXT", "updated_at TEXT"],
+        "relationships": "belongs_to workspace, has_many execution_processes"
+      },
+      "execution_processes": {
+        "columns": ["id BLOB PK", "session_id BLOB FK", "run_reason TEXT CHECK (setupscript/codingagent/devserver/cleanupscript)", "executor_action TEXT", "status TEXT CHECK (running/completed/failed/killed)", "exit_code INT?", "dropped BOOL", "started_at TEXT", "completed_at TEXT?", "created_at TEXT", "updated_at TEXT"],
+        "relationships": "belongs_to session, has_many execution_process_logs, has_many execution_process_repo_states, has_many coding_agent_turns"
+      },
+      "execution_process_logs": {
+        "columns": ["execution_process_id BLOB FK", "data BLOB"],
+        "note": "Raw log output from execution processes"
+      },
+      "execution_process_repo_states": {
+        "columns": ["id BLOB PK", "execution_process_id BLOB FK", "repo_id BLOB FK", "before_head_commit TEXT?", "after_head_commit TEXT?", "merge_commit TEXT?"],
+        "note": "Tracks git state changes per-repo for each execution"
+      },
+      "coding_agent_turns": {
+        "columns": ["id BLOB PK", "execution_process_id BLOB FK", "agent_session_id TEXT?", "prompt TEXT?", "summary TEXT?", "seen BOOL", "agent_message_id TEXT?", "created_at TEXT", "updated_at TEXT"],
+        "note": "Formerly executor_sessions; tracks individual coding agent conversation turns"
+      },
+      "images": {
+        "columns": ["id BLOB PK", "file_path TEXT", "original_name TEXT", "mime_type TEXT?", "size_bytes INT", "hash TEXT (SHA256)", "created_at TEXT", "updated_at TEXT"],
+        "note": "Image storage with content-addressed deduplication via SHA256 hash"
+      },
+      "task_images": {
+        "columns": ["id BLOB PK", "task_id BLOB FK", "image_id BLOB FK", "created_at TEXT"],
+        "note": "Junction table for many-to-many task-image associations"
+      },
+      "merges": {
+        "columns": ["id BLOB PK", "workspace_id BLOB FK", "repo_id BLOB FK", "merge_type TEXT (direct/pr)", "merge_commit TEXT?", "target_branch_name TEXT", "pr_number INT?", "pr_url TEXT?", "pr_status TEXT? (open/merged/closed/unknown)", "pr_merged_at TEXT?", "pr_merge_commit_sha TEXT?", "created_at TEXT"],
+        "note": "Tracks both direct merges and PR merges per workspace per repo"
+      },
+      "tags": {
+        "columns": ["id BLOB PK", "project_id BLOB FK", "name TEXT", "is_default BOOL", "created_at TEXT", "updated_at TEXT"],
+        "note": "Formerly task_templates; converted in migration 20251020"
+      },
+      "scratch": {
+        "columns": ["id BLOB PK", "scratch_type TEXT", "entity_id BLOB", "payload TEXT (JSON)", "created_at TEXT", "updated_at TEXT"],
+        "note": "General-purpose scratch pad for draft follow-ups, notes, etc."
+      },
+      "migration_state": {
+        "columns": ["id BLOB PK", "organization_id BLOB", "project_id BLOB?", "entity_type TEXT", "local_id BLOB", "remote_id BLOB", "created_at TEXT"],
+        "note": "Tracks migration state between local and remote servers"
+      }
+    },
+
+    "enums": {
+      "TaskStatus": ["Todo", "InProgress", "InReview", "Done", "Cancelled"],
+      "ExecutionProcessStatus": ["Running", "Completed", "Failed", "Killed"],
+      "ExecutionProcessRunReason": ["SetupScript", "CodingAgent", "DevServer", "CleanupScript"],
+      "MergeStatus": ["Open", "Merged", "Closed", "Unknown"],
+      "MergeType": ["Direct", "Pr"],
+      "ScratchType": ["DraftFollowUp"]
+    }
+  },
+
+  "3_key_modules_and_purpose": {
+    "crates/server": {
+      "purpose": "HTTP server entry point and API route definitions",
+      "key_files": ["main.rs", "lib.rs", "routes/mod.rs", "middleware/origin.rs", "middleware/model_loaders.rs", "mcp/mod.rs"],
+      "responsibilities": ["Axum router assembly", "Request routing", "Origin validation middleware", "Model loading middleware", "MCP server integration", "Frontend static file serving"]
+    },
+    "crates/db": {
+      "purpose": "Database access layer with SQLite models and migrations",
+      "key_files": ["lib.rs", "models/*.rs"],
+      "responsibilities": ["SQLite pool management", "CRUD operations via sqlx query_as! macros", "Schema migrations", "Event hooks for real-time updates", "TypeScript type generation via ts-rs"]
+    },
+    "crates/services": {
+      "purpose": "Business logic layer - all domain services",
+      "modules": {
+        "container": "ContainerService trait - workspace lifecycle (create, start, kill, delete), execution process management, task finalization",
+        "workspace_manager": "WorkspaceManager - creates workspace directories with git worktrees for all repos",
+        "worktree_manager": "WorktreeManager - low-level git worktree operations (create, remove, move)",
+        "events": "EventService - real-time event streaming via MsgStore, SSE/WebSocket patch delivery",
+        "config": "Config management - versioned JSON config (v8), editor settings, notification settings, theme, GitHub config",
+        "project": "ProjectService - project CRUD, repository management, file search",
+        "repo": "RepoService - repository CRUD, path validation, git repo detection",
+        "filesystem": "FilesystemService - directory listing, file reading/writing, repo discovery",
+        "file_search": "FileSearchCache - cached file/directory search with git history ranking",
+        "git_host": "GitHostProvider trait - GitHub and Azure DevOps PR management (create, status, comments)",
+        "diff_stream": "DiffStats computation and real-time diff streaming for workspaces",
+        "analytics": "AnalyticsService - PostHog event tracking",
+        "notification": "NotificationService - cross-platform sound and push notifications",
+        "approvals": "Approvals - tool call approval/rejection system for coding agents",
+        "remote_client": "RemoteClient - OAuth client for remote server communication",
+        "auth": "AuthContext - credential management (OAuth tokens, profile caching)",
+        "oauth_credentials": "OAuthCredentials - persistent JWT token storage",
+        "pr_monitor": "PrMonitorService - background task polling PR status every 60s",
+        "migration": "MigrationService - data migration between local and remote servers",
+        "queued_message": "QueuedMessageService - message queue for follow-up operations",
+        "remote_sync": "Remote sync utilities for syncing local state to remote server"
+      }
+    },
+    "crates/executors": {
+      "purpose": "Coding agent executor implementations",
+      "supported_agents": ["ClaudeCode", "Amp", "Gemini", "Codex", "Opencode", "CursorAgent", "QwenCode", "Copilot", "Droid"],
+      "key_traits": {
+        "StandardCodingAgentExecutor": "spawn(), spawn_follow_up(), spawn_review(), normalize_logs(), available_slash_commands()",
+        "Executable": "spawn() for ExecutorAction types"
+      },
+      "action_types": ["CodingAgentInitialRequest", "CodingAgentFollowUpRequest", "ScriptRequest", "ReviewRequest"],
+      "capabilities": ["SessionFork", "SetupHelper", "ContextUsage"],
+      "features": ["MCP configuration per agent", "Log normalization", "Approval integration", "Exit signals and cancellation tokens"]
+    },
+    "crates/git": {
+      "purpose": "Git operations using both libgit2 and git CLI",
+      "key_operations": ["open_repo", "commit", "get_diffs", "merge_changes (squash merge)", "rebase_branch", "push_to_remote", "fetch", "add/remove/move worktrees", "get_all_branches", "detect_conflict_op", "get_conflicted_files", "abort_conflicts", "collect_recent_file_stats"],
+      "note": "1953 lines, the largest single file in the codebase"
+    },
+    "crates/deployment": {
+      "purpose": "Abstract Deployment trait defining all service access points",
+      "trait_methods": ["new()", "user_id()", "config()", "db()", "analytics()", "container()", "git()", "project()", "repo()", "image()", "filesystem()", "events()", "file_search_cache()", "approvals()", "queued_message_service()", "auth_context()", "remote_client()", "pty()"],
+      "provided_methods": ["trigger_auto_project_setup()", "stream_events()", "track_if_analytics_allowed()"]
+    },
+    "crates/local-deployment": {
+      "purpose": "LocalDeployment - concrete implementation of Deployment for desktop use",
+      "key_features": ["SQLite DB with event hooks", "All services instantiation", "OAuth login flow", "Executor profile recommendation", "PrMonitorService background task", "PTY service for terminal", "File copy operations for workspace setup"]
+    },
+    "crates/review": {
+      "purpose": "Standalone CLI tool for PR review via Vibe Kanban servers",
+      "workflow": "Parse PR URL -> Clone repo -> Select Claude session -> Create tarball -> Upload -> Poll for results",
+      "api_endpoint": "https://api.vibekanban.com"
+    },
+    "crates/remote": {
+      "purpose": "Cloud server with PostgreSQL, JWT auth, OAuth providers",
+      "auth_providers": ["GitHub OAuth", "Google OAuth"],
+      "features": ["JWT session management", "Organization/membership management", "Issue management (CRUD + bulk)", "Project status management", "PR tracking", "Electric proxy", "Billing integration", "GitHub App integration"]
+    },
+    "crates/utils": {
+      "purpose": "Shared utilities across all crates",
+      "modules": ["api (shared API types)", "approvals", "assets", "browser", "diff", "jwt", "log_msg", "msg_store", "path", "port_file", "process", "response (ApiResponse)", "sentry", "shell", "stream_lines", "text", "tokio", "version"],
+      "platform_support": "WSL2 detection, cross-platform cache directories"
+    }
+  },
+
+  "4_authentication_and_security": {
+    "local_server": {
+      "csrf_protection": {
+        "mechanism": "Origin header validation via validate_origin() middleware",
+        "config": "VK_ALLOWED_ORIGINS env var (comma-separated list of allowed origins)",
+        "behavior": "Rejects cross-origin requests with 403, normalizes loopback addresses",
+        "null_origin": "Explicitly rejected"
+      },
+      "oauth_flow": {
+        "mechanism": "OAuth authorization code handoff via remote server",
+        "credential_storage": "JWT tokens persisted to disk via OAuthCredentials",
+        "token_refresh": "Automatic refresh when access_token expires_soon (with mutex guard)",
+        "providers": "GitHub, Google (delegated to remote server)"
+      },
+      "api_key": "No API key authentication on local server (protected by origin validation only)"
+    },
+    "remote_server": {
+      "jwt_auth": "JWT session tokens, require_session middleware on protected routes",
+      "oauth_providers": ["GitHub OAuth", "Google OAuth"],
+      "authorization": "ensure_project_access() checks organization membership for project operations",
+      "cors": "Mirror request CORS (AllowOrigin::mirror_request(), AllowCredentials::true)"
+    },
+    "executor_approvals": {
+      "mechanism": "Tool call approval system - agents request permission before executing tools",
+      "storage": "In-memory DashMap with pending/completed states",
+      "flow": "Agent requests approval -> stored as PendingApproval -> UI responds -> oneshot channel delivers result"
+    }
+  },
+
+  "5_configuration_patterns": {
+    "config_file": {
+      "location": "asset_dir/config.json",
+      "schema_version": "v8 (with automatic migration from older versions)",
+      "key_settings": {
+        "notifications": "sound_enabled, push_enabled, sound_file",
+        "editor": "EditorType (VSCode, Cursor, Windsurf, Zed, etc.)",
+        "theme": "ThemeMode (light/dark/auto)",
+        "github": "GitHubConfig",
+        "language": "UiLanguage",
+        "send_message_shortcut": "SendMessageShortcut",
+        "showcase_state": "ShowcaseState",
+        "pr_description_prompt": "Customizable PR description template",
+        "commit_reminder_prompt": "Customizable commit reminder"
+      }
+    },
+    "environment_variables": {
+      "BACKEND_PORT / PORT": "Server port (default: auto-assigned)",
+      "HOST": "Server host (default: 127.0.0.1)",
+      "RUST_LOG": "Log level (default: info)",
+      "VK_ALLOWED_ORIGINS": "Comma-separated allowed origins for CSRF",
+      "VK_SHARED_API_BASE": "Remote server base URL",
+      "POSTHOG_API_KEY": "Analytics API key",
+      "POSTHOG_API_ENDPOINT": "Analytics endpoint"
+    },
+    "executor_profiles": {
+      "mechanism": "ExecutorConfigs with cached profiles per agent type",
+      "profile_id": "ExecutorProfileId for selecting specific agent configurations"
+    }
+  },
+
+  "6_entry_points": {
+    "local_server_binary": {
+      "file": "crates/server/src/main.rs",
+      "startup_sequence": [
+        "1. Install rustls crypto provider",
+        "2. Initialize Sentry",
+        "3. Configure tracing/logging",
+        "4. Create asset directory",
+        "5. Create LocalDeployment (DB, services, background tasks)",
+        "6. Update Sentry scope",
+        "7. Cleanup orphan executions",
+        "8. Backfill before_head_commits and repo names",
+        "9. Track analytics session_start",
+        "10. Warm file search cache (async)",
+        "11. Build Axum router",
+        "12. Bind to port (auto-assign if PORT=0)",
+        "13. Write port file (production only)",
+        "14. Open browser (production only)",
+        "15. Serve with graceful shutdown"
+      ],
+      "shutdown": "SIGTERM/SIGINT -> kill all running processes"
+    },
+    "review_cli_binary": {
+      "file": "crates/review/src/main.rs",
+      "description": "Standalone CLI for PR review: parse URL -> clone -> archive -> upload -> poll"
+    },
+    "remote_server_binary": {
+      "file": "crates/remote/src/app.rs",
+      "startup_sequence": [
+        "1. Create PostgreSQL pool and run migrations",
+        "2. Configure Electric role password",
+        "3. Initialize JWT service",
+        "4. Register OAuth providers (GitHub, Google)",
+        "5. Create handoff/token validation services",
+        "6. Start billing service",
+        "7. Build Axum router with CORS, tracing, request IDs"
+      ]
+    }
+  },
+
+  "7_integration_points": {
+    "inter_crate_dependencies": {
+      "server": ["deployment", "local-deployment", "db", "services", "utils"],
+      "local-deployment": ["deployment", "db", "services", "executors", "git", "utils"],
+      "services": ["db", "executors", "git", "utils"],
+      "executors": ["utils (as workspace_utils)"],
+      "db": ["(standalone, depends only on sqlx/chrono/uuid/serde/ts-rs)"],
+      "git": ["(standalone git operations)"],
+      "utils": ["(standalone utilities)"],
+      "deployment": ["db", "services", "executors", "git", "utils"],
+      "remote": ["(separate server, not directly dependent on local crates)"],
+      "review": ["(standalone CLI tool)"]
+    },
+    "external_services": {
+      "posthog": "Analytics event tracking",
+      "sentry": "Error monitoring and crash reporting",
+      "github_api": "PR creation, status checking, comments (via gh CLI and API)",
+      "azure_devops": "PR creation and management",
+      "vibekanban_remote": "Remote project sync, OAuth, organization management",
+      "electric_sql": "Real-time sync proxy (remote server)"
+    },
+    "real_time_communication": {
+      "sse": "Server-Sent Events for execution process streams, diff streams, event streams, slash commands",
+      "websocket": "Terminal PTY sessions, scratch pad streaming",
+      "msg_store": "In-memory pub/sub for event patches (JSON Patch format)"
+    },
+    "key_architectural_patterns": {
+      "deployment_trait": "Abstract trait pattern allowing LocalDeployment and (future) CloudDeployment implementations",
+      "enum_dispatch": "Used extensively in executors for zero-cost polymorphism across agent types",
+      "event_sourcing_lite": "SQLite hooks on INSERT/UPDATE -> after_connect callback -> MsgStore patches -> SSE/WS delivery",
+      "worktree_isolation": "Each workspace gets isolated git worktrees per repo, enabling parallel task execution",
+      "action_chain": "ExecutorAction with next_action field for sequencing setup -> coding agent -> cleanup",
+      "feature_flags": "qa-mode feature for testing with mock executors, cloud feature for clone support"
+    }
+  }
+}

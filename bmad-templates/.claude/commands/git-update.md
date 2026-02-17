@@ -36,19 +36,48 @@ Run `git add .` to stage all changes, or ask the user which specific files they 
    )"
    ```
 
-## Step 4: Push to Remote
+## Step 4: Merge into Main and Push
 
-1. Check if the current branch has a remote tracking branch
-2. If yes, run `git push`
-3. If no, run `git push -u origin <branch-name>`
+The project uses a local merge workflow (no PRs). After committing on the feature branch, merge into main and push.
+
+### 4a: Detect worktree context
+
+Run `git worktree list` to check if you are in a worktree.
+
+- **If in a worktree** (current directory is NOT the main worktree): the `main` branch is locked by the primary worktree and cannot be checked out here. Identify the primary worktree path from `git worktree list` (the one with `main` checked out).
+- **If in the primary repo** (not a worktree, or main worktree): you can checkout main directly.
+
+### 4b: Push feature branch to origin
+
+```bash
+git push -u origin <branch-name>
+```
+
+### 4c: Merge into main
+
+**From a worktree** (main is checked out elsewhere at `<primary-worktree-path>`):
+```bash
+git -C <primary-worktree-path> pull origin main
+git -C <primary-worktree-path> merge <branch-name>
+git -C <primary-worktree-path> push origin main
+```
+
+**From the primary repo** (main can be checked out directly):
+```bash
+git checkout main
+git pull origin main
+git merge <branch-name>
+git push origin main
+```
 
 ## Step 5: Confirmation
 
 Display a summary of:
 - Number of files changed
 - Commit message used
-- Branch pushed to
-- Remote repository status
+- Feature branch name
+- Whether merge into main was done from worktree or primary repo
+- Remote push status for both feature branch and main
 
 ## Important Notes
 
@@ -57,3 +86,5 @@ Display a summary of:
 - Ensure all tests pass before pushing (if applicable)
 - Follow the conventional commits format for consistency
 - Ask for confirmation before pushing if there are many changes
+- When in a worktree, always use `git -C <primary-path>` to operate on main
+- Never force-checkout main in a worktree -- it will fail because main is locked by the primary worktree
