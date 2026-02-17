@@ -1,7 +1,7 @@
 # Document Inventory
 
 > Imported: 2026-02-17
-> Total documents: 109 files
+> Total documents: 112 files
 > Source: bmad-vibe-kanban project (fork of Vibe Kanban 0.1.4 with BMAD integration)
 
 ---
@@ -11,11 +11,11 @@
 | Category | Files | BMAD Target Directory |
 |----------|-------|-----------------------|
 | Project Root | 5 | `docs/input/` (reference) |
-| Vibe Kanban Technical | 81 | `docs/architecture/`, `docs/design/` |
+| Vibe Kanban Technical | 83 | `docs/architecture/`, `docs/design/` |
 | Integration & Fork | 14 | `docs/input/` (reference) |
 | BMAD Methodology | 7 | `docs/brief/`, `docs/prd/` |
 | Plans | 2 | `docs/input/` (reference) |
-| **Total** | **109** | |
+| **Total** | **112** | |
 
 ---
 
@@ -33,7 +33,7 @@ Reference documents that define the overall project scope and context.
 
 ---
 
-## 2. Vibe Kanban Technical Documentation (81 files)
+## 2. Vibe Kanban Technical Documentation (83 files)
 
 ### 2.1 Core Technical Documentation
 
@@ -47,6 +47,7 @@ Reference documents that define the overall project scope and context.
 | `vibe-kanban/api-contracts.md` | REST endpoint documentation | Input for Architecture |
 | `vibe-kanban/data-models.md` | Database schema details (SQLite) | Input for Architecture |
 | `vibe-kanban/component-inventory.md` | React component catalog | Input for Architecture/Design |
+| `vibe-kanban/integration-architecture.md` | Inter-part communication, event system, build sync | Input for Architecture |
 | `vibe-kanban/BUILD-GUIDE.md` | Complete build documentation | Developer reference |
 | `vibe-kanban/TESTING-CHECKLIST.md` | Testing procedures (6 phases) | Input for Test Strategy |
 | `vibe-kanban/CLAUDE-VERIFICATION-GUIDE.md` | Claude Code verification quick reference | Developer reference |
@@ -58,6 +59,7 @@ Reference documents that define the overall project scope and context.
 |------|-------------|----------------|
 | `vibe-kanban/docs.json` | Mintlify documentation config | Reference |
 | `vibe-kanban/project-scan-report.json` | Project scan metadata | Reference |
+| `vibe-kanban/rust-backend-deep-scan.json` | Backend deep scan: routes, models, auth, config | Input for Architecture |
 
 ### 2.3 User Documentation - Getting Started
 
@@ -247,7 +249,7 @@ data that significantly reduces the effort needed to produce BMAD artifacts.
 | 8 | `vibe-kanban/data-models.md` | 650 | 16 SQLite tables, 25+ PostgreSQL tables, 44 migrations, ER diagrams | Architecture: data layer |
 | 9 | `vibe-kanban/component-inventory.md` | 535 | 220+ React components, Container/View pattern, stores, contexts | Design: component catalog |
 | 10 | `vibe-kanban/project-scan-report.json` | -- | Structured scan metadata (12 completed analysis steps) | Metadata |
-| 11 | rust-backend-deep-scan.json | -- | Routes, models, modules, auth, config (structured data) | Architecture: backend map (NOT FOUND in repo) |
+| 11 | `vibe-kanban/rust-backend-deep-scan.json` | 488 | Routes, models, modules, auth, config (structured data) | Architecture: backend map |
 
 **Total generated content: 6,300+ lines of structured technical documentation**
 
