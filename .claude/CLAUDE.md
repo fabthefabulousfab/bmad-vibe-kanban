@@ -160,6 +160,6 @@ DEBUG=false
 ## Git Workflow
 
 - Conventional commits: `feat:`, `fix:`, `refactor:`, `docs:`, `test:`
-- Never commit to main directly
-- PRs require review
 - All tests must pass before merge
+- When pushing changes, merge locally into main and push main directly (no PRs)
+- Workflow: commit on feature branch, then `git checkout main && git merge <branch> && git push origin main`
