@@ -1,1 +1,92 @@
-{"workflow_version":"1.2.0","timestamps":{"started":"2026-02-17T12:00:00Z","last_updated":"2026-02-17T12:00:00Z"},"mode":"initial_scan","scan_level":"deep","project_root":"/private/var/folders/nn/0dh5rvfj2s97hwf3p6ctb0zw0000gn/T/vibe-kanban/worktrees/436c-2-analyze-existi/bmad-vibe-kanban","output_folder":"docs","completed_steps":[{"step":"step_1","status":"completed","timestamp":"2026-02-17T12:00:00Z","summary":"Classified as monorepo with 6 parts: server(backend), frontend(web), remote-frontend(web), remote(backend), npx-cli(cli), shared(library)"}],"current_step":"step_2","findings":{"project_classification":"Polyglot monorepo (Rust+TypeScript), 6 application parts"},"project_types":[{"part_id":"server","project_type_id":"backend","display_name":"Rust Backend (Axum)"},{"part_id":"frontend","project_type_id":"web","display_name":"React Frontend"},{"part_id":"remote-frontend","project_type_id":"web","display_name":"Remote React Frontend"},{"part_id":"remote","project_type_id":"backend","display_name":"Remote Rust Backend"},{"part_id":"npx-cli","project_type_id":"cli","display_name":"NPX CLI Wrapper"},{"part_id":"shared","project_type_id":"library","display_name":"Shared TypeScript Types"}],"outputs_generated":["project-scan-report.json"],"resume_instructions":"Continue from step 2: Discover existing documentation"}
+{
+  "workflow_version": "1.2.0",
+  "timestamps": {
+    "started": "2026-02-17T12:00:00Z",
+    "last_updated": "2026-02-17T16:15:00Z"
+  },
+  "mode": "initial_scan",
+  "scan_level": "deep",
+  "project_root": "/private/var/folders/nn/0dh5rvfj2s97hwf3p6ctb0zw0000gn/T/vibe-kanban/worktrees/436c-2-analyze-existi/bmad-vibe-kanban",
+  "output_folder": "docs",
+  "completed_steps": [
+    {
+      "step": "step_1",
+      "status": "completed",
+      "timestamp": "2026-02-17T12:00:00Z",
+      "summary": "Classified as monorepo with 6 parts: server(backend), frontend(web), remote-frontend(web), remote(backend), npx-cli(cli), shared(library)"
+    },
+    {
+      "step": "step_2",
+      "status": "completed",
+      "timestamp": "2026-02-17T12:30:00Z",
+      "summary": "Discovered existing documentation: README.md, AGENTS.md, CODE-OF-CONDUCT.md, frontend/CLAUDE.md, crates/remote/README.md, npx-cli/README.md, docs/docs-vibe-kanban/ (previous quick scan)"
+    },
+    {
+      "step": "step_3",
+      "status": "completed",
+      "timestamp": "2026-02-17T13:00:00Z",
+      "summary": "Tech stack analyzed: Rust nightly (Axum, Tokio, SQLx), TypeScript (React 18, Vite 5, TailwindCSS, Zustand), 95+ frontend deps, 44 migrations"
+    },
+    {
+      "step": "step_4",
+      "status": "completed",
+      "timestamp": "2026-02-17T14:30:00Z",
+      "summary": "Deep scan of all 6 parts via parallel agents: server (10 crates, 50+ endpoints, 16 tables), frontend (90+ components, 25 contexts, 5 stores), remote (60+ endpoints, 25+ tables, JWT auth), remote-frontend, shared, npx-cli"
+    },
+    {
+      "step": "step_5",
+      "status": "completed",
+      "timestamp": "2026-02-17T15:00:00Z",
+      "summary": "Source tree analysis written with annotations for all 6 parts, integration diagrams, and critical directory tables"
+    },
+    {
+      "step": "step_6_7_8_9",
+      "status": "completed",
+      "timestamp": "2026-02-17T15:45:00Z",
+      "summary": "Generated 7 docs via 5 parallel agents: development-guide.md (936 lines), architecture.md (1119 lines), project-overview.md (330 lines), api-contracts.md (598 lines), data-models.md (650 lines), component-inventory.md (535 lines), integration-architecture.md (1329 lines)"
+    },
+    {
+      "step": "step_10",
+      "status": "completed",
+      "timestamp": "2026-02-17T16:00:00Z",
+      "summary": "Master index generated with navigation for all 8 generated docs, existing docs, architectural patterns table, and getting started guide"
+    },
+    {
+      "step": "step_11_12",
+      "status": "completed",
+      "timestamp": "2026-02-17T16:20:00Z",
+      "summary": "Validation passed: no incomplete markers, no TODO/FIXME/PLACEHOLDER issues, all 11 output files verified on disk"
+    }
+  ],
+  "current_step": "completed",
+  "findings": {
+    "project_classification": "Polyglot monorepo (Rust+TypeScript), 6 application parts",
+    "rust_backend_scan": "Complete deep scan of all 10 Rust crates. See docs-vibe-kanban/rust-backend-deep-scan.json",
+    "frontend_scan": "220+ components, Container/View pattern, 5 Zustand stores, 25 Contexts, 13 API namespaces",
+    "remote_scan": "60+ endpoints, 25+ PostgreSQL tables, JWT + AES-256-GCM auth, Stripe billing, GitHub App",
+    "source_tree": "Documented with integration diagrams and critical directory tables",
+    "total_generated_lines": 6066
+  },
+  "project_types": [
+    {"part_id": "server", "project_type_id": "backend", "display_name": "Rust Backend (Axum)"},
+    {"part_id": "frontend", "project_type_id": "web", "display_name": "React Frontend"},
+    {"part_id": "remote-frontend", "project_type_id": "web", "display_name": "Remote React Frontend"},
+    {"part_id": "remote", "project_type_id": "backend", "display_name": "Remote Rust Backend"},
+    {"part_id": "npx-cli", "project_type_id": "cli", "display_name": "NPX CLI Wrapper"},
+    {"part_id": "shared", "project_type_id": "library", "display_name": "Shared TypeScript Types"}
+  ],
+  "outputs_generated": [
+    "project-scan-report.json",
+    "docs-vibe-kanban/rust-backend-deep-scan.json",
+    "docs-vibe-kanban/source-tree-analysis.md",
+    "docs-vibe-kanban/development-guide.md",
+    "docs-vibe-kanban/architecture.md",
+    "docs-vibe-kanban/project-overview.md",
+    "docs-vibe-kanban/api-contracts.md",
+    "docs-vibe-kanban/data-models.md",
+    "docs-vibe-kanban/component-inventory.md",
+    "docs-vibe-kanban/integration-architecture.md",
+    "docs-vibe-kanban/index.md"
+  ],
+  "resume_instructions": "All 12 steps complete. Deep scan documentation finalized with 11 output files (6066+ lines total)."
+}
