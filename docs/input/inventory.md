@@ -229,9 +229,40 @@ Reference documents that define the overall project scope and context.
 
 ---
 
-## 6. Documentation Gap Analysis
+## 6. High-Value Generated Documents (Brownfield Analysis)
 
-### 6.1 BMAD-Required Documents (Status)
+The following 11 documents were generated through automated codebase analysis and represent
+the most valuable inputs for BMAD workflow consumption. They contain structured, machine-analyzed
+data that significantly reduces the effort needed to produce BMAD artifacts.
+
+| # | Document | Lines | Content Summary | BMAD Value |
+|---|----------|-------|-----------------|------------|
+| 1 | `vibe-kanban/index.md` | 242 | Index with navigation, tech stack quick reference (React 18, Axum, SQLite) | Architecture input: tech stack reference |
+| 2 | `vibe-kanban/project-overview.md` | 330 | Executive summary, 6 core capabilities, full tech stack tables | Product Brief: primary input |
+| 3 | `vibe-kanban/architecture.md` | 1,119 | 5-layer architecture diagram, Executor Trait pattern, crate hierarchy, auth, real-time events | Architecture: direct adaptation |
+| 4 | `vibe-kanban/source-tree-analysis.md` | 569 | Annotated directory tree for all 6 project parts with integration diagrams | Architecture: structural reference |
+| 5 | `vibe-kanban/development-guide.md` | 936 | Setup, 30+ commands, build pipeline, Docker, release workflow | Architecture/DevOps: process reference |
+| 6 | `integration/integration-architecture.md` | 1,329 | Inter-part communication, BMAD-VK integration, event system, build sync | Architecture: integration layer |
+| 7 | `vibe-kanban/api-contracts.md` | 598 | 50+ local endpoints, 60+ remote endpoints, SSE/WebSocket contracts | Architecture: API specification |
+| 8 | `vibe-kanban/data-models.md` | 650 | 16 SQLite tables, 25+ PostgreSQL tables, 44 migrations, ER diagrams | Architecture: data layer |
+| 9 | `vibe-kanban/component-inventory.md` | 535 | 220+ React components, Container/View pattern, stores, contexts | Design: component catalog |
+| 10 | `vibe-kanban/project-scan-report.json` | -- | Structured scan metadata (12 completed analysis steps) | Metadata |
+| 11 | rust-backend-deep-scan.json | -- | Routes, models, modules, auth, config (structured data) | Architecture: backend map (NOT FOUND in repo) |
+
+**Total generated content: 6,300+ lines of structured technical documentation**
+
+### Key Observations
+
+- **Architecture coverage is substantial**: Documents 3, 4, 6, 7, 8 together provide ~4,265 lines of architecture documentation covering all layers (presentation, API, service, data, integration). This is sufficient to produce a BMAD Architecture Document with minimal additional analysis.
+- **Product Brief has strong input**: Document 2 (project-overview) already contains executive summary, capabilities, and tech stack -- the core of a Product Brief.
+- **Design has partial coverage**: Document 9 (component-inventory) catalogs 220+ React components but lacks UX flows, wireframes, and user journey documentation.
+- **PRD gap remains**: While core-features docs (Section 2.6) describe features from the user perspective, there is no requirements-level specification with acceptance criteria, priorities, or scope boundaries.
+
+---
+
+## 7. Documentation Gap Analysis
+
+### 7.1 BMAD-Required Documents (Status)
 
 The BMAD methodology requires the following documents for a complete project lifecycle. The table below shows what exists and what needs to be created.
 
@@ -245,7 +276,7 @@ The BMAD methodology requires the following documents for a complete project lif
 | **Test Strategy** | `docs/test/` | PARTIAL | Yes - TESTING-CHECKLIST.md, testing-reports/ |
 | **Test Results** | `docs/tests-results/` | PARTIAL | Yes - testing-reports/ directory |
 
-### 6.2 Identified Gaps
+### 7.2 Identified Gaps
 
 1. **No formal Product Brief** -- The project has a detailed README and project overview, but no structured BMAD Product Brief. Source material is readily available.
 
@@ -261,7 +292,7 @@ The BMAD methodology requires the following documents for a complete project lif
 
 7. **Cloud features documented but N/A for fork** -- The 13 cloud documentation files describe features that were removed/disabled in this fork (v0.1.4 is local-only). They serve as reference for what the upstream project offers but should be marked as out-of-scope.
 
-### 6.3 Recommendations
+### 7.3 Recommendations
 
 1. **Next Step**: Run the BMAD `create-product-brief` workflow using this inventory as input
 2. **Priority Documents**: Product Brief -> PRD -> Architecture (BMAD format) -> Epics & Stories
@@ -270,7 +301,7 @@ The BMAD methodology requires the following documents for a complete project lif
 
 ---
 
-## 7. Document Origin Map
+## 8. Document Origin Map
 
 ```
 Source                          -> docs/input/ Category
