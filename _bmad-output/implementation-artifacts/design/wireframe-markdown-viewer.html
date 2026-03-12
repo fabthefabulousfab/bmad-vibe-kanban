@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markdown Viewer - Wireframe Prototype v4 (sync scroll + context menu)</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     DESIGN SYSTEM TOKENS
+     Matches: frontend/src/styles/new/index.css (dark mode)
+     and tailwind.new.config.js
+     ============================================================ */
+  :root {
+    /* Background (dark) - from --_bg-*-default */
+    --bg-primary: hsl(0 0% 13%);
+    --bg-secondary: hsl(0 0% 11%);
+    --bg-panel: hsl(0 0% 16%);
+
+    /* Text (dark) */
+    --text-high: hsl(0 0% 96%);
+    --text-normal: hsl(0 0% 77%);
+    --text-low: hsl(0 0% 56%);
+
+    /* Brand (accent) - warm orange */
+    --brand: hsl(25 82% 54%);
+    --brand-hover: hsl(25 75% 62%);
+    --brand-secondary: hsl(25 82% 37%);
+    --text-on-brand: hsl(0 0% 100%);
+
+    /* Status */
+    --error: hsl(0 59% 57%);
+    --success: hsl(117 38% 50%);
+    --merged: hsl(271 81% 66%);
+
+    /* Border (dark) */
+    --border: hsl(0 0% 20%);
+
+    /* Muted */
+    --muted: hsl(0 0% 16%);
+    --muted-fg: hsl(0 0% 64%);
+
+    /* Radius - from config radiusMultiplier=0.25 */
+    --radius-sm: 0.1875rem;
+    --radius-md: 0.21875rem;
+    --radius-lg: 0.28125rem;
+
+    /* Spacing - from config base=0.5rem */
+    --sp-half: 0.25rem;
+    --sp-base: 0.5rem;
+    --sp-plusfifty: 0.75rem;
+    --sp-double: 1rem;
+
+    /* Icon sizes - from config iconMultiplier=1.25 */
+    --icon-xs: 0.9375rem;
+    --icon-sm: 1.09375rem;
+    --icon-base: 1.25rem;
+
+    /* Fonts */
+    --font-sans: 'IBM Plex Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+
+    /* Font sizes - from config */
+    --fs-xs: 0.75rem;
+    --fs-sm: 0.875rem;
+    --fs-base: 1rem;
+    --fs-lg: 1.125rem;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg-primary);
+    color: var(--text-normal);
+    height: 100vh;
+    overflow: hidden;
+    font-size: var(--fs-base);
+    line-height: 1.5;
+  }
+
+  /* ============================================================
+     NAVBAR - matches Navbar.tsx pattern
+     "flex items-center justify-between px-base py-half bg-secondary border-b"
+     ============================================================ */
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--sp-half) var(--sp-base);
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+    height: 36px;
+  }
+  .navbar-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--sp-base);
+  }
+  .navbar-center {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .navbar-center p {
+    font-size: var(--fs-base);
+    color: var(--text-low);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .navbar-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--sp-base);
+  }
+
+  /* Navbar icon button - matches NavbarIconButton in Navbar.tsx */
+  .nav-icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    color: var(--text-low);
+    cursor: pointer;
+    padding: 2px;
+    border-radius: var(--radius-sm);
+    transition: color 0.2s;
+    font-size: var(--icon-base);
+    line-height: 1;
+  }
+  .nav-icon-btn:hover { color: var(--text-normal); }
+  .nav-icon-btn.active { color: var(--text-normal); }
+  .nav-icon-btn svg { width: var(--icon-base); height: var(--icon-base); }
+
+  /* Divider in navbar */
+  .nav-divider { width: 1px; height: 16px; background: var(--border); }
+
+  /* ============================================================
+     MAIN LAYOUT
+     ============================================================ */
+  .main {
+    display: flex;
+    height: calc(100vh - 36px);
+  }
+
+  /* ============================================================
+     SIDEBAR
+     ============================================================ */
+  .sidebar {
+    width: 250px;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border);
+    background: var(--bg-secondary);
+  }
+
+  /* Branch selector */
+  .branch-section {
+    padding: var(--sp-base);
+    border-bottom: 1px solid var(--border);
+  }
+  .section-label {
+    font-size: var(--fs-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-low);
+    margin-bottom: var(--sp-half);
+    font-weight: 500;
+  }
+  .branch-select {
+    width: 100%;
+    height: 28px;
+    padding: 0 var(--sp-base);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg-panel);
+    color: var(--text-normal);
+    font-size: var(--fs-sm);
+    font-family: var(--font-sans);
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%23909090' d='M5 7L1 3h8z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 6px center;
+  }
+  .branch-select:focus { outline: 1px solid var(--brand); outline-offset: -1px; }
+
+  /* File tree */
+  .file-tree {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--sp-half) 0;
+  }
+  .file-tree::-webkit-scrollbar { width: 6px; }
+  .file-tree::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  .tree-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px var(--sp-base);
+    cursor: pointer;
+    font-size: var(--fs-sm);
+    transition: color 0.2s, background 0.2s;
+    user-select: none;
+    border-left: 2px solid transparent;
+    color: var(--text-normal);
+  }
+  .tree-item:hover { background: hsl(0 0% 16%); }
+  .tree-item.selected {
+    background: hsl(25 82% 54% / 0.1);
+    border-left-color: var(--brand);
+    color: var(--text-high);
+  }
+  .tree-item.dir { color: var(--text-low); font-weight: 500; }
+  .tree-item .caret {
+    width: 12px;
+    font-size: 9px;
+    text-align: center;
+    flex-shrink: 0;
+    color: var(--text-low);
+  }
+  .tree-item .icon {
+    font-size: 14px;
+    flex-shrink: 0;
+    opacity: 0.6;
+  }
+  .tree-item .fname {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .tree-children { padding-left: 14px; }
+  .tree-children.collapsed { display: none; }
+
+  /* Git action bar */
+  .git-action-bar {
+    border-top: 1px solid var(--border);
+    padding: var(--sp-base);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .action-select {
+    width: 100%;
+    height: 28px;
+    padding: 0 var(--sp-base);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg-panel);
+    color: var(--text-normal);
+    font-size: var(--fs-sm);
+    font-family: var(--font-sans);
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%23909090' d='M5 7L1 3h8z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 6px center;
+  }
+  .action-select:focus { outline: 1px solid var(--brand); outline-offset: -1px; }
+
+  /* DO! button - uses brand color like orange variant button */
+  .do-btn {
+    width: 100%;
+    height: 29px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: var(--brand);
+    color: var(--text-on-brand);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    font-family: var(--font-sans);
+    cursor: pointer;
+    transition: background 0.2s;
+    letter-spacing: 0.03em;
+  }
+  .do-btn:hover { background: var(--brand-hover); }
+  .do-btn:active { transform: scale(0.98); }
+  .do-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* ============================================================
+     CONTENT AREA
+     ============================================================ */
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: var(--bg-primary);
+  }
+
+  /* Empty state */
+  .empty-state {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-base);
+    color: var(--text-low);
+  }
+  .empty-state .e-icon { font-size: 40px; opacity: 0.2; }
+  .empty-state .e-title { font-size: var(--fs-lg); font-weight: 500; }
+  .empty-state .e-sub { font-size: var(--fs-sm); color: var(--muted-fg); }
+
+  /* Split pane */
+  .split-pane {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 0;
+  }
+
+  .pane-header {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--sp-base);
+    font-size: var(--fs-xs);
+    color: var(--text-low);
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+    gap: var(--sp-base);
+    flex-shrink: 0;
+  }
+  .pane-header-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .pane-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .pane-dot.editor { background: var(--brand); }
+  .pane-dot.preview { background: var(--success); }
+  .pane-dot.unsaved { background: var(--brand); animation: pulse-dot 1.5s ease-in-out infinite; }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* Save button in pane header */
+  .save-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 22px;
+    padding: 0 8px;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-xs);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, opacity 0.2s;
+    line-height: 1;
+  }
+  .save-btn.has-changes {
+    background: var(--brand);
+    color: var(--text-on-brand);
+  }
+  .save-btn.has-changes:hover { background: var(--brand-hover); }
+  .save-btn.no-changes {
+    background: var(--bg-panel);
+    color: var(--text-low);
+    opacity: 0.5;
+    cursor: default;
+  }
+  .save-btn.saving {
+    background: var(--brand-secondary);
+    color: var(--text-on-brand);
+    cursor: wait;
+  }
+  .save-btn svg { width: 12px; height: 12px; }
+
+  /* Editor pane (left) */
+  .editor-pane {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border);
+    min-height: 0;
+  }
+
+  .editor-textarea {
+    flex: 1;
+    width: 100%;
+    resize: none;
+    border: none;
+    outline: none;
+    padding: var(--sp-double);
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    line-height: 1.65;
+    color: var(--text-normal);
+    background: hsl(0 0% 11% / 0.5);
+    tab-size: 2;
+  }
+  .editor-textarea:focus {
+    background: hsl(0 0% 10%);
+  }
+  .editor-textarea::placeholder { color: var(--muted-fg); }
+  .editor-textarea::-webkit-scrollbar { width: 6px; }
+  .editor-textarea::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* Preview pane (right) */
+  .preview-pane {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .preview-content {
+    flex: 1;
+    overflow: auto;
+    padding: var(--sp-double) calc(var(--sp-double) * 1.5);
+    line-height: 1.7;
+    font-size: var(--fs-sm);
+  }
+  .preview-content::-webkit-scrollbar { width: 6px; }
+  .preview-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* Preview markdown typography */
+  .preview-content h1 { font-size: 1.5em; font-weight: 700; margin: 0 0 var(--sp-double); padding-bottom: var(--sp-base); border-bottom: 1px solid var(--border); color: var(--text-high); }
+  .preview-content h2 { font-size: 1.25em; font-weight: 600; margin: 1.5em 0 0.75em; padding-bottom: 6px; border-bottom: 1px solid var(--border); color: var(--text-high); }
+  .preview-content h3 { font-size: 1.1em; font-weight: 600; margin: 1.25em 0 0.5em; color: var(--text-high); }
+  .preview-content p { margin: 0 0 0.75em; color: var(--text-normal); }
+  .preview-content ul, .preview-content ol { margin: 0 0 0.75em; padding-left: 1.5em; }
+  .preview-content li { margin: 3px 0; }
+  .preview-content code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: var(--bg-panel);
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: var(--brand-hover);
+  }
+  .preview-content pre {
+    background: hsl(0 0% 8%);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: var(--sp-base) var(--sp-double);
+    margin: 0 0 1em;
+    overflow-x: auto;
+  }
+  .preview-content pre code {
+    background: none;
+    padding: 0;
+    color: var(--text-normal);
+  }
+  .preview-content strong { color: var(--text-high); }
+  .preview-content a { color: var(--brand); text-decoration: none; }
+  .preview-content a:hover { text-decoration: underline; }
+  .preview-content table { border-collapse: collapse; width: 100%; margin: 0 0 1em; }
+  .preview-content th, .preview-content td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; font-size: var(--fs-sm); }
+  .preview-content th { background: var(--bg-secondary); font-weight: 600; color: var(--text-high); }
+  .preview-content blockquote { border-left: 3px solid var(--brand); padding: var(--sp-base) var(--sp-double); margin: 0 0 0.75em; color: var(--text-low); background: hsl(25 82% 54% / 0.04); border-radius: 0 3px 3px 0; }
+
+  /* ============================================================
+     CONTEXT BAR - matches ContextBar.tsx
+     ============================================================ */
+  .context-bar {
+    position: fixed;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+    z-index: 50;
+  }
+  .context-bar.visible { display: block; }
+  .context-bar-inner {
+    background: hsl(0 0% 11% / 0.5);
+    backdrop-filter: blur(8px);
+    border: 1px solid hsl(0 0% 11%);
+    border-radius: 6px;
+    padding: var(--sp-base) 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: inset 2px 2px 5px rgba(255,255,255,0.03), 0 0 10px rgba(0,0,0,0.2);
+    transition: box-shadow 0.2s;
+  }
+  .context-bar-inner:hover {
+    box-shadow: inset 2px 2px 5px rgba(255,255,255,0.06), 0 0 10px rgba(0,0,0,0.4);
+  }
+
+  /* Drag handle dots */
+  .ctx-drag {
+    display: flex;
+    justify-content: center;
+    padding: var(--sp-half) 0;
+    border-bottom: 1px solid var(--border);
+    cursor: grab;
+  }
+  .ctx-drag-dots { display: flex; gap: 2px; }
+  .ctx-drag-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--bg-panel); transition: background 0.2s; }
+  .context-bar-inner:hover .ctx-drag-dot { background: var(--text-low); }
+
+  .ctx-btn {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: color 0.2s;
+    position: relative;
+    color: var(--text-low);
+    font-size: 14px;
+  }
+  .ctx-btn:hover { color: var(--text-normal); }
+  .ctx-btn .md-badge {
+    font-size: 9px;
+    font-weight: 800;
+    font-family: var(--font-sans);
+    color: var(--text-low);
+    opacity: 0.5;
+    letter-spacing: -0.5px;
+    transition: opacity 0.2s;
+  }
+  .context-bar-inner:hover .ctx-btn .md-badge { opacity: 0.8; }
+  .ctx-btn .ide-img { width: var(--icon-xs); height: var(--icon-xs); opacity: 0.5; transition: opacity 0.2s; }
+  .context-bar-inner:hover .ctx-btn .ide-img { opacity: 0.8; }
+  .ctx-sep { height: 1px; background: var(--border); margin: 2px 0; }
+
+  .ctx-tooltip {
+    position: absolute;
+    right: 36px;
+    white-space: nowrap;
+    font-size: var(--fs-xs);
+    background: hsl(0 0% 20%);
+    color: var(--text-high);
+    padding: 3px 8px;
+    border-radius: 3px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s;
+    font-family: var(--font-sans);
+  }
+  .ctx-btn:hover .ctx-tooltip { opacity: 1; }
+
+  /* ============================================================
+     DIALOG - matches ConfirmDialog.tsx pattern
+     ============================================================ */
+  .dialog-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 90;
+    backdrop-filter: blur(1px);
+  }
+  .dialog-overlay.visible { display: flex; }
+
+  .dialog {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.5rem;
+    max-width: 425px;
+    width: 90%;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  }
+  .dialog-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .dialog-icon { font-size: 24px; }
+  .dialog-title { font-size: var(--fs-lg); font-weight: 600; color: var(--text-high); }
+  .dialog-message { font-size: var(--fs-sm); color: var(--muted-fg); margin-bottom: 1.25rem; line-height: 1.5; padding-top: 6px; }
+  .dialog-footer { display: flex; gap: 8px; justify-content: flex-end; }
+
+  /* Dialog buttons - match Button component variants */
+  .dlg-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    padding: 0 16px;
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    font-family: var(--font-sans);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+    border: 1px solid var(--border);
+  }
+  .dlg-btn.outline {
+    background: transparent;
+    color: var(--text-normal);
+  }
+  .dlg-btn.outline:hover { background: hsl(0 0% 20%); }
+  .dlg-btn.primary {
+    background: transparent;
+    color: var(--text-high);
+    border-color: var(--text-normal);
+  }
+  .dlg-btn.primary:hover { background: hsl(0 0% 5% / 0.9); }
+  .dlg-btn.brand {
+    background: var(--brand);
+    color: var(--text-on-brand);
+    border-color: var(--brand);
+  }
+  .dlg-btn.brand:hover { background: var(--brand-hover); }
+
+  /* ============================================================
+     TOAST
+     ============================================================ */
+  .toast {
+    position: fixed;
+    bottom: 80px;
+    right: 24px;
+    padding: 10px 16px;
+    border-radius: 4px;
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    font-family: var(--font-sans);
+    color: white;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 100;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  }
+  .toast.visible { opacity: 1; transform: translateY(0); }
+  .toast.success { background: var(--success); }
+  .toast.error { background: var(--error); }
+
+  /* ============================================================
+     STATE NAV (prototype only)
+     ============================================================ */
+  .state-nav {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 2px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 3px;
+    z-index: 80;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  }
+  .st-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    background: transparent;
+    color: var(--text-low);
+    font-size: var(--fs-xs);
+    font-family: var(--font-sans);
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+  .st-btn:hover { background: hsl(0 0% 16%); color: var(--text-normal); }
+  .st-btn.active { background: var(--brand); color: var(--text-on-brand); }
+
+  /* Skeleton */
+  .skeleton {
+    height: 12px;
+    background: linear-gradient(90deg, hsl(0 0% 16%) 25%, hsl(0 0% 20%) 50%, hsl(0 0% 16%) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 3px;
+    margin: 5px var(--sp-base);
+  }
+  @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+  /* ============================================================
+     CONTEXT MENU - matches Radix ContextMenu pattern
+     ============================================================ */
+  .ctx-menu {
+    position: fixed;
+    min-width: 160px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 0;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    z-index: 80;
+    display: none;
+    animation: ctx-menu-in 0.1s ease-out;
+  }
+  .ctx-menu.visible { display: block; }
+  @keyframes ctx-menu-in {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .ctx-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    font-size: var(--fs-sm);
+    color: var(--text-normal);
+    cursor: pointer;
+    transition: background 0.1s;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    font-family: var(--font-sans);
+  }
+  .ctx-menu-item:hover { background: hsl(0 0% 18%); color: var(--text-high); }
+  .ctx-menu-item.destructive { color: var(--error); }
+  .ctx-menu-item.destructive:hover { background: hsl(0 59% 57% / 0.1); }
+  .ctx-menu-item .cm-icon { font-size: 14px; opacity: 0.7; width: 16px; text-align: center; }
+  .ctx-menu-sep { height: 1px; background: var(--border); margin: 4px 0; }
+
+  /* Inline rename/create input */
+  .inline-input {
+    height: 24px;
+    padding: 0 4px;
+    font-size: var(--fs-sm);
+    font-family: var(--font-sans);
+    background: var(--bg-primary);
+    border: 1px solid var(--brand);
+    border-radius: 2px;
+    color: var(--text-high);
+    outline: none;
+    caret-color: var(--brand);
+    width: 140px;
+  }
+  .inline-input:focus { box-shadow: 0 0 0 1px var(--brand); }
+
+  /* Shortcut badge */
+  .kbd {
+    font-size: 10px;
+    padding: 1px 4px;
+    border-radius: 2px;
+    background: hsl(0 0% 20%);
+    color: var(--text-low);
+    font-family: var(--font-mono);
+    margin-left: 4px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== VIEW: WORKSPACE ===== -->
+<div id="v-workspace" style="display:none; height:100vh; flex-direction:column;">
+  <div class="navbar">
+    <div class="navbar-left">
+      <button class="nav-icon-btn" title="Archive">&#9744;</button>
+    </div>
+    <div class="navbar-center">
+      <p>my-feature-branch</p>
+    </div>
+    <div class="navbar-right">
+      <div class="nav-divider"></div>
+      <button class="nav-icon-btn" title="Chat">&#9776;</button>
+      <button class="nav-icon-btn active" title="Changes">&#916;</button>
+      <button class="nav-icon-btn" title="Logs">&#9638;</button>
+      <button class="nav-icon-btn" title="Preview">&#9633;</button>
+      <div class="nav-divider"></div>
+      <button class="nav-icon-btn" title="Settings">&#9881;</button>
+    </div>
+  </div>
+  <div style="flex:1; display:flex; align-items:center; justify-content:center;">
+    <div style="text-align:center;">
+      <div style="font-size:40px; opacity:0.15; margin-bottom:12px;">&#9776;</div>
+      <div style="font-size:var(--fs-lg); color:var(--text-low);">Workspace Kanban Board</div>
+      <div style="font-size:var(--fs-sm); color:var(--muted-fg); margin-top:8px;">Click the <span style="color:var(--brand); font-weight:700;">MD</span> icon in the context bar &rarr;</div>
+    </div>
+  </div>
+  <div class="context-bar visible">
+    <div class="context-bar-inner">
+      <div class="ctx-drag"><div class="ctx-drag-dots"><span class="ctx-drag-dot"></span><span class="ctx-drag-dot"></span><span class="ctx-drag-dot"></span></div></div>
+      <button class="ctx-btn" title="Open in VS Code">
+        <span class="ide-img" style="font-size:var(--icon-xs); opacity:0.5;">&#x2756;</span>
+        <span class="ctx-tooltip">Open in VS Code</span>
+      </button>
+      <button class="ctx-btn" onclick="go('no-file')" title="Markdown Viewer">
+        <span class="md-badge">MD</span>
+        <span class="ctx-tooltip">Markdown Viewer</span>
+      </button>
+      <div class="ctx-sep"></div>
+      <button class="ctx-btn" title="Copy Path">
+        <span style="font-size:12px; opacity:0.5;">&#x2398;</span>
+        <span class="ctx-tooltip">Copy Workspace Path</span>
+      </button>
+      <div class="ctx-sep"></div>
+      <button class="ctx-btn" title="Dev Server">
+        <span style="font-size:13px; opacity:0.5;">&#9654;</span>
+        <span class="ctx-tooltip">Start Dev Server</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== VIEW: LOADING ===== -->
+<div id="v-loading" style="display:none; height:100vh; flex-direction:column;">
+  <div class="navbar">
+    <div class="navbar-left"><button class="nav-icon-btn" onclick="go('workspace')">&#8592;</button></div>
+    <div class="navbar-center"><p>Markdown Viewer</p></div>
+    <div class="navbar-right"></div>
+  </div>
+  <div class="main">
+    <div class="sidebar">
+      <div class="branch-section">
+        <div class="section-label">Branch</div>
+        <select class="branch-select" disabled><option>Loading...</option></select>
+      </div>
+      <div class="file-tree">
+        <div class="skeleton" style="width:55%"></div>
+        <div class="skeleton" style="width:75%"></div>
+        <div class="skeleton" style="width:40%"></div>
+        <div class="skeleton" style="width:65%"></div>
+        <div class="skeleton" style="width:50%"></div>
+        <div class="skeleton" style="width:70%"></div>
+      </div>
+      <div class="git-action-bar">
+        <div class="section-label">Git Actions</div>
+        <select class="action-select" disabled><option>Commit & Push</option></select>
+        <button class="do-btn" disabled>DO!</button>
+      </div>
+    </div>
+    <div class="content">
+      <div class="empty-state">
+        <div class="e-icon">&#8987;</div>
+        <div class="e-title">Loading files...</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== VIEW: EMPTY ===== -->
+<div id="v-empty" style="display:none; height:100vh; flex-direction:column;">
+  <div class="navbar">
+    <div class="navbar-left"><button class="nav-icon-btn" onclick="go('workspace')">&#8592;</button></div>
+    <div class="navbar-center"><p>Markdown Viewer</p></div>
+    <div class="navbar-right"></div>
+  </div>
+  <div class="main">
+    <div class="sidebar">
+      <div class="branch-section">
+        <div class="section-label">Branch</div>
+        <select class="branch-select" onchange="toast('Switched to ' + this.value,'success')">
+          <option selected>main</option><option>develop</option><option>review</option><option>stable</option>
+        </select>
+      </div>
+      <div class="file-tree" style="display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--muted-fg); text-align:center; padding:24px 12px;">
+        <div style="font-size:28px; opacity:0.15; margin-bottom:8px;">&#128196;</div>
+        <div style="font-size:var(--fs-sm); line-height:1.5;">No .md files found<br>in this branch.</div>
+      </div>
+      <div class="git-action-bar">
+        <div class="section-label">Git Actions</div>
+        <select class="action-select"><option>Commit & Push</option><option>Merge Review</option><option>Merge Stable</option></select>
+        <button class="do-btn" onclick="toast('No changes to commit','error')">DO!</button>
+      </div>
+    </div>
+    <div class="content">
+      <div class="empty-state">
+        <div class="e-icon">&#128196;</div>
+        <div class="e-title">No markdown files found</div>
+        <div class="e-sub">This repository does not contain any .md files on this branch.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== VIEW: NO FILE SELECTED ===== -->
+<div id="v-no-file" style="display:none; height:100vh; flex-direction:column;">
+  <div class="navbar">
+    <div class="navbar-left"><button class="nav-icon-btn" onclick="go('workspace')">&#8592;</button></div>
+    <div class="navbar-center"><p>Markdown Viewer <span style="color:var(--text-low);">- my-feature-branch</span></p></div>
+    <div class="navbar-right"></div>
+  </div>
+  <div class="main">
+    <div class="sidebar">
+      <div class="branch-section">
+        <div class="section-label">Branch</div>
+        <select class="branch-select" onchange="toast('Switched to ' + this.value,'success')">
+          <option selected>main</option><option>develop</option><option>feature/docs</option><option>review</option><option>stable</option>
+        </select>
+      </div>
+      <div class="file-tree" id="tree1"></div>
+      <div class="git-action-bar">
+        <div class="section-label">Git Actions</div>
+        <select class="action-select" id="act1"><option value="commit-push">Commit & Push</option><option value="merge-review">Merge Review</option><option value="merge-stable">Merge Stable</option></select>
+        <button class="do-btn" onclick="doAction('act1')">DO!</button>
+      </div>
+    </div>
+    <div class="content">
+      <div class="empty-state">
+        <div class="e-icon">&#128196;</div>
+        <div class="e-title">Select a markdown file</div>
+        <div class="e-sub">Choose a .md file from the tree to view and edit its contents.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== VIEW: FILE SELECTED (SPLIT: EDITOR + PREVIEW) ===== -->
+<div id="v-split" style="display:none; height:100vh; flex-direction:column;">
+  <div class="navbar">
+    <div class="navbar-left"><button class="nav-icon-btn" onclick="go('workspace')">&#8592;</button></div>
+    <div class="navbar-center"><p>Markdown Viewer <span style="color:var(--text-low);">- my-feature-branch</span></p></div>
+    <div class="navbar-right">
+      <span class="kbd" style="font-size:9px; color:var(--text-low);">Ctrl+S to save</span>
+    </div>
+  </div>
+  <div class="main">
+    <div class="sidebar">
+      <div class="branch-section">
+        <div class="section-label">Branch</div>
+        <select class="branch-select" onchange="toast('Switched to ' + this.value,'success')">
+          <option selected>main</option><option>develop</option><option>feature/docs</option><option>review</option><option>stable</option>
+        </select>
+      </div>
+      <div class="file-tree" id="tree2"></div>
+      <div class="git-action-bar">
+        <div class="section-label">Git Actions</div>
+        <select class="action-select" id="act2"><option value="commit-push">Commit & Push</option><option value="merge-review">Merge Review</option><option value="merge-stable">Merge Stable</option></select>
+        <button class="do-btn" onclick="doAction('act2')">DO!</button>
+      </div>
+    </div>
+    <div class="content">
+      <div class="split-pane">
+        <div class="editor-pane">
+          <div class="pane-header">
+            <div class="pane-header-left">
+              <span class="pane-dot editor" id="editor-dot"></span>
+              <span id="editor-fname">README.md</span>
+            </div>
+            <button class="save-btn no-changes" id="save-btn" onclick="saveFile()">
+              <svg viewBox="0 0 256 256" fill="currentColor"><path d="M219.31,72,184,36.69A15.86,15.86,0,0,0,172.69,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V83.31A15.86,15.86,0,0,0,219.31,72ZM168,208H88V152h80Zm40,0H184V152a16,16,0,0,0-16-16H88a16,16,0,0,0-16,16v56H48V48H172.69L208,83.31ZM160,72a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h56A8,8,0,0,1,160,72Z"/></svg>
+              Save
+            </button>
+          </div>
+          <textarea class="editor-textarea" id="editor-area" spellcheck="false"></textarea>
+        </div>
+        <div class="preview-pane">
+          <div class="pane-header">
+            <div class="pane-header-left">
+              <span class="pane-dot preview"></span>
+              <span>README.md (preview)</span>
+            </div>
+            <span style="font-size:var(--fs-xs); color:var(--text-low); opacity:0.6;" title="Scroll is synchronized between editor and preview">&#128279; sync</span>
+          </div>
+          <div class="preview-content" id="preview-area"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CONTEXT MENU (right-click on file tree) ===== -->
+<div class="ctx-menu" id="tree-ctx-menu">
+  <button class="ctx-menu-item" data-action="rename">
+    <span class="cm-icon">&#9998;</span> Rename
+  </button>
+  <div class="ctx-menu-sep"></div>
+  <button class="ctx-menu-item" data-action="new-file">
+    <span class="cm-icon">&#128196;</span> New File
+  </button>
+  <button class="ctx-menu-item" data-action="new-folder">
+    <span class="cm-icon">&#128193;</span> New Folder
+  </button>
+  <div class="ctx-menu-sep"></div>
+  <button class="ctx-menu-item destructive" data-action="delete">
+    <span class="cm-icon">&#128465;</span> Delete
+  </button>
+</div>
+
+<!-- ===== DIALOG ===== -->
+<div class="dialog-overlay" id="dlg-overlay">
+  <div class="dialog">
+    <div class="dialog-header">
+      <span class="dialog-icon" id="dlg-icon">&#9888;</span>
+      <span class="dialog-title" id="dlg-title">Confirm</span>
+    </div>
+    <div class="dialog-message" id="dlg-msg">Are you sure?</div>
+    <div class="dialog-footer">
+      <button class="dlg-btn outline" onclick="closeDlg()">Cancel</button>
+      <button class="dlg-btn primary" id="dlg-confirm" onclick="confirmDlg()">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast-el"></div>
+
+<!-- ===== STATE NAV ===== -->
+<div class="state-nav">
+  <button class="st-btn active" data-v="workspace" onclick="go('workspace')">Workspace</button>
+  <button class="st-btn" data-v="loading" onclick="go('loading')">Loading</button>
+  <button class="st-btn" data-v="empty" onclick="go('empty')">Empty</button>
+  <button class="st-btn" data-v="no-file" onclick="go('no-file')">No File</button>
+  <button class="st-btn" data-v="split" onclick="go('split')">Editor + Preview</button>
+  <button class="st-btn" style="border-left:1px solid var(--border); margin-left:2px; color:var(--brand);" onclick="go('no-file'); toast('Right-click on a file or folder to see the context menu','success')">Try Context Menu</button>
+</div>
+
+<script>
+// ===== Markdown content =====
+const MD = `# Vibe Kanban
+
+A modern **kanban board** for managing development workflows with AI-powered agents.
+
+## Getting Started
+
+\`\`\`bash
+# Install dependencies
+pnpm install
+
+# Start the development server
+cargo run --bin server
+\`\`\`
+
+## Features
+
+- **Workspace Management** - Create isolated workspaces with git worktrees
+- **AI Agent Integration** - Run coding agents directly from the board
+- **Real-time Updates** - SSE-powered live synchronization
+- **Git Operations** - Branch, merge, and PR management built-in
+
+## Architecture
+
+| Component | Technology | Purpose |
+|-----------|-----------|---------|
+| Backend | Rust + Axum | API server and git operations |
+| Frontend | React + TypeScript | Interactive kanban UI |
+| Database | SQLite | Local data persistence |
+| State | Zustand | Client-side state management |
+
+## Configuration
+
+> **Note:** All configuration is managed through environment variables.
+> See \`.env.example\` for available options.
+
+### Required Variables
+
+- \`DATABASE_URL\` - Path to SQLite database
+- \`API_KEY\` - Authentication key for AI services
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run \`pnpm lint && cargo test\`
+5. Open a pull request
+
+## API Reference
+
+### Authentication
+
+All API endpoints require a valid \`API_KEY\` header:
+
+\`\`\`bash
+curl -H "Authorization: Bearer YOUR_API_KEY" \\
+  http://localhost:3000/api/workspaces
+\`\`\`
+
+### Endpoints
+
+#### GET /api/workspaces
+
+Returns a list of all workspaces.
+
+\`\`\`json
+{
+  "success": true,
+  "data": [
+    { "id": "ws-1", "name": "my-workspace", "status": "running" }
+  ]
+}
+\`\`\`
+
+#### POST /api/workspaces
+
+Creates a new workspace.
+
+- \`name\` (string, required) - Workspace name
+- \`repo_url\` (string, required) - Git repository URL
+- \`branch\` (string, optional) - Branch name, defaults to \`main\`
+
+#### DELETE /api/workspaces/:id
+
+Deletes a workspace and cleans up its worktree.
+
+## Deployment
+
+### Docker
+
+\`\`\`bash
+docker build -t vibe-kanban .
+docker run -p 3000:3000 -v ./data:/app/data vibe-kanban
+\`\`\`
+
+### Manual
+
+\`\`\`bash
+cargo build --release
+./target/release/server
+\`\`\`
+
+## License
+
+MIT License. See [LICENSE](./LICENSE) for details.`;
+
+const PREVIEW = `<h1>Vibe Kanban</h1>
+<p>A modern <strong>kanban board</strong> for managing development workflows with AI-powered agents.</p>
+<h2>Getting Started</h2>
+<pre><code># Install dependencies
+pnpm install
+
+# Start the development server
+cargo run --bin server</code></pre>
+<h2>Features</h2>
+<ul>
+<li><strong>Workspace Management</strong> - Create isolated workspaces with git worktrees</li>
+<li><strong>AI Agent Integration</strong> - Run coding agents directly from the board</li>
+<li><strong>Real-time Updates</strong> - SSE-powered live synchronization</li>
+<li><strong>Git Operations</strong> - Branch, merge, and PR management built-in</li>
+</ul>
+<h2>Architecture</h2>
+<table><thead><tr><th>Component</th><th>Technology</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td>Backend</td><td>Rust + Axum</td><td>API server and git operations</td></tr>
+<tr><td>Frontend</td><td>React + TypeScript</td><td>Interactive kanban UI</td></tr>
+<tr><td>Database</td><td>SQLite</td><td>Local data persistence</td></tr>
+<tr><td>State</td><td>Zustand</td><td>Client-side state management</td></tr>
+</tbody></table>
+<h2>Configuration</h2>
+<blockquote><p><strong>Note:</strong> All configuration is managed through environment variables. See <code>.env.example</code> for available options.</p></blockquote>
+<h3>Required Variables</h3>
+<ul>
+<li><code>DATABASE_URL</code> - Path to SQLite database</li>
+<li><code>API_KEY</code> - Authentication key for AI services</li>
+</ul>
+<h2>Contributing</h2>
+<ol>
+<li>Fork the repository</li>
+<li>Create a feature branch</li>
+<li>Make your changes</li>
+<li>Run <code>pnpm lint && cargo test</code></li>
+<li>Open a pull request</li>
+</ol>
+<h2>API Reference</h2>
+<h3>Authentication</h3>
+<p>All API endpoints require a valid <code>API_KEY</code> header:</p>
+<pre><code>curl -H "Authorization: Bearer YOUR_API_KEY" \\
+  http://localhost:3000/api/workspaces</code></pre>
+<h3>Endpoints</h3>
+<h4>GET /api/workspaces</h4>
+<p>Returns a list of all workspaces.</p>
+<pre><code>{
+  "success": true,
+  "data": [
+    { "id": "ws-1", "name": "my-workspace", "status": "running" }
+  ]
+}</code></pre>
+<h4>POST /api/workspaces</h4>
+<p>Creates a new workspace.</p>
+<ul>
+<li><code>name</code> (string, required) - Workspace name</li>
+<li><code>repo_url</code> (string, required) - Git repository URL</li>
+<li><code>branch</code> (string, optional) - Branch name, defaults to <code>main</code></li>
+</ul>
+<h4>DELETE /api/workspaces/:id</h4>
+<p>Deletes a workspace and cleans up its worktree.</p>
+<h2>Deployment</h2>
+<h3>Docker</h3>
+<pre><code>docker build -t vibe-kanban .
+docker run -p 3000:3000 -v ./data:/app/data vibe-kanban</code></pre>
+<h3>Manual</h3>
+<pre><code>cargo build --release
+./target/release/server</code></pre>
+<h2>License</h2>
+<p>MIT License. See <a href="./LICENSE">LICENSE</a> for details.</p>`;
+
+// ===== File tree =====
+const TREE = [
+  { n:'docs', d:true, open:true, ch:[
+    { n:'architecture', d:true, open:false, ch:[{ n:'architecture.md', d:false }] },
+    { n:'prd', d:true, open:false, ch:[{ n:'prd.md', d:false }] },
+    { n:'plans', d:true, open:true, ch:[{ n:'multi-platform-installers.md', d:false }] },
+  ]},
+  { n:'_bmad', d:true, open:false, ch:[{ n:'README.md', d:false }] },
+  { n:'CHANGELOG.md', d:false },
+  { n:'DOCUMENTATION.md', d:false },
+  { n:'README.md', d:false, sel:true },
+  { n:'RESTORATION-VERIFICATION.md', d:false },
+];
+
+// ===== Context Menu State =====
+let ctxTarget = null; // { item, parentArray, isDir, path }
+let renamingItem = null; // reference to item being renamed
+let creatingIn = null; // { parentArray, type:'file'|'directory', depth }
+
+function buildTree(el, items, depth, parentPath) {
+  items.forEach((it, idx) => {
+    const fullPath = parentPath ? parentPath + '/' + it.n : it.n;
+
+    // -- Inline rename mode --
+    if (renamingItem && renamingItem === it) {
+      const row = document.createElement('div');
+      row.className = 'tree-item' + (it.d ? ' dir' : '');
+      row.style.paddingLeft = (8 + depth * 14) + 'px';
+      let h = '<span class="caret">' + (it.d ? (it.open ? '&#9662;' : '&#9656;') : '') + '</span>';
+      h += '<span class="icon">' + (it.d ? '&#128193;' : '&#128196;') + '</span>';
+      row.innerHTML = h;
+      const inp = document.createElement('input');
+      inp.className = 'inline-input';
+      inp.value = it.n;
+      // For .md files, select just the name part (without extension)
+      inp.addEventListener('focus', () => {
+        if (!it.d && it.n.endsWith('.md')) {
+          inp.setSelectionRange(0, it.n.length - 3);
+        } else {
+          inp.select();
+        }
+      });
+      inp.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const newName = inp.value.trim();
+          if (newName && newName !== it.n) {
+            it.n = newName;
+            toast('Renamed to ' + newName, 'success');
+          }
+          renamingItem = null;
+          refreshTrees();
+        } else if (e.key === 'Escape') {
+          renamingItem = null;
+          refreshTrees();
+        }
+      });
+      inp.addEventListener('blur', () => {
+        if (renamingItem) { renamingItem = null; refreshTrees(); }
+      });
+      row.appendChild(inp);
+      el.appendChild(row);
+      // Auto-focus the input after DOM insertion
+      requestAnimationFrame(() => inp.focus());
+      // Still render children if directory
+      if (it.d && it.ch) {
+        const c = document.createElement('div');
+        c.className = 'tree-children' + (it.open ? '' : ' collapsed');
+        buildTree(c, it.ch, depth + 1, fullPath);
+        el.appendChild(c);
+      }
+      return;
+    }
+
+    // -- Normal tree item --
+    const row = document.createElement('div');
+    row.className = 'tree-item' + (it.d ? ' dir' : '') + (it.sel ? ' selected' : '');
+    row.style.paddingLeft = (8 + depth * 14) + 'px';
+    let h = '<span class="caret">' + (it.d ? (it.open ? '&#9662;' : '&#9656;') : '') + '</span>';
+    h += '<span class="icon">' + (it.d ? '&#128193;' : '&#128196;') + '</span>';
+    h += '<span class="fname">' + it.n + '</span>';
+    row.innerHTML = h;
+
+    // Left click: select file or toggle directory
+    row.onclick = (e) => {
+      if (e.button !== 0) return;
+      if (it.d) { it.open = !it.open; refreshTrees(); }
+      else { clearSel(TREE); it.sel = true; refreshTrees(); go('split'); }
+    };
+
+    // Right click: show context menu
+    row.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      ctxTarget = { item: it, parentArray: items, isDir: it.d, path: fullPath };
+      showTreeContextMenu(e.clientX, e.clientY, it.d);
+    });
+
+    el.appendChild(row);
+
+    if (it.d && it.ch) {
+      const c = document.createElement('div');
+      c.className = 'tree-children' + (it.open ? '' : ' collapsed');
+      buildTree(c, it.ch, depth + 1, fullPath);
+      el.appendChild(c);
+
+      // -- Inline create mode: render input at end of this directory's children --
+      if (creatingIn && creatingIn.parentArray === it.ch) {
+        const createRow = document.createElement('div');
+        createRow.className = 'tree-item';
+        createRow.style.paddingLeft = (8 + (depth + 1) * 14) + 'px';
+        const isFile = creatingIn.type === 'file';
+        let ch = '<span class="caret"></span>';
+        ch += '<span class="icon">' + (isFile ? '&#128196;' : '&#128193;') + '</span>';
+        createRow.innerHTML = ch;
+        const inp = document.createElement('input');
+        inp.className = 'inline-input';
+        inp.placeholder = isFile ? 'filename.md' : 'folder-name';
+        inp.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            const name = inp.value.trim();
+            if (name) {
+              if (isFile) {
+                const finalName = name.endsWith('.md') ? name : name + '.md';
+                it.ch.push({ n: finalName, d: false });
+                toast('Created ' + finalName, 'success');
+              } else {
+                it.ch.push({ n: name, d: true, open: false, ch: [] });
+                toast('Created folder ' + name, 'success');
+              }
+            }
+            creatingIn = null;
+            refreshTrees();
+          } else if (e.key === 'Escape') {
+            creatingIn = null;
+            refreshTrees();
+          }
+        });
+        inp.addEventListener('blur', () => {
+          if (creatingIn) { creatingIn = null; refreshTrees(); }
+        });
+        createRow.appendChild(inp);
+        c.appendChild(createRow);
+        requestAnimationFrame(() => inp.focus());
+      }
+    }
+  });
+}
+
+function clearSel(items) { items.forEach(i => { i.sel = false; if (i.ch) clearSel(i.ch); }); }
+
+function refreshTrees() {
+  ['tree1','tree2'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.innerHTML = ''; buildTree(el, TREE, 0, ''); }
+  });
+}
+
+// ===== Context Menu Logic =====
+function showTreeContextMenu(x, y, isDir) {
+  const menu = document.getElementById('tree-ctx-menu');
+  // Show/hide "New File" and "New Folder" only for directories
+  const items = menu.querySelectorAll('.ctx-menu-item');
+  items.forEach(item => {
+    const action = item.dataset.action;
+    if (action === 'new-file' || action === 'new-folder') {
+      item.style.display = isDir ? 'flex' : 'none';
+    }
+  });
+  // Hide separator before New File if target is a file
+  const seps = menu.querySelectorAll('.ctx-menu-sep');
+  if (seps[0]) seps[0].style.display = isDir ? 'block' : 'none';
+
+  // Position menu, prevent overflow
+  menu.style.left = x + 'px';
+  menu.style.top = y + 'px';
+  menu.classList.add('visible');
+
+  // Adjust if overflows viewport
+  requestAnimationFrame(() => {
+    const rect = menu.getBoundingClientRect();
+    if (rect.right > window.innerWidth) {
+      menu.style.left = (window.innerWidth - rect.width - 8) + 'px';
+    }
+    if (rect.bottom > window.innerHeight) {
+      menu.style.top = (window.innerHeight - rect.height - 8) + 'px';
+    }
+  });
+}
+
+function hideTreeContextMenu() {
+  document.getElementById('tree-ctx-menu').classList.remove('visible');
+}
+
+// Close context menu on click outside or Escape
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.ctx-menu')) hideTreeContextMenu();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') hideTreeContextMenu();
+});
+
+// Context menu item clicks
+document.getElementById('tree-ctx-menu').addEventListener('click', (e) => {
+  const item = e.target.closest('.ctx-menu-item');
+  if (!item || !ctxTarget) return;
+  const action = item.dataset.action;
+  hideTreeContextMenu();
+
+  switch (action) {
+    case 'rename':
+      renamingItem = ctxTarget.item;
+      refreshTrees();
+      break;
+
+    case 'delete':
+      const name = ctxTarget.item.n;
+      const isDir = ctxTarget.isDir;
+      const parentArr = ctxTarget.parentArray;
+      const targetItem = ctxTarget.item;
+      showDlg(
+        'Delete ' + (isDir ? 'Folder' : 'File'),
+        'Are you sure you want to delete "' + name + '"' + (isDir ? ' and all its contents' : '') + '? This action cannot be undone.',
+        'Delete',
+        () => {
+          const idx = parentArr.indexOf(targetItem);
+          if (idx !== -1) {
+            parentArr.splice(idx, 1);
+            toast('Deleted ' + name, 'success');
+            refreshTrees();
+          }
+        }
+      );
+      // Style the confirm button as destructive
+      const confirmBtn = document.getElementById('dlg-confirm');
+      confirmBtn.className = 'dlg-btn brand';
+      confirmBtn.style.background = 'var(--error)';
+      confirmBtn.style.borderColor = 'var(--error)';
+      break;
+
+    case 'new-file':
+      if (ctxTarget.isDir) {
+        ctxTarget.item.open = true; // expand the directory
+        if (!ctxTarget.item.ch) ctxTarget.item.ch = [];
+        creatingIn = { parentArray: ctxTarget.item.ch, type: 'file' };
+        refreshTrees();
+      }
+      break;
+
+    case 'new-folder':
+      if (ctxTarget.isDir) {
+        ctxTarget.item.open = true; // expand the directory
+        if (!ctxTarget.item.ch) ctxTarget.item.ch = [];
+        creatingIn = { parentArray: ctxTarget.item.ch, type: 'directory' };
+        refreshTrees();
+      }
+      break;
+  }
+});
+
+// Right-click on empty area of file tree: show create-only menu
+document.addEventListener('DOMContentLoaded', () => {
+  ['tree1', 'tree2'].forEach(id => {
+    const treeEl = document.getElementById(id);
+    if (treeEl) {
+      treeEl.addEventListener('contextmenu', (e) => {
+        // Only trigger if clicking the empty area (not a tree item)
+        if (e.target.closest('.tree-item')) return;
+        e.preventDefault();
+        ctxTarget = { item: null, parentArray: TREE, isDir: false, path: '' };
+        // Show a simplified menu with only New File and New Folder
+        const menu = document.getElementById('tree-ctx-menu');
+        const items = menu.querySelectorAll('.ctx-menu-item');
+        items.forEach(item => {
+          const action = item.dataset.action;
+          item.style.display = (action === 'new-file' || action === 'new-folder') ? 'flex' : 'none';
+        });
+        // Hide all separators
+        menu.querySelectorAll('.ctx-menu-sep').forEach(s => s.style.display = 'none');
+        menu.style.left = e.clientX + 'px';
+        menu.style.top = e.clientY + 'px';
+        menu.classList.add('visible');
+      });
+    }
+  });
+});
+
+// Override new-file/new-folder for empty area (creates at root)
+const origCtxClick = document.getElementById('tree-ctx-menu').onclick;
+document.getElementById('tree-ctx-menu').addEventListener('click', (e) => {
+  if (!ctxTarget || ctxTarget.item !== null) return; // handled by main handler
+  const item = e.target.closest('.ctx-menu-item');
+  if (!item) return;
+  const action = item.dataset.action;
+  hideTreeContextMenu();
+
+  if (action === 'new-file') {
+    creatingIn = { parentArray: TREE, type: 'file', atRoot: true };
+    refreshTrees();
+    // Render root-level inline input
+    renderRootCreateInput('file');
+  } else if (action === 'new-folder') {
+    creatingIn = { parentArray: TREE, type: 'directory', atRoot: true };
+    refreshTrees();
+    renderRootCreateInput('directory');
+  }
+}, true); // Use capture to run before the other handler
+
+function renderRootCreateInput(type) {
+  ['tree1', 'tree2'].forEach(id => {
+    const treeEl = document.getElementById(id);
+    if (!treeEl || treeEl.offsetParent === null) return; // skip hidden trees
+    const isFile = type === 'file';
+    const createRow = document.createElement('div');
+    createRow.className = 'tree-item';
+    createRow.style.paddingLeft = '8px';
+    let ch = '<span class="caret"></span>';
+    ch += '<span class="icon">' + (isFile ? '&#128196;' : '&#128193;') + '</span>';
+    createRow.innerHTML = ch;
+    const inp = document.createElement('input');
+    inp.className = 'inline-input';
+    inp.placeholder = isFile ? 'filename.md' : 'folder-name';
+    inp.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter') {
+        ev.preventDefault();
+        const name = inp.value.trim();
+        if (name) {
+          if (isFile) {
+            const finalName = name.endsWith('.md') ? name : name + '.md';
+            TREE.push({ n: finalName, d: false });
+            toast('Created ' + finalName, 'success');
+          } else {
+            TREE.push({ n: name, d: true, open: false, ch: [] });
+            toast('Created folder ' + name, 'success');
+          }
+        }
+        creatingIn = null;
+        refreshTrees();
+      } else if (ev.key === 'Escape') {
+        creatingIn = null;
+        refreshTrees();
+      }
+    });
+    inp.addEventListener('blur', () => {
+      if (creatingIn) { creatingIn = null; refreshTrees(); }
+    });
+    createRow.appendChild(inp);
+    treeEl.appendChild(createRow);
+    requestAnimationFrame(() => inp.focus());
+  });
+}
+
+// ===== View switching =====
+const VIEWS = { workspace:'v-workspace', loading:'v-loading', empty:'v-empty', 'no-file':'v-no-file', split:'v-split' };
+let unsaved = false;
+let origContent = MD;
+
+function go(v) {
+  Object.values(VIEWS).forEach(id => document.getElementById(id).style.display = 'none');
+  const el = document.getElementById(VIEWS[v]);
+  el.style.display = 'flex'; el.style.flexDirection = 'column';
+  document.querySelectorAll('.st-btn').forEach(b => b.classList.toggle('active', b.dataset.v === v));
+  document.querySelectorAll('.context-bar').forEach(c => c.classList.toggle('visible', v === 'workspace'));
+
+  if (v === 'no-file') refreshTrees();
+  if (v === 'split') {
+    refreshTrees();
+    const area = document.getElementById('editor-area');
+    area.value = origContent;
+    document.getElementById('preview-area').innerHTML = PREVIEW;
+    unsaved = false;
+    updateSaveBtn();
+    // Re-attach sync scroll after content is rendered
+    requestAnimationFrame(() => setupSyncScroll());
+  }
+}
+
+// ===== Synchronized Scroll =====
+// Proportional bidirectional sync between editor textarea and preview div.
+// Uses a scrollSource guard to prevent infinite feedback loops.
+let scrollSource = null; // 'editor' | 'preview' | null
+let syncScrollInitialized = false;
+
+function setupSyncScroll() {
+  if (syncScrollInitialized) return; // prevent duplicate listeners
+  const editor = document.getElementById('editor-area');
+  const preview = document.getElementById('preview-area');
+  if (!editor || !preview) return;
+
+  editor.addEventListener('scroll', () => {
+    if (scrollSource === 'preview') return; // ignore programmatic scroll
+    scrollSource = 'editor';
+    const maxScroll = editor.scrollHeight - editor.clientHeight;
+    if (maxScroll <= 0) { scrollSource = null; return; }
+    const ratio = editor.scrollTop / maxScroll;
+    const previewMax = preview.scrollHeight - preview.clientHeight;
+    preview.scrollTop = ratio * previewMax;
+    requestAnimationFrame(() => { scrollSource = null; });
+  });
+
+  preview.addEventListener('scroll', () => {
+    if (scrollSource === 'editor') return; // ignore programmatic scroll
+    scrollSource = 'preview';
+    const maxScroll = preview.scrollHeight - preview.clientHeight;
+    if (maxScroll <= 0) { scrollSource = null; return; }
+    const ratio = preview.scrollTop / maxScroll;
+    const editorMax = editor.scrollHeight - editor.clientHeight;
+    editor.scrollTop = ratio * editorMax;
+    requestAnimationFrame(() => { scrollSource = null; });
+  });
+
+  syncScrollInitialized = true;
+}
+
+// ===== Editor: track unsaved changes =====
+document.addEventListener('DOMContentLoaded', () => {
+  const area = document.getElementById('editor-area');
+  if (area) {
+    area.addEventListener('input', () => {
+      unsaved = area.value !== origContent;
+      updateSaveBtn();
+    });
+  }
+  setupSyncScroll();
+});
+
+function updateSaveBtn() {
+  const btn = document.getElementById('save-btn');
+  const dot = document.getElementById('editor-dot');
+  const fname = document.getElementById('editor-fname');
+  if (unsaved) {
+    btn.className = 'save-btn has-changes';
+    dot.className = 'pane-dot editor unsaved';
+    fname.textContent = 'README.md *';
+  } else {
+    btn.className = 'save-btn no-changes';
+    dot.className = 'pane-dot editor';
+    fname.textContent = 'README.md';
+  }
+}
+
+function saveFile() {
+  if (!unsaved) return;
+  const btn = document.getElementById('save-btn');
+  btn.className = 'save-btn saving';
+  btn.innerHTML = '<svg viewBox="0 0 256 256" fill="currentColor" style="animation:spin 0.8s linear infinite"><path d="M232,128a104,104,0,0,1-208,0c0-57.44,46.56-104,104-104a8,8,0,0,1,0,16,88,88,0,1,0,88,88,8,8,0,0,1,16,0Z"/></svg> Saving...';
+  setTimeout(() => {
+    origContent = document.getElementById('editor-area').value;
+    unsaved = false;
+    updateSaveBtn();
+    btn.innerHTML = '<svg viewBox="0 0 256 256" fill="currentColor"><path d="M219.31,72,184,36.69A15.86,15.86,0,0,0,172.69,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V83.31A15.86,15.86,0,0,0,219.31,72ZM168,208H88V152h80Zm40,0H184V152a16,16,0,0,0-16-16H88a16,16,0,0,0-16,16v56H48V48H172.69L208,83.31ZM160,72a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h56A8,8,0,0,1,160,72Z"/></svg> Save';
+    toast('File saved successfully', 'success');
+  }, 600);
+}
+
+// Ctrl+S / Cmd+S
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+    e.preventDefault();
+    if (document.getElementById('v-split').style.display !== 'none') saveFile();
+  }
+});
+
+// ===== Git actions =====
+let dlgCb = null;
+function doAction(selId) {
+  const v = document.getElementById(selId).value;
+  const map = {
+    'commit-push': ['Commit & Push', 'Stage all changes, create a commit, and push to remote.', 'Push'],
+    'merge-review': ['Merge to Review', "Merge branch 'main' into 'review' and push to remote.", 'Merge'],
+    'merge-stable': ['Merge to Stable', "Merge branch 'main' into 'stable' and push to remote.", 'Merge'],
+  };
+  const [t, m, c] = map[v];
+  showDlg(t, m, c, () => toast(t + ' completed successfully', 'success'));
+}
+
+function showDlg(title, msg, confirmTxt, cb) {
+  document.getElementById('dlg-title').textContent = title;
+  document.getElementById('dlg-msg').textContent = msg;
+  document.getElementById('dlg-confirm').textContent = confirmTxt;
+  dlgCb = cb;
+  document.getElementById('dlg-overlay').classList.add('visible');
+}
+function closeDlg() {
+  document.getElementById('dlg-overlay').classList.remove('visible');
+  // Reset destructive style on confirm button
+  const confirmBtn = document.getElementById('dlg-confirm');
+  confirmBtn.style.background = '';
+  confirmBtn.style.borderColor = '';
+  confirmBtn.className = 'dlg-btn primary';
+  dlgCb = null;
+}
+function confirmDlg() {
+  const cb = dlgCb; // capture before closeDlg nulls it
+  closeDlg();
+  if (cb) cb();
+}
+
+function toast(msg, type) {
+  const t = document.getElementById('toast-el');
+  t.textContent = msg; t.className = 'toast ' + type + ' visible';
+  setTimeout(() => t.classList.remove('visible'), 2500);
+}
+
+// Add spin animation for save spinner
+const style = document.createElement('style');
+style.textContent = '@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }';
+document.head.appendChild(style);
+
+// Init
+go('workspace');
+</script>
+</body>
+</html>
