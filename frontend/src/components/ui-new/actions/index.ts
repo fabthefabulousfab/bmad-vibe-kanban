@@ -88,7 +88,7 @@ const RightSidebarIcon: Icon = forwardRef<SVGSVGElement, IconProps>(
 RightSidebarIcon.displayName = 'RightSidebarIcon';
 
 // Special icon types for ContextBar
-export type SpecialIconType = 'ide-icon' | 'copy-icon';
+export type SpecialIconType = 'ide-icon' | 'copy-icon' | 'md-icon';
 export type ActionIcon = Icon | SpecialIconType;
 
 // Workspace type for sidebar (minimal subset needed for workspace selection)
@@ -886,6 +886,22 @@ export const Actions = {
     },
   },
 
+  OpenMarkdownViewer: {
+    id: 'open-markdown-viewer',
+    label: 'Open Docs',
+    icon: 'md-icon' as const,
+    requiresTarget: ActionTargetType.NONE,
+    isVisible: (ctx) => ctx.hasWorkspace,
+    getTooltip: () => 'Open Markdown Docs',
+    execute: async (ctx) => {
+      if (!ctx.currentWorkspaceId || !ctx.containerRef) return;
+      const basePath = encodeURIComponent(ctx.containerRef);
+      ctx.navigate(
+        `/workspaces/${ctx.currentWorkspaceId}/markdown?basePath=${basePath}`
+      );
+    },
+  },
+
   CopyRawLogs: {
     id: 'copy-raw-logs',
     label: 'Copy Raw Logs',
@@ -1493,7 +1509,7 @@ export type ContextBarItem = ActionDefinition | typeof ContextBarDivider;
 
 // ContextBar action groups define which actions appear in each section
 export const ContextBarActionGroups = {
-  primary: [Actions.OpenInIDE, Actions.CopyWorkspacePath] as ActionDefinition[],
+  primary: [Actions.OpenInIDE, Actions.CopyWorkspacePath, Actions.OpenMarkdownViewer] as ActionDefinition[],
   secondary: [
     Actions.ToggleDevServer,
     Actions.TogglePreviewMode,
@@ -1503,5 +1519,5 @@ export const ContextBarActionGroups = {
 
 // Helper to check if an icon is a special type
 export function isSpecialIcon(icon: ActionIcon): icon is SpecialIconType {
-  return icon === 'ide-icon' || icon === 'copy-icon';
+  return icon === 'ide-icon' || icon === 'copy-icon' || icon === 'md-icon';
 }

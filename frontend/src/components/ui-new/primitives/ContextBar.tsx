@@ -196,6 +196,29 @@ export function ContextBar({
           />
         );
       }
+
+      if (iconType === 'md-icon') {
+        // Render markdown viewer icon
+        return (
+          <Tooltip
+            key={key}
+            content={tooltip}
+            shortcut={action.shortcut}
+            side="left"
+          >
+            <button
+              className="flex items-center justify-center transition-colors drop-shadow-[2px_2px_4px_rgba(121,121,121,0.25)]"
+              aria-label={tooltip}
+              onClick={() => onExecuteAction(action)}
+              disabled={!enabled}
+            >
+              <span className="size-icon-xs opacity-50 group-hover:opacity-80 transition-opacity inline-flex items-center justify-center font-bold text-[9px] leading-none text-low group-hover:text-normal">
+                MD
+              </span>
+            </button>
+          </Tooltip>
+        );
+      }
     }
 
     // Get dynamic icon if available

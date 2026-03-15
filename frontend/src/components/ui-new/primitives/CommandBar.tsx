@@ -38,6 +38,13 @@ function ActionItemIcon({ icon }: { icon: ActionIcon }) {
     if (icon === 'copy-icon') {
       return <CopyIcon className="h-4 w-4" weight="regular" />;
     }
+    if (icon === 'md-icon') {
+      return (
+        <span className="inline-flex items-center justify-center h-4 w-4 font-bold text-[9px] leading-none">
+          MD
+        </span>
+      );
+    }
   }
   // Regular phosphor icon
   const IconComponent = icon;

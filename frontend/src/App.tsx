@@ -50,6 +50,7 @@ import { WorkspacesLanding } from '@/pages/ui-new/WorkspacesLanding';
 import { ElectricTestPage } from '@/pages/ui-new/ElectricTestPage';
 import { ProjectKanban } from '@/pages/ui-new/ProjectKanban';
 import { MigratePage } from '@/pages/ui-new/MigratePage';
+import { MarkdownViewerPage } from '@/pages/ui-new/MarkdownViewerPage';
 
 const SentryRoutes = Sentry.withSentryReactRouterV6Routing(Routes);
 
@@ -222,6 +223,10 @@ function AppContent() {
                 element={<ElectricTestPage />}
               />
               <Route path="/workspaces/:workspaceId" element={<Workspaces />} />
+              <Route
+                path="/workspaces/:workspaceId/markdown"
+                element={<MarkdownViewerPage />}
+              />
 
               {/* Projects routes */}
               <Route path="/projects/:projectId" element={<ProjectKanban />} />

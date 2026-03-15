@@ -94,6 +94,9 @@ import {
   CreateFromPrError,
   MigrationRequest,
   MigrationResponse,
+  FileTreeEntry,
+  FileContentResponse,
+  RenameEntryResponse,
 } from 'shared/types';
 import type { WorkspaceWithSession } from '@/types/attempt';
 import { createWorkspaceWithSession } from '@/types/attempt';
@@ -820,6 +823,101 @@ export const fileSystemApi = {
       `/api/filesystem/git-repos${queryParam}`
     );
     return handleApiResponse<DirectoryEntry[]>(response);
+  },
+
+  getMarkdownTree: async (basePath: string): Promise<FileTreeEntry[]> => {
+    const response = await makeRequest(
+      `/api/filesystem/markdown-tree?path=${encodeURIComponent(basePath)}`
+    );
+    return handleApiResponse<FileTreeEntry[]>(response);
+  },
+
+  getFileContent: async (
+    basePath: string,
+    filePath: string
+  ): Promise<FileContentResponse> => {
+    const params = new URLSearchParams({
+      base_path: basePath,
+      file_path: filePath,
+    });
+    const response = await makeRequest(
+      `/api/filesystem/file-content?${params.toString()}`
+    );
+    return handleApiResponse<FileContentResponse>(response);
+  },
+
+  saveFileContent: async (
+    basePath: string,
+    filePath: string,
+    content: string
+  ): Promise<void> => {
+    const response = await makeRequest('/api/filesystem/file-content', {
+      method: 'PUT',
+      body: JSON.stringify({
+        base_path: basePath,
+        file_path: filePath,
+        content,
+      }),
+    });
+    await handleApiResponse<void>(response);
+  },
+
+  createFile: async (
+    basePath: string,
+    relativePath: string
+  ): Promise<void> => {
+    const response = await makeRequest('/api/filesystem/create-file', {
+      method: 'POST',
+      body: JSON.stringify({
+        base_path: basePath,
+        relative_path: relativePath,
+      }),
+    });
+    await handleApiResponse<void>(response);
+  },
+
+  createDirectory: async (
+    basePath: string,
+    relativePath: string
+  ): Promise<void> => {
+    const response = await makeRequest('/api/filesystem/create-directory', {
+      method: 'POST',
+      body: JSON.stringify({
+        base_path: basePath,
+        relative_path: relativePath,
+      }),
+    });
+    await handleApiResponse<void>(response);
+  },
+
+  renameEntry: async (
+    basePath: string,
+    oldPath: string,
+    newName: string
+  ): Promise<RenameEntryResponse> => {
+    const response = await makeRequest('/api/filesystem/rename', {
+      method: 'POST',
+      body: JSON.stringify({
+        base_path: basePath,
+        old_path: oldPath,
+        new_name: newName,
+      }),
+    });
+    return handleApiResponse<RenameEntryResponse>(response);
+  },
+
+  deleteEntry: async (
+    basePath: string,
+    relativePath: string
+  ): Promise<void> => {
+    const response = await makeRequest('/api/filesystem/entry', {
+      method: 'DELETE',
+      body: JSON.stringify({
+        base_path: basePath,
+        relative_path: relativePath,
+      }),
+    });
+    await handleApiResponse<void>(response);
   },
 };
 
