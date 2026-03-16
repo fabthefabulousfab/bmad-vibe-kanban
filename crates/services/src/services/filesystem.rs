@@ -34,6 +34,8 @@ pub enum FilesystemError {
     InvalidName(String),
     #[error("Directory is not empty")]
     DirectoryNotEmpty,
+    #[error("Content exceeds maximum allowed size of {0} bytes")]
+    ContentTooLarge(usize),
 }
 
 /// A single entry in the markdown file tree
@@ -561,6 +563,7 @@ impl FilesystemService {
     }
 
     /// Lists only markdown files and their parent directories in a tree structure.
+    /// Uses spawn_blocking to avoid blocking the async runtime during recursive I/O.
     pub async fn list_markdown_files(
         &self,
         base_path: &str,
@@ -568,7 +571,17 @@ impl FilesystemService {
         tracing::info!("list_markdown_files: base_path={}", base_path);
         let path = PathBuf::from(base_path);
         Self::verify_directory(&path)?;
-        let tree = Self::build_markdown_tree(&path, &path);
+        let path_clone = path.clone();
+        let tree = tokio::task::spawn_blocking(move || {
+            Self::build_markdown_tree(&path_clone, &path_clone)
+        })
+        .await
+        .map_err(|e| {
+            FilesystemError::Io(std::io::Error::other(format!(
+                "spawn_blocking failed: {}",
+                e
+            )))
+        })?;
         tracing::info!(
             "list_markdown_files: completed, found {} top-level entries",
             tree.len()
@@ -595,9 +608,7 @@ impl FilesystemService {
         }
 
         let canonical = Self::validate_path_within_base(&base, &full_path)?;
-        let content = fs::read_to_string(&canonical).map_err(|_| {
-            FilesystemError::FileNotFound(file_path.to_string())
-        })?;
+        let content = fs::read_to_string(&canonical)?;
 
         tracing::info!("read_file_content: read {} bytes", content.len());
         Ok(FileContentResponse {
@@ -605,6 +616,9 @@ impl FilesystemService {
             path: file_path.to_string(),
         })
     }
+
+    /// Maximum content size for write operations (10 MB)
+    const MAX_CONTENT_SIZE: usize = 10 * 1024 * 1024;
 
     /// Writes content to a .md file within the base path.
     pub async fn write_file_content(
@@ -618,6 +632,11 @@ impl FilesystemService {
             base_path,
             file_path
         );
+
+        if content.len() > Self::MAX_CONTENT_SIZE {
+            return Err(FilesystemError::ContentTooLarge(Self::MAX_CONTENT_SIZE));
+        }
+
         let base = PathBuf::from(base_path);
         let full_path = base.join(file_path);
 

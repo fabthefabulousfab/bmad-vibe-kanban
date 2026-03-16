@@ -99,7 +99,7 @@ export function MarkdownViewerContainer({
   const handleToggleDir = useCallback((path: string) => {
     setExpandedDirs((prev) => ({
       ...prev,
-      [path]: prev[path] === false ? true : prev[path] === undefined ? false : !prev[path],
+      [path]: !prev[path],
     }));
   }, []);
 
@@ -112,16 +112,17 @@ export function MarkdownViewerContainer({
   }, [selectedFilePath, editedContent, saveFileMutation]);
 
   const handleContextMenuAction = useCallback(
-    (action: TreeContextAction, targetPath: string, _isDirectory: boolean) => {
+    (action: TreeContextAction, targetPath: string, isDirectory: boolean) => {
       switch (action) {
         case 'rename':
           setRenamingPath(targetPath);
           setRenameValue(targetPath.split('/').pop() ?? '');
           break;
-        case 'delete':
+        case 'delete': {
+          const entryType = isDirectory ? 'folder' : 'file';
           if (
             window.confirm(
-              `Are you sure you want to delete "${targetPath.split('/').pop()}"?`
+              `Are you sure you want to delete the ${entryType} "${targetPath.split('/').pop()}"?`
             )
           ) {
             deleteEntryMutation.mutate(targetPath, {
@@ -134,6 +135,7 @@ export function MarkdownViewerContainer({
             });
           }
           break;
+        }
         case 'new-file':
           setCreatingAt({ parentPath: targetPath, type: 'file' });
           setCreateValue('');
@@ -221,19 +223,17 @@ export function MarkdownViewerContainer({
 
   const handleSelectBranch = useCallback(
     (_branchName: string) => {
-      // Branch checkout would require a workspace-specific API call
-      // For now this is a placeholder - the tech spec mentions checkout endpoint
-      // which would be implemented via the workspace/repo git service
-      console.warn('Branch checkout not yet implemented for standalone markdown viewer');
+      // Branch checkout would require a workspace-specific API call.
+      // The tech spec mentions a checkout endpoint which would be
+      // implemented via the workspace/repo git service.
     },
     []
   );
 
   const handleExecuteGitAction = useCallback(() => {
     setIsExecutingGitAction(true);
-    // Git actions would be implemented via workspace git APIs
-    // For now, simulate a brief loading state
-    console.warn(`Git action "${selectedGitAction}" not yet implemented for standalone markdown viewer`);
+    // Git actions would be implemented via workspace git APIs.
+    // For now, simulate a brief loading state as a placeholder.
     setTimeout(() => {
       setIsExecutingGitAction(false);
     }, 1000);

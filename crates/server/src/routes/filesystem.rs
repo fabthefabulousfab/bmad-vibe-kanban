@@ -61,6 +61,9 @@ fn map_filesystem_error(err: FilesystemError) -> String {
         FilesystemError::NotMarkdownFile => "Only .md files are supported".to_string(),
         FilesystemError::InvalidName(msg) => format!("Invalid name: {}", msg),
         FilesystemError::DirectoryNotEmpty => "Directory is not empty".to_string(),
+        FilesystemError::ContentTooLarge(max) => {
+            format!("Content exceeds maximum allowed size of {} bytes", max)
+        }
         FilesystemError::Io(e) => {
             tracing::error!("Filesystem IO error: {}", e);
             format!("IO error: {}", e)

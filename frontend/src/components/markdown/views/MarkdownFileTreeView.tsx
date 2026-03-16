@@ -59,6 +59,8 @@ export function MarkdownFileTreeView({
     );
   }
 
+  const isCreatingAtRoot = creatingAt !== null && creatingAt.parentPath === '';
+
   return (
     <div
       className="flex-1 overflow-auto"
@@ -103,6 +105,33 @@ export function MarkdownFileTreeView({
           onCreateCancel={onCreateCancel}
         />
       ))}
+      {/* Root-level inline create input */}
+      {isCreatingAtRoot && (
+        <div className="flex items-center gap-1 px-2 py-0.5" style={{ paddingLeft: '8px' }}>
+          {creatingAt.type === 'directory' ? (
+            <FolderSimple className="size-icon-sm text-low flex-shrink-0" />
+          ) : (
+            <FileText className="size-icon-sm text-low flex-shrink-0" />
+          )}
+          <input
+            type="text"
+            className="flex-1 px-1 text-sm bg-secondary border border-accent rounded text-normal focus:outline-none"
+            value={createValue}
+            onChange={(e) => onCreateChange(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                onCreateSubmit();
+              } else if (e.key === 'Escape') {
+                e.preventDefault();
+                onCreateCancel();
+              }
+            }}
+            placeholder={creatingAt.type === 'file' ? 'filename.md' : 'folder name'}
+            autoFocus
+          />
+        </div>
+      )}
     </div>
   );
 }
@@ -151,7 +180,7 @@ function TreeItem({
   onCreateCancel,
 }: TreeItemProps) {
   const isSelected = selectedFilePath === entry.path;
-  const isExpanded = entry.is_directory && expandedDirs[entry.path] !== false;
+  const isExpanded = entry.is_directory && expandedDirs[entry.path] === true;
   const isRenaming = renamingPath === entry.path;
   const isCreatingHere =
     creatingAt !== null && creatingAt.parentPath === entry.path;
